@@ -1,6 +1,6 @@
 ---
 name: official-dnd-ranking-review
-description: Use for official, partner, UA, third-party published, or legacy-compatible D&D 5.5e/2024/5R ranking and review work in this project. Enforces local DND5e_chm source verification, Rankings/changelog.md criteria, version matching for community comments, and prevents using model memory for class/subclass feature text.
+description: Use for official, partner, UA, third-party published, or legacy-compatible D&D 5.5e/2024/5R ranking and review work in this project. Enforces local DND5e_chm source verification, Rankings/changelog.md criteria, version matching for community comments, full rule/resource/action/spell/feat interaction analysis, and prevents using model memory for class/subclass feature text.
 ---
 
 # Official D&D Ranking Review
@@ -53,6 +53,7 @@ Unmarked filenames are reserved for current official first-party published or of
    - For 5e / 2014 Cleric subclasses converted to the 5.5e / 2024 Cleric chassis, ignore subclass features that grant `重甲` / `Heavy Armor` training, `军用武器` / `Martial Weapon` proficiency, `神圣打击` / `Divine Strike`, or `强力施法` / `Potent Spellcasting` when assigning balance/functionality ranks. Those benefits are covered or overwritten by the 2024 Cleric base class through `神圣秩序` and `受祝击`; they may be mentioned only as legacy-source notes or design/compatibility issues, not as subclass power gains.
    - Record enough local context in your own notes before writing: source path, class/subclass name, feature names, feature levels, spell list, and any special action/resource wording.
    - Record the Chinese translation for every official / partner name you plan to mention. If the local source only exposes an English name or garbled text prevents reliable Chinese extraction, state that the Chinese translation could not be localized and keep the English name.
+   - If `Get-Content`, `Select-String`, or `rg` displays mojibake for Chinese source text, do not guess the translation. Re-read the file with the correct local encoding, commonly GBK/CP936 for this repository, or inspect another local index/list page. Example PowerShell pattern: `[System.Text.Encoding]::GetEncoding(936).GetString([System.IO.File]::ReadAllBytes($path))`. Only write the Chinese name after this check.
    - Verify the class/subclass Chinese name before choosing the output directory, filename, and top-level heading. The filename must be `[verified subclass Chinese name].md` for first-party official content, or `[verified subclass Chinese name]（source marker）.md` for UA / partner / third-party content; class summaries must stay as `README.md` inside the verified class-name directory. If a previous file has the wrong Chinese name or lacks a required source marker, move/rename it rather than creating a duplicate.
 
 4. Version-lock the review.
@@ -60,14 +61,32 @@ Unmarked filenames are reserved for current official first-party published or of
    - If a previous review file contains old-version features, remove or correct them.
    - If a feature cannot be reliably found locally, explicitly say the source could not be localized and keep the analysis conservative. Do not invent feature names.
 
-5. Use community comments only after local verification.
+5. Build the actual rules context before scoring.
+   - Identify which core or supplement rules the feature text relies on. Do not treat a feature sentence in isolation when PHB / DMG / MM / XGE / TCE / FRHoF or another local rule changes the real effect. Example: under 2024 `每回合仅能施展一道消耗法术位的法术 One Spell with a Spell Slot per Turn`, old bonus-action spell limits may be redundant or less meaningful than in 2014.
+   - Read the base class again when reviewing a subclass. Record the exact resource amount, recharge timing, and feature conflicts for class resources such as `动作如潮`, `回气`, Channel Divinity, Rage, Focus/Ki, Bardic Inspiration, Wild Shape, spell slots, pact slots, prepared spells, and similar class currencies.
+   - Separate resource ceiling from practical throughput. A feature that looks extreme may be limited by short-rest/long-rest recharge, action cost, concentration, spell slots, prepared spell count, limited uses, saving throws, positioning, or competition with the class’s normal best turn.
+   - For every caster or spell-granting subclass/build, check spell-slot progression, prepared/known spell count, preparation change rules, subclass bonus spells, spell-list scope, combat spell value, noncombat spell value, and whether the feature’s delivery mode actually improves the spells worth casting. Do not assume “more spell access” is strong without naming the spells and the use case.
+   - If a caster can change prepared/known spells only when leveling up, treat each spell choice as a long-term build commitment, not a daily toolbox. Identify which spells are actually worth locking at each tier, then explain what is crowded out. Examples of high-pressure locked choices include defense (`护盾术`, `吸收元素` if locally available), encounter control (`催眠图纹`, `恐惧术`, `缓慢术`, `放逐术`), anti-caster tools (`法术反制`, `解除魔法`, `沉默术`), mobility/escape (`迷踪步`, `任意门`), healing/recovery (`治愈真言`, `次等复原术`, `回生术`), summon/companion spells (`野兽召唤术`, `妖精召唤术`, `亡灵召唤术`, `龙类召唤术`), and battlefield division (`蛛网术`, `力墙术`, `力场墙`, `墙`-type spells where locally present). A class with level-up-only swaps can still be strong, but its rank must reflect lower day-to-day adaptability and the real opportunity cost of carrying situational spells.
+   - Bard-specific example: 2024 `吟游诗人` can replace only one prepared spell when gaining a Bard level. `魔法奥秘` expands future preparations and replacement choices to the Bard/Cleric/Druid/Wizard lists, but it does not create daily full-list preparation. At level 10, optimized Bards often need to replace several low-level transitional Bard spells over multiple later levels because cross-list staples such as `法术反制`, `解除魔法`, `回生术`, `野兽召唤术` / `妖精召唤术`, `力墙术` / `力场墙`, `护盾术`, `迷踪步`, or another table-specific answer are competing for limited prepared slots and replacement opportunities. When ranking Bard or Bard subclasses, credit `魔法奥秘` as a major power spike, but do not score every possible cross-list role as simultaneously online immediately at level 10.
+   - Spell scroll interaction matters for caster rankings. Under the 2024 `法术卷轴` rule and local `贤者谏言2025`, the spell on a scroll must be on a spell list used by the character. For Bards, `魔法奥秘` does not let them read every Wizard/Cleric/Druid scroll. A cross-list spell counts as a Bard spell for scroll use only if the Bard has actually prepared that spell through `魔法奥秘`. Example: a Bard can use a `灵体卫士` scroll only if `灵体卫士` is currently prepared through `魔法奥秘`; otherwise the Bard cannot understand that scroll. When ranking Bard scroll access, treat scrolls as improving depth for already-locked Magical Secrets choices, not as solving every missing role.
+   - When scoring a level-up-only caster, do not give full credit in every spell-related aspect merely because the spell list contains options. Credit only the functions that a reasonable optimized character can afford to lock simultaneously at that tier. If choosing `法术反制` means delaying `催眠图纹`, a summon, healing, or mobility, discuss that tradeoff in the relevant aspect and overall reason.
+   - Check species, origin feats, general feats, setting feats, and common magic items that realistically interact with the class/subclass at each tier. Examples to remember: `阿斯莫` `天启` / `天堂飞翼` is 1/long rest; `魔法学徒（法师）` can grant `护盾术`; Human can have two origin feats; `妖精触碰` can choose Divination or Enchantment spells such as `猎人印记` or `脆弱诅咒`; The Crooked Moon `教团新进者` can grant `脆弱诅咒`; `魔咒武器` can duplicate some concentration-damage packages.
+   - Explain whether a feat/item/species interaction is actually worth the opportunity cost. Compare against common competing choices such as Great Weapon Master, Polearm Master, Magic Initiate, resilient defenses, ASI pressure, and concentration economy.
+   - Evaluate action economy explicitly: action, bonus action, reaction, concentration, free/no-action timing, precombat setup, companion command, and whether the feature competes with the class’s normal damage/control/defense loop. A “ribbon” that is free and does not compete with key actions/resources may matter more than its text size suggests; a powerful feature that consumes the same action as the class’s best turn may matter less.
+   - Check whether the feature's benefit is already available from the class chassis, common spells, `武器精通`, feats, species traits, magic items, or widely used party tactics before calling it a major strength. Apply this to every scoring aspect, not only advantage or DPR: damage riders, accuracy, defense, saves, resistance, healing, temporary hit points, mobility, forced movement, prone/restraining, debuff, anti-caster tools, battlefield division, summons/companions, skills, crafting, information gathering, ritual utility, and exploration.
+   - For each overlap, ask what is actually left: lower action cost, no-save reliability, no-concentration, no spell slot, no resource, earlier level, longer duration, bigger range, team-wide effect, off-turn/reaction compatibility, better scaling, better target type, fewer counters, or lower opportunity cost. Credit those differences directly; if the feature merely duplicates a common baseline, lower uniqueness/design credit and avoid over-scoring the relevant function.
+   - Advantage is a common example, not a special-only case: `烦扰` / `Vex`, `失衡` / `Topple`, prone, invisibility, help actions, and spells such as `闪耀斩` can make a cheap advantage feature less unique at later tiers. Still credit the feature if it is cheaper, no-save, no-concentration, no-slot, works before the first hit, applies to more attacks, works at range, or stacks with reaction/off-turn attacks; but do not score it as if no other advantage engine exists.
+   - Evaluate replaceability. If a class identity is built around an effect that can be copied by common feats, spells, or magic items, lower the uniqueness/design value unless later class features meaningfully deepen or protect that niche. Example: treat Hunter's Mark-style damage as more replaceable when `妖精触碰`, `教团新进者`, `魔咒武器`, or `脆弱诅咒` can cover a similar combat role.
+   - For resource-conversion mechanics, count the resource at each tier and account for every competing feature that spends it. Compare to official analogues with the same rigor. Example: compare a luck/Portent-style home or partner mechanic against `预言师` `预兆` / `高等预兆` and `时间魔法` `收束未来`, including whether costs such as `力竭` can be mitigated by high-level wizard tools like `拟像术` or other immunity/avoidance methods when those assumptions are table-legal.
+
+6. Use community comments only after local verification.
    - Browse when the user asks for community comments, current opinions, or calibration.
    - Treat RPGBOT, Tabletop Builds, Treantmonk, Pack Tactics, Dungeon Dudes, Reddit, Giantitp, and D&D Beyond forums as calibration sources, not rules sources.
    - Keep only comments that match the local version’s actual feature set.
    - If a community review is about 2014 content but the file is 2024, use it only as historical contrast.
    - In final responses, cite online sources used.
 
-6. Write feature-level reviews.
+7. Write feature-level reviews.
    - `详细评价` should explain actual level features, spell list, action economy, resources, concentration, weapon mastery, feat/item interactions, and Tier curve.
    - Use Chinese translated names for official / partner features, spells, feats, items, conditions, actions, and rules terms whenever `DND5e_chm` contains them. Do not leave names such as `Action Surge`, `Shield`, `Magic Initiate`, or `Weapon Mastery` English-only if their Chinese names are available locally.
    - Do not simply repeat the scoring table in prose.
@@ -89,7 +108,7 @@ Unmarked filenames are reserved for current official first-party published or of
    - For build files, `具体理由` must name the build's actual level split, delayed features, ability-score pressure, spell-slot progression, action economy, and the point where the multiclass combination becomes stronger or weaker than staying single-class.
    - `Rankings\构筑` is for multiclass or cross-system build packages, not pure class / pure subclass optimization writeups. If a community "build" is simply one class/subclass from level 1-20 with feat choices, do not create a build file for it; fold that analysis into the relevant class/subclass review instead. This avoids conflict with direct subclass review and keeps build rankings from duplicating subclass rankings. Exception: if the user explicitly asks for a named community package whose identity depends on cross-version rules, legacy options, magic-item assumptions, or a distinct play package that is not represented by the subclass review, it may be included as a clearly marked cross-system build file; the file must state why it is not just a duplicate subclass review and must separate default strength from table-permission strength.
 
-7. Keep rankings calibrated.
+8. Keep rankings calibrated.
    - Tier 1: levels 1-4.
    - Tier 2: levels 5-10.
    - Tier 3: levels 11-16.
@@ -104,18 +123,18 @@ Unmarked filenames are reserved for current official first-party published or of
    - Partner, UA, and third-party published classes/subclasses must be ranked by their actual balance and functionality, not intentionally lowered because of source status. If community feedback is scarce, combine careful local text analysis, action economy, resource math, spell/feat/item interactions, and comparison against existing official rankings to assign the proper rank.
    - If a partner, UA, or third-party option breaks the expected class boundary, count that in its balance ranking. Give `S+` only when it exceeds the ceiling of the broader class/subclass ecosystem, not merely when it exceeds its own base class. If it is merely strong, specialized, or above its class baseline, use the appropriate normal rank.
 
-8. Apply design-score separation.
+9. Apply design-score separation.
    - Four design items: `设计质量`, `主题`, `能力设计质量`, `主题与能力关联度`.
    - High power is not automatically good design.
    - Overpowered action economy, bounded accuracy breaks, resource loops, old-version incompatibility, DM-dependent ambiguity, or feature bloat can lower design quality even if strength is high.
 
-9. Account for shared 2024 assumptions.
-   - 起源专长（Origin Feats） exist; `魔法入门（法师） Magic Initiate (Wizard)` can give many characters `护盾术 Shield`, so do not over-credit a subclass just for easy Shield access.
+10. Account for shared 2024 assumptions.
+   - 起源专长（Origin Feats） exist; `魔法学徒（法师） Magic Initiate (Wizard)` can give many characters `护盾术 Shield`, so do not over-credit a subclass just for easy Shield access.
    - `武器精通 Weapon Mastery` is part of the 2024 martial baseline.
    - General magic items can affect a tier, but do not assume unlimited magic item economy.
    - FRHoF `Circle Magic` can strongly alter full-caster/team environments; do not assume it is always active unless the file or task says so.
 
-10. Update records.
+11. Update records.
    - When a round changes official ranking methodology, standards, or calibration, prepend a concise entry to `Rankings\changelog.md`.
    - Keep `Rankings\changelog.md` in reverse chronological order: newest entries at the beginning of the file, older entries below.
    - Do not pollute individual review files with repeated community-source boilerplate; keep source summaries in `changelog.md` unless a file needs a specific citation or uncertainty note.
