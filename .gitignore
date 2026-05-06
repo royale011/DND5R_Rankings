@@ -1,0 +1,15 @@
+# Local/private content
+/homebrews/
+/5e Reference/
+
+# Local reference files and generated binaries
+*.pdf
+*.chm
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
