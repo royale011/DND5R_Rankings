@@ -351,11 +351,11 @@ def write_review_file(name: str, data: dict, calibration: str) -> None:
 
 
 def update_summary_leaderboards() -> None:
-    summary = OUT / "0x总评.md"
+    summary = OUT / "README.md"
     official = {}
     non_first = {}
     for path in sorted(OUT.glob("*.md"), key=lambda p: p.name):
-        if path.name == "0x总评.md":
+        if path.name == "README.md":
             continue
         non = "（" in path.stem and "）" in path.stem
         try:
@@ -380,7 +380,7 @@ def update_summary_leaderboards() -> None:
 
 
 def update_record() -> None:
-    rec = ROOT / "Rankings" / "record.md"
+    rec = ROOT / "Rankings" / "changelog.md"
     current = rec.read_text(encoding="utf-8") if rec.exists() else ""
     if "术士合作方/第三方重评" in current:
         return
@@ -392,7 +392,7 @@ def update_record() -> None:
 - 读取`DND5e_chm\\不全书.wcp`术士区块，确认合作内容分割线后的第三方/合作方子职：`符文之子（塔尔多雷）`、`织光者（黯潮之书）`、`荒漠之魂（狮鹫鞍包）`、`鬼之血脉（胧忆岛）`、`猩红术法（歪曲之月）`、`饥欲之暗（克苏鲁）`。
 - 逐项读取本地源文件并重写评论；第三方内容按实际功能评分，不因来源身份压低。`符文之子`和`饥欲之暗`在高等级达到S，但因资源副作用、战术依赖或不具备全体系唯一顶点，不给S+。
 - 校准上一轮术士正式/UA：发现XGE正式`幽影魔法`未生成，已补充为正式旧版文件；UA`幽影术法（UA）`保留为新版UA独立评审。
-- `0x总评.md`的正式与UA/合作方/第三方排行榜由当前子职文件的`综合评分`表回读生成，避免总评与单文件评分不一致。
+- `README.md`的正式与UA/合作方/第三方排行榜由当前子职文件的`综合评分`表回读生成，避免总评与单文件评分不一致。
 """
     rec.write_text(current.rstrip() + entry + "\n", encoding="utf-8")
 

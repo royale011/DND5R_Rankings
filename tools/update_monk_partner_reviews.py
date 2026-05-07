@@ -113,7 +113,7 @@ def bucket(files):
 
 
 def render_leaderboard(title, intro, files):
-    order = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
+    order = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
     data = bucket(files)
     out = [f"## {title}", ""]
     if intro:
@@ -136,7 +136,7 @@ def render_leaderboard(title, intro, files):
 
 
 def update_summary():
-    summary = MONK / "0x总评.md"
+    summary = MONK / "README.md"
     text = summary.read_text(encoding="utf-8")
     start = text.index("## 分阶段子职排行榜")
     end = text.index("## 设计相关评分")

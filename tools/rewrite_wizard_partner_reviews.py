@@ -196,7 +196,7 @@ PARTNER = {
 
 
 def update_record() -> None:
-    rec = ROOT / "Rankings" / "record.md"
+    rec = ROOT / "Rankings" / "changelog.md"
     current = rec.read_text(encoding="utf-8") if rec.exists() else ""
     marker = "法师合作方与第三方子职重评"
     if marker in current:
@@ -208,7 +208,7 @@ def update_record() -> None:
 
 - 本轮补完`法师`合作方/第三方子职，范围来自`DND5e_chm\\不全书.wcp`中法师块的`合作内容分割线`之后：`血魔法（塔尔多雷）`、`地脉魔法（谦卑林）`、`暗影（黯潮之书）`、`远古魔杖学（狮鹫鞍包）`、`折纸魔法师（胧忆岛）`、`神秘学者（歪曲之月）`、`贤者（歪曲之月）`、`司书（克苏鲁）`。
 - 评分按实际功能处理，不因第三方身份压低。主要校准点：`远古魔杖学`的DC/AC/豁免充能属于强数值越界但未达到全体系S+；`贤者`的精粹结晶经济若被刷取会失控，但按合理资源约束综合为S；`司书`的`编写法术`低级即进入S，但仍受单一选定法术与准备限制约束；`暗影`的`黑暗灌注`建议按恢复已拥有且已消耗法术位理解。
-- 已使用实际子职文件的`综合评分`重建`法师\\0x总评.md`中的正式与`UA/合作方/第三方子职分阶段排行榜`。
+- 已使用实际子职文件的`综合评分`重建`法师\\README.md`中的正式与`UA/合作方/第三方子职分阶段排行榜`。
 """
     rec.write_text(current.rstrip() + entry + "\n", encoding="utf-8")
 

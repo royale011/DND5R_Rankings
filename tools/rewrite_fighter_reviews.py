@@ -35,7 +35,7 @@ COMMON = (
 
 
 DATA = {
-    "0x总评.md": {
+    "README.md": {
         "summary_heading": "队伍定位摘要",
         "summary": "战士是最通用、最稳定的武器平台：它可以近战、远程、盾牌前排、双手爆发或专长堆叠。2024 版把职业从“攻击很多次”推进到“攻击很多次且有战术选择”，但它仍不是满施法者；高等级解题、召唤、治疗、反制和跨场景控制都要靠子职、装备或队友补。",
         "review": """1级 `Fighting Style`、`Second Wind` 和 `Weapon Mastery` 同时进场，决定了战士的底盘质量。Fighting Style 让近战、远程、防御或双武器路线都能从 1 级开始成型；Second Wind 是短休/长休节奏下可靠的自我续航；Weapon Mastery 则让战士用 Push、Topple、Sap、Nick、Vex 等效果把普通攻击变成站位和命中管理工具。
@@ -258,4 +258,3 @@ for filename, (summary, body) in GENERIC.items():
             ("主题与能力关联度", "A", "能力与子职意象基本一致。"),
         ],
     })
-

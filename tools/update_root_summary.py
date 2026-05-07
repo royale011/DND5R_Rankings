@@ -3,7 +3,9 @@ import re
 
 ROOT = Path("Rankings")
 TIERS = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
-RANKS = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
+TIER_SHORT = {"Tier 1（1-4）": "T1", "Tier 2（5-10）": "T2", "Tier 3（11-16）": "T3", "Tier 4（17-20）": "T4"}
+RANKS = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+SUMMARY_FILE = "README.md"
 
 
 def read(path: Path) -> str:
@@ -29,7 +31,7 @@ def extract_overall(path: Path):
 
 
 def short_reason(reason: str, limit: int = 96) -> str:
-    reason = re.sub(r"\s+", "", reason)
+    reason = re.sub(r"\s+", " ", reason).strip()
     if len(reason) <= limit:
         return reason
     cut = reason[:limit]
@@ -53,7 +55,7 @@ def class_dirs():
     for p in sorted(ROOT.iterdir(), key=lambda x: x.name):
         if not p.is_dir() or p.name == "构筑":
             continue
-        if (p / "0x总评.md").exists():
+        if (p / SUMMARY_FILE).exists():
             dirs.append(p)
     return dirs
 
@@ -61,7 +63,7 @@ def class_dirs():
 def class_scores():
     rows = []
     for d in class_dirs():
-        scores = extract_overall(d / "0x总评.md")
+        scores = extract_overall(d / SUMMARY_FILE)
         if scores:
             rows.append((d.name, scores))
     return rows
@@ -72,14 +74,15 @@ def subclass_entries():
     nonfirst = []
     for d in class_dirs():
         for p in sorted(d.glob("*.md"), key=lambda x: x.name):
-            if p.name == "0x总评.md":
+            if p.name == SUMMARY_FILE:
                 continue
             scores = extract_overall(p)
             if not scores:
                 continue
             sub = p.stem
             entry = {
-                "name": f"{d.name} - {sub}",
+                "class_name": d.name,
+                "item_name": sub,
                 "scores": scores,
                 "kind": "subclass",
                 "marked": is_marked_nonfirst_party(sub),
@@ -102,7 +105,8 @@ def build_entries():
         scores = extract_overall(p)
         if scores:
             entries.append({
-                "name": f"构筑 - {p.stem}",
+                "class_name": "构筑",
+                "item_name": p.stem,
                 "scores": scores,
                 "kind": "build",
             })
@@ -117,28 +121,30 @@ def rank_table(title, first_col, rows):
 
 
 def leaderboard(title, entries):
-    out = [f"## {title}", ""]
+    out = [
+        f"## {title}",
+    ]
     for tier in TIERS:
-        out.append(f"{tier}:")
-        used = False
-        for rank in RANKS:
-            bucket = [e for e in entries if e["scores"][tier][0] == rank]
-            if not bucket:
-                continue
-            used = True
-            bucket.sort(key=lambda e: e["name"])
-            out.append(f"- {rank}:")
-            for e in bucket:
-                out.append(f"  - {e['name']}：{short_reason(e['scores'][tier][1])}")
-        if not used:
-            out.append("- 无")
-        out.append("")
+        out.extend([
+            "",
+            f"### {tier}",
+            "",
+            "| 阶段 | 评级 | 职业 | 子职 | 具体理由 |",
+            "|---|---|---|---|---|",
+        ])
+        rows = []
+        for e in entries:
+            rank, reason = e["scores"][tier]
+            rows.append((tier, rank, e["class_name"], e["item_name"], short_reason(reason)))
+        rows.sort(key=lambda row: (RANKS.index(row[1]), row[2], row[3]))
+        for tier, rank, class_name, item_name, reason in rows:
+            out.append(f"| {TIER_SHORT[tier]} | {rank} | {class_name} | {item_name} | {reason} |")
     return "\n".join(out).rstrip()
 
 
 def main():
     classes = class_scores()
-    builds = [(e["name"].replace("构筑 - ", ""), e["scores"]) for e in build_entries()]
+    builds = [(e["item_name"], e["scores"]) for e in build_entries()]
     official_subclasses, nonfirst_subclasses = subclass_entries()
     build_es = build_entries()
     official_plus_builds = official_subclasses + build_es
@@ -158,7 +164,7 @@ def main():
     doc.append("")
     doc.append(leaderboard("分阶段子职排行榜", official_plus_builds))
     doc.append("")
-    doc.append("本节把官方第一方子职、项目例外的EGW子职，以及`Rankings\\构筑`中的有效构筑放在同一竞争池。构筑以`构筑 -`标记，方便和单职业子职区分；每条理由来自对应单文件`综合评分`。")
+    doc.append("本节把官方第一方子职、项目例外的EGW子职，以及`Rankings\\构筑`中的有效构筑放在同一竞争池。构筑在`职业`列标为`构筑`，方便和单职业子职区分；每条理由来自对应单文件`综合评分`。")
     doc.append("")
     doc.append(leaderboard("UA/合作方/第三方子职分阶段排行榜", nonfirst_subclasses))
     doc.append("")
@@ -174,13 +180,10 @@ def main():
     doc.append("## 更新说明")
     doc.append("本次总评从当前各职业、子职与构筑文件的`综合评分`表回读生成排行榜。根`分阶段子职排行榜`已按新标准加入构筑，使其直接与官方子职竞争；UA、合作方、第三方子职仍保留在独立排行榜中，EGW子职按项目例外同时出现在两个排行榜。")
     doc.append("")
-    (ROOT / "总评.md").write_text("\n".join(doc), encoding="utf-8")
+    (ROOT / SUMMARY_FILE).write_bytes(("\n".join(doc).rstrip() + "\n").encode("utf-8"))
 
-    record = ROOT / "record.md"
-    with record.open("a", encoding="utf-8") as f:
-        f.write("\n## 2026-05-05 根总评构筑并入排行榜\n")
-        f.write("- 更新 official skill：根目录`总评.md`的`分阶段子职排行榜`现在将`Rankings\\构筑`中的有效构筑与官方第一方子职、EGW例外子职放入同一Tier/评分竞争池；职业内`0x总评.md`不受此规则影响。\n")
-        f.write("- 重建`Rankings\\总评.md`：职业表、构筑表、官方子职+构筑排行榜、UA/合作方/第三方排行榜均从当前单文件`综合评分`回读生成，避免总评与单文件漂移。\n")
+    # Standards updates are recorded manually in Rankings/changelog.md.
+    # This script only regenerates Rankings/README.md from file-level 综合评分 tables.
 
 
 if __name__ == "__main__":

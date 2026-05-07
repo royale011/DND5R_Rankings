@@ -492,7 +492,7 @@ def write_build(filename, data):
 
 
 def update_summary():
-    summary = ROOT / "Rankings" / "总评.md"
+    summary = ROOT / "Rankings" / "README.md"
     if not summary.exists():
         return
     text = summary.read_text(encoding="utf-8")
@@ -514,7 +514,7 @@ def update_summary():
 
 
 def update_record():
-    rec = ROOT / "Rankings" / "record.md"
+    rec = ROOT / "Rankings" / "changelog.md"
     current = rec.read_text(encoding="utf-8") if rec.exists() else ""
     marker = "2026-05-05 构筑重评"
     entries = []

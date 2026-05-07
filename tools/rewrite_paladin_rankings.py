@@ -577,11 +577,11 @@ for old, new in [("破誓者（UA）.md", "破誓者.md"), ("护法之誓（UA�
     elif old_path.exists() and new_path.exists():
         old_path.unlink()
 
-(OUT / "0x总评.md").write_text(base_doc, encoding="utf-8")
+(OUT / "README.md").write_text(base_doc, encoding="utf-8")
 for name, content in subclasses.items():
     (OUT / f"{name}.md").write_text(content, encoding="utf-8")
 
-record = ROOT / "Rankings" / "record.md"
+record = ROOT / "Rankings" / "changelog.md"
 with record.open("a", encoding="utf-8") as f:
     f.write(
         "\n\n## 2026-05-05 Paladin rebuild calibration\n"
@@ -590,4 +590,3 @@ with record.open("a", encoding="utf-8") as f:
         "- Renamed UA review filenames to verified local subclass names: `破誓者.md` and `护法之誓.md`.\n"
         "- Calibrated 2024 Paladin community feedback: `防护灵光` remains the core S-tier team defense engine, while `至圣斩` being a spell and usually once per turn prevents old burst assumptions.\n"
     )
-

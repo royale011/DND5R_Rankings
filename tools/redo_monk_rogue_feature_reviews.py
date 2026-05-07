@@ -38,7 +38,7 @@ MONK = Path("Rankings/武僧")
 ROGUE = Path("Rankings/游荡者")
 
 MONK_DATA = {
-    "0x总评.md": {
+    "README.md": {
         "summary_heading": "队伍定位摘要",
         "summary": "武僧是 2024 版最成功的重做职业之一：它现在能靠 Focus 经济、附赠动作攻击、防御反应、机动和单体干扰稳定参与每场战斗。它不是满施法者，不能替代群控、反制、召唤和战役级法术，但作为武系游击核心已经从旧版低谷里走出来。",
         "review": """1级 `Martial Arts` 决定武僧的攻击结构：轻武器或徒手攻击后接附赠动作攻击，早期攻击次数好看，和 Tavern Brawler、Grappler、命中 rider、魔法物品附伤都有天然互动。`Unarmored Defense` 让它不用护甲，但敏捷、感知、体质都想要，低级 AC 并不奢侈。
@@ -173,7 +173,7 @@ for f in ["命流武者.md", "秘术武者（UA）.md"]:
 
 
 ROGUE_DATA = {
-    "0x总评.md": {
+    "README.md": {
         "summary_heading": "队伍定位摘要",
         "summary": "游荡者是技能、潜入、侦察和无资源可靠性的专家。2024 版用 Weapon Mastery、Cunning Strike 和提前的 Reliable Talent 让它更好玩，但没有根本解决战斗 DPR 与高等级队伍级解题偏弱的问题。",
         "review": """1级 `Expertise` 是游荡者最硬的职业身份。它不仅是“技能多”，而是能把潜行、察觉、巧手、调查、游说、欺瞒等关键技能推到同级最可靠。`Sneak Attack` 给无资源单点伤害，但它每轮通常只结算一次，和战士/武僧的多攻击成长不是同一种输出曲线。`Weapon Mastery` 让 Vex、Nick 等武器更稳定，改善手感但不改变单次偷袭核心。
@@ -304,4 +304,3 @@ for name, cfg in MONK_DATA.items():
     apply(MONK, name, cfg)
 for name, cfg in ROGUE_DATA.items():
     apply(ROGUE, name, cfg)
-

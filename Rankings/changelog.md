@@ -1,3 +1,139 @@
+## README 排行榜分 Tier 分表结构调整（2026-05-08）
+- 更新 official ranking skill：`分阶段子职排行榜` 与 `UA/合作方/第三方子职分阶段排行榜` 改为在二级标题下按 `### Tier 1（1-4）`、`### Tier 2（5-10）`、`### Tier 3（11-16）`、`### Tier 4（17-20）` 分成四张表。
+- 每张表仍保留 `阶段` 列，并继续使用 `T1` / `T2` / `T3` / `T4` 作为紧凑显示；排序和理由仍从单文件 `综合评分` 回读生成。
+- 更新 `rebuild_class_leaderboards_from_reviews.py` 与 `update_root_summary.py`，并重建全部职业 README 与根 README。
+
+## 构筑评测整体重做（2026-05-08）
+- 重写 `Rankings\构筑` 下全部现有14个构筑评测，按最新 rank scale、构筑综合评分三要素、满施法压缩、非满施法公平评价和多职业节点延迟重新校准。
+- 关键调整：Dora 的 Tier 2 上调为 A+、Tier 4 上调为 S-；Pistolero 的 Tier 3-4 上调为 A+；圣武士/吟游诗人与圣武士/魔契师从旧S压缩到 S-/A+；Celestial Generalist 上调为 A/A+/S-/S-；Sorlock 从旧中阶S压缩为 S-；诡术师/法师 Tier 3 细化为 A-。
+- 本轮不新增构筑、不恢复纯职业构筑；根 README 将由构筑文件的 `综合评分` 表重新生成。
+
+## 2026-05-08 - Rogue full review rewrite under expanded rank scale
+
+- Remade `Rankings\游荡者\README.md` and all existing Rogue subclass review files from verified local scope in `DND5e_chm\不全书.wcp`.
+- Kept 2024 PHB subclasses, official legacy subclasses, FRHoF `三神门徒`, latest UA `窃法者（UA）` / `鬼魅（UA）`, and partner/third-party subclasses separate.
+- Recalibrated Rogue as `B / B / C / C`: excellent skills, scouting, infiltration, and no-resource reliability, but high-tier comprehensive rank remains limited by modest DPR, paid Cunning Strike riders, and lack of default spell-scale problem solving.
+- Rewrote individual reasons to separate `职业底盘贡献`, `子职增量`, and `限制器`, especially around `偷袭`, `狡诈打击`, `可靠才能`, bonus-action pressure, item economy, anti-caster access, and campaign-dependence.
+- Regenerated class/root leaderboards from file-level `综合评分`.
+
+## 2026-05-08 - Monk full review rewrite under expanded rank scale
+
+- Remade `Rankings\武僧\README.md` and all existing Monk subclass review files from verified local scope in `DND5e_chm\不全书.wcp`.
+- Kept 2024 PHB subclasses, official legacy subclasses, latest UA rewrites, and partner/third-party subclasses separate; old official `醉拳宗` and UA `醉拳武者（UA）` are evaluated as separate files.
+- Recalibrated Monk as `A / A / A / B`: 2024 base chassis is a strong non-full-caster with excellent mobility, single-target pressure, reaction defense, and saving throw resilience, but lacks full-caster encounter and campaign control at Tier 4.
+- Rewrote individual reasons to separate `职业底盘贡献`, `子职增量`, and `限制器`, especially around `专注点`, 附赠动作 pressure, `偏斜攻击`, `震慑拳`, target access, and high-tier non-spell limits.
+- Regenerated class/root leaderboards from file-level `综合评分` instead of hand-forcing rank distribution.
+
+## 2026-05-08 - Fighter full review rewrite under expanded rank scale
+
+- Remade `Rankings\战士\README.md` and the existing Fighter official / UA / partner / third-party subclass reviews under the current rank scale and Chinese-term requirement.
+- Recalibrated Fighter as `A / A / B / B`: top-tier weapon execution and action-economy burst, but high-tier comprehensive rank is limited by lack of default high-level spell, anti-caster, teleportation, summon, and campaign-scale problem solving.
+- Added latest UA `魔射手（UA）.md` while keeping official XGE `魔射手.md`; renamed stale `晓骑士（UA）.md` to verified local source name `骁骑士（UA）.md`.
+- Kept EGW `回音骑士（EGW）` in the main subclass leaderboard exception while also listing it in UA/partner/third-party context through the generated source-marked file system.
+
+## 2026-05-08 - Barbarian full review rewrite under expanded rank scale
+
+- Remade `Rankings\野蛮人\README.md` and all existing Barbarian subclass reviews under the current rank scale and Chinese-term requirement.
+- Added missing official `巨人道途.md` from `DND5e_chm\巨人之荣耀\角色选项\子职业选项_野蛮人_巨人道途.htm`.
+- Recalibrated Barbarian as `A / B / C / C`: excellent low-level melee and durability, but high-tier functionality remains narrow compared with spell and aura ecosystems.
+- Kept XGE `风暴先驱道途` and new UA `风暴先驱道途（UA）` as separate files; partner/third-party options are ranked by actual function, not source penalty.
+
+## 2026-05-08 - Paladin full review rewrite under expanded rank scale
+
+- Remade `Rankings\圣武士\README.md` and every existing Paladin subclass review, covering 2024 PHB, official legacy, FRHoF, UA, partner, and third-party sources listed in `DND5e_chm\不全书.wcp`.
+- Recalibrated Paladin under the current rank scale: base class is now `A / S / A+ / A`, reflecting Tier 2 `防护灵光` dominance and Tier 3-4 half-caster limits.
+- Rewrote `详细评价` and `综合评分` reasons to separate Paladin chassis value, subclass increment, action/resource/concentration limits, and table sensitivity.
+- Corrected the analysis style away from 2014-memory wording: `奉献之誓` uses 2024 `卫护斩`, and `复仇之誓` explicitly accounts for `闪耀斩`, `武器精通`, and other replaceable advantage sources.
+
+## 2026-05-07 游侠全量重评
+
+- 按最新官方技能和新评分粒度重写游侠底盘、2024 PHB 子职、XGE/TCE/FTD/FRHoF 兼容子职、`幽邃戍卫（UA）`、以及四个合作/第三方游侠子职。
+- 本轮核心校准：游侠不是弱到不能玩；低中等级远程、技能、`行踪无迹`、`荆棘丛生`和召唤/伙伴都很实用。但 `猎人印记` 的集中与附赠动作绑定、可替代性和高等级补丁过晚，仍压低职业设计质量与 Tier 4 综合评价。
+- 第三方/合作内容按实际强度评分，不因来源降档；`荒径守护者（克苏鲁）`因团队骰、先攻与多人命中/伤害放大进入高档，但保留集中、队友数量、站位和文本环境限制。
+- 已保留文件级 `综合评分` 为排行榜唯一来源；后续通过脚本重建游侠目录与根目录排行榜。
+
+## 2026-05-07 奇械师半施法与物品经济重评
+
+- 按最新半施法、物品经济与S-/A+粒度标准重评`奇械师`本职、五个`艾伯伦：奇械锻炉`正式子职与`苏生师（UA）`。
+- 奇械师本职调整为 `B / A / A+ / A`：Tier 3的`储法物品`、5同调位和高级仿制方案是实质团队资源/行动经济引擎；Tier 4仍强，但缺少满施法终局现实改写。
+- 子职校准：`魔炮师`为 `A / S- / S- / A+`，是正式奇械师顶层但仍受炮台、附赠动作、站位和半施法限制；`装甲师`、`制图师`、`战地匠师`用A/A+细分强前线、团队定位和伙伴路线；`炼金师`保持后勤可用但不顶尖；`苏生师（UA）`按实际强度评为 `A / S- / A+ / A+`，不因UA来源压分。
+- 本轮从单文件`综合评分`回读重建`Rankings\奇械师\README.md`与根`Rankings\README.md`，不手工强制排行榜分布。
+
+## 2026-05-07 魔契师非普通满施法者压缩重评
+- 按最新标准重评 `魔契师` 与全部现有宗主文件。核心校准：魔契师不按普通准备满施法者处理；`玄奥秘法`是无槽高环入口，但每环固定、通常长休一次，仍受施法时间、成分、专注、短休节奏、祈唤机会成本和魔契路线选择限制。
+- 职业底盘调整为 `A / A+ / S- / S-`。高阶可作为强力近满施法者参与终局问题，但不因6-9环入口自动取得普通满施法者的`S`。
+- 正式宗主中，`巨灵宗主`因容器短休与Tier 3内取得的`有限祈愿`进入 `S`；`旧日支配者宗主`、`死灵宗主`、`深海意志`、`至高妖精宗主`等高阶多压缩到 `S-`，理由中明确区分职业底盘与宗主增量。
+- UA/第三方宗主按实际强度评价，不因来源压分；`契灵宗主（UA）`、`角之王宗主（歪曲之月）`等仍可到 `S`，但没有发现足以跨全职业生态给 `S+` 的魔契师宗主。
+
+## 2026-05-07 灵能使满施法者压缩重评
+
+- 依据最新满施法者压缩标准重评UA职业`灵能使`及其当前子职。基础职业、`蜕变者`、`念动使`、`传心师`使用`其他\新UA\灵能二期`；`裂空使`因二期未替换，继续使用一期`其他\新UA\灵能`文本。
+- UA身份不自动降低强度；但正式出版前的文本不稳定性、缺少`祈愿术`、法表生态窄于法师、以及社区讨论仍未充分沉淀，都写入`综合评分`理由。
+- 灵能使本职高等级从默认 S 校准为 S-：它是强满施法者，但默认不拥有法师式法术书/仪式经济、日备全表或`祈愿术`生态。
+- 子职校准：`念动使（UA）`因硬控制、防御和无专注`心灵遥控`保留 S；`裂空使（UA）`因群体空间重排在Tier 3-4为 S；`传心师（UA）`和`蜕变者（UA）`按强满施法底盘加较窄子职增量校准到 S- / A+ 区间。
+
+## 2026-05-07 术士满施法者压缩重评
+
+- 依据当前 rank-scale 与满施法者压缩标准，重写`术士`本职、正式子职、UA子职和合作/第三方子职的`详细评价`校准段与`综合评分`理由。
+- 术士本职 Tier 2-4 从默认 S 校准为 S-：`先天术法`、`术法复苏`、`术法化身`和`奥术化神`非常强，但缺少法师法术书/仪式经济、日备全表与默认`祈愿术`，不能把所有术士子职自动推入 S。
+- 保留或给予 S 的子职必须有明确子职增量：如`畸变术法`的隐蔽灵能施法、`时械术法`的高质量扩表/防护、`咒火术法`的反制资源回收、UA`先祖术法`的反制与专注保护、UA`幽影术法`的无专注召唤，以及`饥欲之暗（克苏鲁）`高等级暗场规则压制。
+- 主要只提供个人伤害、防御或窄场景工具的子职改用 S- / A+ / A- 细分说明，例如`龙族术法`、`月之术法`、`神圣之魂`、`狂野术法`、`风暴术法`、`烈焰士（Plane Shift）`、`织光者（黯潮之书）`、`荒漠之魂（狮鹫鞍包）`、`鬼之血脉（胧忆岛）`与`猩红术法（歪曲之月）`。
+
+## 吟游诗人全子职评分粒度校准（2026-05-07）
+- 依据当前官方 ranking skill 重新校准`吟游诗人`本职、正式/旧版兼容/UA/合作方/第三方子职的`综合评分`与理由。
+- 本轮核心口径：`魔法奥秘`是重大强度跃升，但不是每日全表准备；吟游诗人仍受准备数量、升级替换、跨表锁位和卷轴合法性限制。只有真正解决准备压力、行动经济、豁免失败、团队防线或关键战场功能的子职才保持S。
+- 吟游诗人本职高阶由默认S校准为S-；`逸闻学院`、`舞蹈学院`、`魅心学院`、`皓月学院`等按阶段内时点和子职增量重新区分S/S-/A+；较弱但搭载强底盘的旧版子职用A+/A-表达，而不再简单写成A或S。
+- 合作方/第三方子职按实际功能重评：亡灵、面具、灵哨、戏剧等高阶功能保留高评价，但凡主要依赖吟游诗人底盘、场景/召唤/选项裁定或晚成型的项目从S压到S-或A+。
+- 已从单文件`综合评分`重建`Rankings\吟游诗人\README.md`与根目录`Rankings\README.md`，不手工强迫榜单分布。
+
+## 德鲁伊全子职评分粒度校准（2026-05-07 22:15）
+- 重新生成`Rankings\德鲁伊`下德鲁伊本体、正式子职、UA子职以及合作方/第三方子职评审，并按当前 `S+ > S > S- > A+ > A > A- > B...` 粒度校准`综合评分`理由。
+- 德鲁伊本体由高Tier默认S压缩为Tier 2-4 S-：准备型原初满施法、治疗、召唤、地形控制和探索仍是高位满施法者；但没有默认`祈愿术`、稳定`法术反制`，且受专注竞争、召唤生态、地形依赖和桌面执行影响。
+- 正式子职校准重点：`星辰结社`保留Tier 1-3 S，但Tier 4因缺少新的d20升级压为S-；`野火结社`Tier 2因灵魄施法起点和团队位移保留S，Tier 3-4压为S-；`大地结社`改为中高Tier S-；`月亮结社`高Tier按强而窄的前线/专注路线评为A+；`牧人结社`按2024召唤生态重评为A/A+，不按旧版海量召唤天花板处理。
+- UA/合作方/第三方子职不因来源降分，但按真实限制压缩：`恩护结社（UA）`保留S但不达S+；`巨龙结社（狮鹫鞍包）`低中级S、高阶S-；`柳艺结社（歪曲之月）`低中级S、高阶S/S-；`枯朽`、`暗影`、`落英`等按召唤、黑暗、花墙等实际限制落在A+到S-。
+- 已从单文件`综合评分`表回读重建`Rankings\德鲁伊\README.md`与根`Rankings\README.md`，确保排行榜与独立文件一致。
+
+## README排行榜列名与阶段缩写微调（2026-05-07 21:53）
+- 更新 official skill：README排行榜表头中的`子职-出版物名称`改为更短的`子职`；但该列含义保持不变，仍必须保留`（UA）`、`（EGW）`、`（鬼魅幽谷）`等来源/出版物标记。
+- 更新 official skill：README排行榜表格的`阶段`列使用`T1`、`T2`、`T3`、`T4`作为显示缩写，以减少表格宽度；单文件`综合评分`表仍保留完整`Tier 1（1-4）`等标签。
+- 更新`tools\rebuild_class_leaderboards_from_reviews.py`与`tools\update_root_summary.py`，并重新生成所有职业目录`README.md`与根`Rankings\README.md`。
+
+## README排行榜表格结构更新（2026-05-07 21:50）
+- 更新 official skill：`分阶段子职排行榜`与`UA/合作方/第三方子职分阶段排行榜`不再按Tier下的rank bucket列表呈现，统一改为Markdown表格。
+- 单职业`README.md`排行榜表格列固定为`阶段`、`评级`、`子职-出版物名称`、`具体理由`；根`Rankings\README.md`额外在`评级`与`子职-出版物名称`之间加入`职业`列，构筑行用`职业=构筑`。
+- 更新`tools\rebuild_class_leaderboards_from_reviews.py`与`tools\update_root_summary.py`，排行榜继续从各单文件`综合评分`表回读，不手写分布；排序仍按`S+ > S > S- > A+ > A > A- > B > C > D > E > E- > F`。
+- `tools\rebuild_class_leaderboards_from_reviews.py`改为自动扫描所有含`README.md`的职业目录，覆盖`灵能使`等UA职业目录，而不是只固定13个官方职业。
+- 已重建所有职业目录`README.md`与根`Rankings\README.md`，仅改变排行榜呈现结构，不进行职业/子职强度重新校准。
+
+## 牧师全领域评分粒度校准（2026-05-07 20:52）
+- 重新核对`DND5e_chm`中2024牧师底盘、PHB2024领域、旧版兼容领域、FR/TCE/UA/合作方/第三方牧师领域，并按当前rank order重写牧师目录31个领域文件的`综合评分`理由。
+- 牧师本职维持 A/S/S/S。`神圣干预`/`进阶神圣干预`的动作压缩计入职业底盘，但复制法术仍保留目标、距离、持续、触发、位置、专注、材料替代范围与桌裁敏感性；该入口不让所有领域自动升到S或S+。
+- `和平领域`与`暮光领域`保留Tier 2-4 S+，Tier 1为S。理由不是“牧师强”，而是低成本、非专注、广覆盖的团队数学/防御破界：`鼓舞纽带`叠`祝福术`、传送分伤/抗性，以及`暮光庇护`每轮刷新临时生命。
+- 按满施法者压缩标准校准普通强领域：`生命领域`、`战争领域`、`锻造领域`、`坟墓领域`等中高Tier主要进入S-；`光明领域`、`诡术领域`、`奥秘领域`只在对应高阶特性真正改变终局爆破、施法角度或跨表解题时进入S。
+- `秩序领域`保留S，因为`权威之声`和相关支援法术能实质压缩队友反应攻击与团队动作经济；但仍因队伍构成和反应资源限制不升S+。
+- 旧版/兼容领域继续遵守5.5e接入规则：1级领域能力视为3级取得，旧版`神圣打击`/`强力施法`/重甲或军武熟练不计为领域额外收益。自然、风暴、死亡等领域因此按真实领域增量压缩到A/A+或S-。
+- UA/合作方/第三方领域不因来源降分。`月亮领域（塔尔多雷）`、`鲜血领域（塔尔多雷）`、`坟墓领域（UA）`、`奥秘领域（UA）`可进入S，但理由必须说明双专注、资源转换、附赠动作易伤/豁免压制或反魔法工具的真实限制。
+- 已从单文件`综合评分`表回读重建`Rankings\牧师\README.md`的正式与UA/合作方/第三方分阶段排行榜，避免README与独立文件漂移。
+
+## 法师全子职评分粒度校准（2026-05-07 17:45）
+- 重新核对`DND5e_chm`中2024法师、旧版兼容法师子职、EGW`时间魔法`/`重力魔法`、UA二期法师子职及现有第三方/合作方评审文件，并按新rank order重写法师目录全部25个子职文件的`综合评分`理由。
+- 本轮重点修正“满施法者底盘压缩”：弱法师子职不再按纯子职模块低估到B/C，高Tier通常至少体现完整法师底盘；但子职增量窄、个人向、环境依赖或桌裁敏感时，也不再机械列入S。
+- `时间魔法（EGW）`校准为Tier 1 S、Tier 2-4 S+：低级强在先攻和重骰但未破界；10级`奥法暂滞`改变法术投送、动作经济和专注归属，14级`收束未来`改写d20成败，力竭代价真实但可被高等级法师工具缓冲或限用于关键节点。
+- `预言师`保留S而非S+：`预兆`是顶级d20替换，但骰值预先随机且次数有限；`防护师`保留S，原因是`奥术守御`/`投射守御`/`破法者`形成团队防御与反魔法可靠性，而非单纯法师底盘强。
+- `幻术师`校准为Tier 2 S-、Tier 3-4 S，并明确14级`亦真亦幻`在Tier 3后段取得；`剑咏者`、`战争魔法`、`书士会`校准为高Tier S-，表达其个人防御、专注稳定、法术书/卷轴经济强，但低于预言/防护/时间魔法的队伍级成败控制。
+- `重力魔法（EGW）`校准为A/A+/S-/S-：秘迹学法术生态计入强度，但`调节密度`、`狂暴牵引`、`事件视界`等都有动作、反应、专注、位置或资源成本，不按S+处理。
+- 已从单文件`综合评分`表回读重建`Rankings\法师\README.md`的正式与UA/合作方/第三方分阶段排行榜，避免README与独立文件漂移。
+
+## 评分粒度与综合评分标准更新（2026-05-07 17:10）
+- 更新官方评审标准与工具基础设施：当前强度顺序固定为 `S+ > S > S- > A+ > A > A- > B > C > D > E > E- > F`。不新增 `SS`、`S++`、`EX`、`B+`、`B-`、`C+`、`C-`、`D+`、`D-`、`E+` 或其他子档；保留既有 `E-`，用于区分近乎无贡献但非完全 `F` 的情况。
+- 保留 S+ 克制：`S+` 仍只给跨全生态的顶端破界选项，尤其是能以低成本、低反制或高可靠性改写遭遇数学、动作经济、专注归属、d20结果、法术投送、资源归属或全队攻防的选项；不得仅因“本职业最强”而给 S+。
+- 明确 `综合评分`：职业 README 的 `综合评分` 是职业底盘在该 Tier 的实践强度；子职文件的 `综合评分` 是该子职角色成品的实践强度，不是纯子职模块分。子职理由必须清楚体现职业底盘贡献、子职增量、限制器/机会成本/桌裁敏感性，避免强底盘抹平子职差异，也避免满施法者子职仅因法表强而自动给 S。
+- 新增满施法者与近满施法者压缩标准：Tier 3-4 满施法底盘已处于 S/S- 时，`强底盘 + 有用但非决定性子职` 默认进入 `S-` 高位桶；只有实质提高成败控制、d20操控、反魔法可靠性、全队保护、专注维持、现实塑形、动作经济、法术投送/专注归属或准备/卷轴/法术书经济的子职才进入 `S`；只有越过全生态边界才进入 `S+`。`魔契师` 等契约/近满施法者需单独计算 `玄奥秘法` 固定选择、契约位、短休、祈唤机会成本与重配置限制。
+- 新增非满施法者、武器职业、半施法者、三分之一施法者、gish 与技能优先选项标准：不因缺少高环法术自动降分，也不因 DPR 自动升高。必须评估目标接触、飞行/隐形/地形处理、伤害可靠性、动作经济、武器精通、控制附带、队伍杠杆、防御恢复、非战斗工具、Tier 缩放、物品/队友假设和遭遇多样性。半施法与 gish 的法术要放回整个动作经济与专注冲突中评价。
+- 新增 Tier 内时点规则：若关键特性在10、11、14、15、17、18级等 Tier 中段或末端出现，`综合评分` 理由必须说明该分数代表整段 Tier、后段爆点，还是类似“11-13 S-，14-16 S”的分段判断。不能把14级能力写成 Tier 4 才出现，也不能把10级 `魔法奥秘` 当作整个 Tier 2 已经在线。
+- 更新工具约束：排行榜/总评脚本必须从单文件 `综合评分` 表回读，按新 rank order 排序，不允许手写强制分布；当前 class summary 与 root summary 文件名均按 `README.md` 处理，不再使用旧 `0x总评.md` / `总评.md` 作为再生成目标。
+- 本 pass 只更新标准、skill 与工具，不批量重写职业、子职或构筑评分。后续校准应按职业/批次进行：先核对 `DND5e_chm` 本地源文，更新单文件与每个变动 rank 的具体理由，再由工具从单文件分数重建 class/root README，并在本 changelog 记录。
+
 ## EGW秘迹学法术与魔法奥秘边界校准（2026-05-07 16:05）
 - 重新读取 `荒洲探险家指南\角色选项\秘迹学法术` 本地文本，确认 `秘迹学法术` 供本章 `时间魔法` 与 `重力魔法` 法师子职使用，并且不应简单加入其他施法职业完整法表；DM可把少量秘迹学法术作为战役奖励交给其他施法者，但这不是普通`魔法奥秘`、通用法师法表或卷轴入口的默认权限。
 - 更新 official skill 与 homebrew skill：评审时不能把 `灵敏之赐`、`时流刹转`、`暗黑星辰`、`饕餮虚空`等秘迹学法术当作普通跨表可取得资源；评审 `时间魔法（EGW）` 与 `重力魔法（EGW）` 时则必须把对应秘迹学法术计入其子职生态。
@@ -533,3 +669,10 @@
 - Calibrated class overall upward from the older B/C/D/D framing to B/B/C/C: 2024 Rogue is still damage- and high-magic-limited, but `可靠才能` at Tier 2 and `狡诈打击` mean Tier 3-4 should not be treated as dead-weight.
 - Calibrated subclasses: `诡术师` is the clear top because spell access solves the most Rogue weaknesses; `魂刃` is top-tier for skill/predicate reliability; `盗贼` is item-economy dependent and can spike high but defaults to B; `刺客` is improved from 2014 but remains opener/encounter-structure dependent.
 - Cross-checked public 2024 Rogue commentary from RPGBOT, Dungeon Dudes, and Reddit samples: consensus supports improved play quality and good subclass repairs, while still treating Rogue DPR and high-level problem solving as conservative compared with full casters and stronger martials.
+
+## 2026-05-07 德鲁伊正式与UA重评
+
+- 本轮选择新职业`德鲁伊`。依据`DND5e_chm\不全书.wcp`与本地职业文件确认正式/UA范围：2024 PHB `大地结社`、`月亮结社`、`海洋结社`、`星辰结社`；旧正式 `梦境结社`、`牧人结社`、`孢子结社`、`野火结社`；UA `恩护结社（UA）`。
+- 按项目规则：旧2014/5e子职低于3级获得的特性视为3级获得；UA按实际功能评分，不因测试稿身份刻意压低。
+- 命名校准：本地UA标题为`恩护结社`，旧文件`疗愈结社（UA）.md`改为`恩护结社（UA）.md`；歪曲之月合作方`旧途结社`、`柳艺结社`改为带来源标记文件名，避免进入正式排行榜。
+- 社区校准：综合采用2024德鲁伊指南、社区讨论与本地文本交叉核对；本轮按新S/S-/A+粒度重评。星辰与野火仍是官方高位，大地因可变扩表和资源恢复给S-中后期，月亮按2024临时生命机制评为强而窄的A+高阶，恩护UA因区域临时生命、体质豁免、减速和反应减伤给S但不达S+。

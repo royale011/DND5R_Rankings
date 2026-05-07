@@ -378,7 +378,7 @@ def extract_overall(text):
 
 
 def leaderboard(title, data):
-    rank_order = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
+    rank_order = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
     out = [f"## {title}", ""]
     if title.startswith("UA/"):
         out.append("本节只列入 UA / 合作方 / 第三方战士子职。它们按实际功能评分，不因来源降分；其中 `回音骑士（EGW）` 因项目例外也列入官方榜，但仍在本节作为合作方条目重复列出。")
@@ -400,7 +400,7 @@ def leaderboard(title, data):
 
 
 def update_summary():
-    path = ROOT / "0x总评.md"
+    path = ROOT / "README.md"
     text = path.read_text(encoding="utf-8")
     official, non = build_summary()
     new = leaderboard("分阶段子职排行榜", official) + "\n" + leaderboard("UA/合作方/第三方子职分阶段排行榜", non)

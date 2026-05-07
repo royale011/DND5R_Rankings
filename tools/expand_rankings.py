@@ -629,7 +629,7 @@ def write():
     for cls, data in CLASSES.items():
         cdir = OUT / cls
         cdir.mkdir(exist_ok=True)
-        (cdir / "0x总评.md").write_text(class_doc(cls, data), encoding="utf-8")
+        (cdir / "README.md").write_text(class_doc(cls, data), encoding="utf-8")
 
     for cls, data in CLASSES.items():
         cdir = OUT / cls
@@ -708,8 +708,8 @@ def write():
         "- 具体校准：和平领域、暮光领域、时间魔法的“能力设计质量”从 C 下调到 D；牧人结社从 B/A/B/A 调为 C/A/C/A；炼金师的“主题与能力关联度”从 A 下调到 B。",
         "- 理由生成也同步校准：不再把非核心制造、反制施法或召唤缺口机械地当成所有子职的设计失败；低分理由优先引用该子职真正的问题，如过强、随机、动作经济、旧版兼容、数值不足、装备锁定或 DM 依赖。",
     ]
-    (OUT / "record.md").write_text(record_doc() + "\n".join(extra_record) + "\n", encoding="utf-8")
-    (OUT / "总评.md").write_text(summary_doc() + "\n## 第二轮扩展说明\n本目录现包含 2024 基准、UA、旧版未覆盖、合作设定书和第三方子职。总评主表仍只列基础职业与构筑；具体子职请进入各职业目录查看。\n", encoding="utf-8")
+    (OUT / "changelog.md").write_text(record_doc() + "\n".join(extra_record) + "\n", encoding="utf-8")
+    (OUT / "README.md").write_text(summary_doc() + "\n## 第二轮扩展说明\n本目录现包含 2024 基准、UA、旧版未覆盖、合作设定书和第三方子职。总评主表仍只列基础职业与构筑；具体子职请进入各职业目录查看。\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

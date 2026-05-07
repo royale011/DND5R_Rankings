@@ -368,11 +368,11 @@ def write_base():
     )
     text += "\n" + leaderboard("分阶段子职排行榜", OFFICIAL)
     text += "\n\n" + leaderboard("UA/合作方/第三方子职分阶段排行榜", UA) + "\n"
-    (OUT / "0x总评.md").write_text(text, encoding="utf-8")
+    (OUT / "README.md").write_text(text, encoding="utf-8")
 
 
 def update_record():
-    rec = ROOT / "Rankings" / "record.md"
+    rec = ROOT / "Rankings" / "changelog.md"
     current = rec.read_text(encoding="utf-8") if rec.exists() else ""
     stamp = datetime.now().strftime("%Y-%m-%d")
     marker = f"{stamp} 奇械师正式与UA重评"
@@ -390,7 +390,7 @@ def update_record():
 
 
 def append_recalibration_record():
-    rec = ROOT / "Rankings" / "record.md"
+    rec = ROOT / "Rankings" / "changelog.md"
     current = rec.read_text(encoding="utf-8") if rec.exists() else ""
     stamp = datetime.now().strftime("%Y-%m-%d")
     marker = f"{stamp} 奇械师二次综合校准"

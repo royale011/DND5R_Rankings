@@ -2,7 +2,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CLERIC = ROOT / "Rankings" / "牧师"
-RECORD = ROOT / "Rankings" / "record.md"
+RECORD = ROOT / "Rankings" / "changelog.md"
 
 
 def table(items):
@@ -253,7 +253,7 @@ def write_entries():
 
 
 def patch_summary_note():
-    summary = CLERIC / "0x总评.md"
+    summary = CLERIC / "README.md"
     text = summary.read_text(encoding="utf-8")
     text = text.replace("`反制法术`", "`法术反制`")
     text = text.replace(

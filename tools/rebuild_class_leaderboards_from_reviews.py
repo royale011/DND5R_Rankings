@@ -4,9 +4,15 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 RANKINGS = ROOT / "Rankings"
 
-CLASS_DIRS = ["野蛮人", "战士", "武僧", "游荡者", "圣武士", "游侠", "牧师", "吟游诗人", "魔契师", "术士", "法师", "德鲁伊", "奇械师"]
 TIER_LABELS = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
-RANK_ORDER = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
+TIER_SHORT = ["T1", "T2", "T3", "T4"]
+RANK_ORDER = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+SUMMARY_FILE = "README.md"
+
+
+def write_utf8_lf(path: Path, text: str) -> None:
+    path.write_bytes((text.rstrip() + "\n").encode("utf-8"))
+NON_FIRST_PARTY_BASE_CLASSES = {"灵能使"}
 
 
 def split_row(line: str) -> list[str]:
@@ -48,26 +54,40 @@ def is_non_first_party(stem: str) -> bool:
 
 
 def render_leaderboard(title: str, entries: dict[str, list[tuple[str, str]]]) -> str:
-    out = [f"## {title}", ""]
+    out = [
+        f"## {title}",
+    ]
     for idx, tier in enumerate(TIER_LABELS):
-        out.append(f"{tier}:")
-        buckets: dict[str, list[tuple[str, str]]] = {}
+        out.extend([
+            "",
+            f"### {tier}",
+            "",
+            "| 阶段 | 评级 | 子职 | 具体理由 |",
+            "|---|---|---|---|",
+        ])
+        tier_entries: list[tuple[str, str, str]] = []
         for name, rows in entries.items():
             rank, reason = rows[idx]
-            buckets.setdefault(rank, []).append((name, reason))
-        for rank in RANK_ORDER:
-            if rank not in buckets:
-                continue
-            out.append(f"- {rank}:")
-            for name, reason in buckets[rank]:
-                out.append(f"  - {name}：{reason}")
-        out.append("")
+            tier_entries.append((rank, name, reason))
+        tier_entries.sort(key=lambda item: (RANK_ORDER.index(item[0]), item[1]))
+        for rank, name, reason in tier_entries:
+            out.append(f"| {TIER_SHORT[idx]} | {rank} | {name} | {reason} |")
     return "\n".join(out).rstrip()
+
+
+def class_dirs() -> list[str]:
+    names: list[str] = []
+    for path in sorted(RANKINGS.iterdir(), key=lambda p: p.name):
+        if not path.is_dir() or path.name == "构筑":
+            continue
+        if (path / SUMMARY_FILE).exists():
+            names.append(path.name)
+    return names
 
 
 def rebuild_class(class_name: str) -> None:
     class_dir = RANKINGS / class_name
-    summary = class_dir / "0x总评.md"
+    summary = class_dir / SUMMARY_FILE
     if not summary.exists():
         raise FileNotFoundError(summary)
 
@@ -75,7 +95,7 @@ def rebuild_class(class_name: str) -> None:
     non_first: dict[str, list[tuple[str, str]]] = {}
 
     for path in sorted(class_dir.glob("*.md"), key=lambda p: p.name):
-        if path.name == "0x总评.md":
+        if path.name == SUMMARY_FILE:
             continue
         stem = path.stem
         non_first_party = is_non_first_party(stem)
@@ -94,11 +114,11 @@ def rebuild_class(class_name: str) -> None:
             (class_name == "战士" and stem == "回音骑士（EGW）")
             or (class_name == "法师" and stem in {"时间魔法（EGW）", "重力魔法（EGW）"})
         )
-        if not non_first_party or egw_exception:
+        if not non_first_party or egw_exception or class_name in NON_FIRST_PARTY_BASE_CLASSES:
             official[stem] = rows
 
     replacement = render_leaderboard("分阶段子职排行榜", official)
-    if non_first:
+    if non_first and class_name not in NON_FIRST_PARTY_BASE_CLASSES:
         replacement += "\n\n" + render_leaderboard("UA/合作方/第三方子职分阶段排行榜", non_first)
     replacement += "\n\n"
 
@@ -107,18 +127,18 @@ def rebuild_class(class_name: str) -> None:
     search_from = start if start >= 0 else 0
     design = text.find("## 设计相关评分", search_from)
     if design < 0 and start >= 0:
-        summary.write_text(text[:start].rstrip() + "\n\n" + replacement, encoding="utf-8")
+        write_utf8_lf(summary, text[:start].rstrip() + "\n\n" + replacement)
         return
     if design < 0:
         raise ValueError(f"{summary} missing 设计相关评分 after leaderboard")
     if start < 0:
-        summary.write_text(text[:design] + replacement + text[design:], encoding="utf-8")
+        write_utf8_lf(summary, text[:design] + replacement + text[design:])
     else:
-        summary.write_text(text[:start] + replacement + text[design:], encoding="utf-8")
+        write_utf8_lf(summary, text[:start] + replacement + text[design:])
 
 
 def main() -> None:
-    for class_name in CLASS_DIRS:
+    for class_name in class_dirs():
         rebuild_class(class_name)
 
 

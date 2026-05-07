@@ -379,7 +379,7 @@ def process_file(path: Path) -> bool:
     title_match = re.search(r"^#\s+(.+)$", text, flags=re.M)
     title = title_match.group(1).strip() if title_match else path.stem
     class_name = path.parent.name
-    is_class = path.name.startswith("0x总评")
+    is_class = path.name == "README.md"
     if is_class:
         title = title.replace("总评", "").strip()
         title = re.sub(r"（[^）]*）", "", title).strip("（） ")
@@ -411,7 +411,7 @@ def main() -> None:
     changed = 0
     skipped = 0
     for path in sorted(RANKINGS.rglob("*.md")):
-        if path.name in {"record.md", "总评.md"}:
+        if path.name == "changelog.md" or (path.name == "README.md" and path.parent == RANKINGS):
             skipped += 1
             continue
         if process_file(path):

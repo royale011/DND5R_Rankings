@@ -88,7 +88,7 @@ def extract_overall(path):
 
 
 def render_leaderboard(title, intro, names):
-    order = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
+    order = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
     data = {tier: {} for tier in TIERS}
     for name in names:
         path = ROGUE / f"{name}.md"
@@ -117,7 +117,7 @@ def render_leaderboard(title, intro, names):
 
 
 def update_summary():
-    path = ROGUE / "0x总评.md"
+    path = ROGUE / "README.md"
     text = path.read_text(encoding="utf-8")
     start = text.index("## 分阶段子职排行榜")
     end = text.index("## 设计相关评分")

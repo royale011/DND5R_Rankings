@@ -364,14 +364,14 @@ def write():
     for cls, data in CLASSES.items():
         cdir = OUT / cls
         cdir.mkdir(exist_ok=True)
-        (cdir / "0x总评.md").write_text(class_doc(cls, data), encoding="utf-8")
+        (cdir / "README.md").write_text(class_doc(cls, data), encoding="utf-8")
         for sub, sd in data["subs"].items():
             (cdir / f"{sub}.md").write_text(subclass_doc(cls, sub, sd, data), encoding="utf-8")
     for b in BUILDS:
         safe = b[0].replace("/", "／").replace(":", "：")
         (OUT / "构筑" / f"{safe}.md").write_text(build_doc(*b), encoding="utf-8")
-    (OUT / "record.md").write_text(record_doc(), encoding="utf-8")
-    (OUT / "总评.md").write_text(summary_doc(), encoding="utf-8")
+    (OUT / "changelog.md").write_text(record_doc(), encoding="utf-8")
+    (OUT / "README.md").write_text(summary_doc(), encoding="utf-8")
 
 def record_doc():
     lines = [

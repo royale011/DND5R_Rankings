@@ -45,7 +45,7 @@ MONK_COMMON = (
 )
 
 MONK = {
-    "0x总评.md": {
+    "README.md": {
         "summary_heading": "队伍定位摘要",
         "summary": "武僧是 2024 版最明显的翻身职业：它从旧版“资源紧、伤害低、站不住”的近战游击，变成高机动、高攻击次数、高防御反应和可靠单体干扰的武术核心。它仍不是满施法者，但在非施法职业里综合性非常高。",
         "review": """1级 `Martial Arts` 和 `Unarmored Defense` 让武僧从开局就能无武器/轻武器连续攻击。它不依赖重甲和重武器，装备压力低；但 AC 同时吃敏捷和感知，早期属性紧，不能像重甲战士那样无脑站桩。
@@ -176,7 +176,7 @@ ROGUE_COMMON = (
 )
 
 ROGUE = {
-    "0x总评.md": {
+    "README.md": {
         "summary_heading": "队伍定位摘要",
         "summary": "游荡者是技能与潜入的王者，也是无资源稳定单点输出者；2024 版让它在战斗中有了 Cunning Strike 这样的真实选择，但它的 DPR 和队伍级解题仍不高。它更像可靠专家，不是高等级遭遇接管者。",
         "review": """1级 `Expertise`、`Sneak Attack`、`Thieves' Cant` 和 `Weapon Mastery` 决定游荡者底盘。Expertise 让它在潜行、察觉、巧手、调查、游说等技能上长期领先；Sneak Attack 是无资源单点伤害；Weapon Mastery 则给 Nick/Vex 等武器路线更多稳定性。
@@ -266,4 +266,3 @@ for file, cfg in MONK.items():
     apply(MONK_ROOT, file, cfg)
 for file, cfg in ROGUE.items():
     apply(ROGUE_ROOT, file, cfg)
-

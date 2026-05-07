@@ -33,7 +33,7 @@ COMMON_NOTE = (
 
 
 DATA: dict[str, dict[str, object]] = {
-    "0x总评.md": {
+    "README.md": {
         "position_title": "队伍定位摘要",
         "position": (
             "野蛮人是最直接的前排武器职业：靠 `Rage`、`Reckless Attack`、Weapon Mastery、Extra Attack 和高生命值把自己变成敌人必须处理的近战威胁。"

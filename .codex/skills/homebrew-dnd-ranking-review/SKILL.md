@@ -121,13 +121,32 @@ Known verified terminology note: `Origin Feat(s)` is `起源专长`, as found in
    - Tier 3: levels 11-16.
    - Tier 4: levels 17-20.
    - Categories: `近战伤害者`, `远程伤害者`, `法术伤害者`, `防御和生存`, `治疗和临时生命`, `团队增益`, `反制施法者`, `减益`, `战场分隔`, `召唤 / 伙伴`, `技能使用`, `制造`.
-   - `S`: top of the relevant comparison set.
-   - `S+`: only if it is among the best of the best across the whole official/partner/homebrew-calibrated ecosystem, not merely above its own class boundary.
-   - `E`: can do it but is among the worst.
-   - `E-`: uniquely worst real participant.
-   - `F`: no meaningful rules access.
+   - Use only these ranks, in this order: `S+`, `S`, `S-`, `A+`, `A`, `A-`, `B`, `C`, `D`, `E`, `E-`, `F`.
+   - Do not add `SS`, `S++`, `EX`, `X`, or any other rank above `S+`. Do not add `B+`, `B-`, `C+`, `C-`, `D+`, `D-`, `E+`, `E--`, or other lower-rank subdivisions. Keep `E-` because it separates near-zero contribution from full `F`.
+   - `S+`: ecosystem-breaking apex. Reserved for options that reshape encounter math, action economy, concentration ownership, d20 outcomes, spell delivery, resource ownership, or whole-party defense/offense with unusually low cost, broad reliability, or low counterplay. It is not merely best within one class.
+   - `S`: top-tier primary engine. Broad, reliable, and capable of serving as the party's main win condition or problem-solving engine in that tier, but not low-cost / low-interaction enough for `S+`.
+   - `S-`: top-tier with a real limiter. Usually still above `A+` because of full-caster, near-full-caster, martial apex, half-caster, or equivalent problem-solving strength, but constrained by spell lock-in, narrower list, lack of `祈愿术`, lack of `法术反制`, concentration pressure, table-sensitive rulings, fixed high-level choices, short-rest dependence, subclass timing, limited prepared/known spell pressure, target-access problems, narrow encounter role, magic-item dependence, or lower adaptability.
+   - `A+`: elite but conditional. Can compete with `S-` in a major role or under favorable assumptions, but lacks the breadth, daily adaptability, encounter-rewriting ceiling, or tier-wide reliability of true S-tier options.
+   - `A`: strong default. Reliable and optimized, above baseline, but not a top-tier ecosystem engine.
+   - `A-`: strong but narrow or tier-fragile. Good at its intended role, but with clear gaps in scaling, breadth, resource flow, action economy, encounter dependence, target access, durability, or campaign dependence.
+   - `B`: competent and playable. Has a real role, can be optimized, and is not a trap, but does not strongly compete with `A-`/`A` options.
+   - `C`: underpowered, narrow, or campaign-dependent. Can work in favorable tables or with support, but is meaningfully below normal optimized options.
+   - `D`: weak. Has structural deficiencies, poor scaling, unreliable action economy, poor resource conversion, severe role mismatch, or dependence on unusual assumptions.
+   - `E`: mostly dysfunctional. Only small parts of the kit matter, or the intended role is barely supported.
+   - `E-`: near-zero contribution with a tiny exception.
+   - `F`: functionally absent or failed. No meaningful support for the evaluated role, or the feature actively fails its expected job.
+   - Lower-rank precision rule: do not create subranks below `A-`. Use prose to explain high/low `B`, `C`, or `D` unless the option clearly crosses the next rank boundary. Use `E-` only for almost no contribution; use `F` for absent/failed roles.
    - Overall score is based on team role and high-impact functions, not simple averaging.
    - Homebrew balance/functionality ranking is a strict cross-ecosystem comparison. Compare every homebrew class/subclass/build directly against the relevant official first-party, UA, partner, and third-party published options already reviewed in root `Rankings`, not merely against its own base class or other homebrews. Do not discount a homebrew because it is homebrew, and do not inflate it because it is only strong inside its own class. If it is weaker than official top options, rank it lower; if it genuinely competes with or exceeds UA/partner/third-party ceilings, rank it accordingly; reserve `S+` only for options that stand at the best-of-the-best ceiling across that full comparison pool.
+   - Do not mechanically roll existing `S` entries down or mechanically uplift lower-ranked entries because their base class chassis is strong. Each changed rank must be justified by actual feature text, spell/resource/action economy, timing, opportunity cost, or table sensitivity.
+   - For subclass files, `综合评分` is the resulting character option's practical strength in that tier, not a pure subclass-module score. Reasons should separate or clearly imply base-class contribution, homebrew increment, and limiter/opportunity cost/table sensitivity.
+   - Full-caster and near-full-caster compression standard: if a full-caster chassis is already `S`/`S-` in Tier 3-4, use `S-` as the default high-tier bucket for "strong caster chassis + useful but non-decisive subclass." Use `S` only when the homebrew materially improves encounter-winning functions such as save failure/d20 control, anti-magic reliability, party protection, concentration uptime, battlefield reality-shaping, action-economy leverage, spell delivery/concentration ownership, or preparation/scroll/spellbook economy. Use `S+` only when it crosses normal ecosystem boundaries.
+   - Non-full-caster and mixed-chassis standard: do not penalize an option merely for lacking high-level spells, but do not overrate it solely for DPR. Judge target access, damage reliability, action economy, control riders, defense/recovery, party leverage, noncombat impact, tier scaling, item/party assumptions, and encounter diversity. `S` for martial/half-caster/skill options requires broad tier-relevant impact beyond one damage lane; `S-` fits apex options with real limits; `A+` fits elite but narrower lane dominance.
+   - Half-caster, third-caster, and gish standard: evaluate spellcasting as part of the whole action economy. Check concentration conflict, delayed spell levels, limited slots, prepared/known pressure, and whether spell access actually solves martial problems such as mobility, flight, condition removal, aura support, burst, defenses, battlefield control, or anti-caster utility.
+   - Skill-first and utility-first standard: skill dominance can raise overall rank only when it meaningfully alters campaign problem-solving alongside acceptable combat performance. Do not rank high solely for many proficiencies if spells, rituals, familiars, summons, or party redundancy replace the checks at that tier.
+   - Weapon Mastery and 2024 martial-floor rule: `武器精通` improves the martial floor and must be counted, but does not by itself solve high-tier full-caster disparity. Check trigger reliability, ally benefit, target limits, overlap with common control/advantage, and whether the class/subclass can swap or stack masteries meaningfully.
+   - Magic item and optimization assumptions must be symmetrical. Default rankings may assume ordinary optimized feats/species/backgrounds and normal rules-legal support, but not specific rare/very rare/legendary items, monster allies, ideal scroll access, unlimited downtime, or campaign rewards unless the review states that environment.
+   - Within-tier timing rule: if a feature arrives mid-tier, especially level 10, 11, 14, 15, 17, or 18, the `综合评分` reason must say whether the rank reflects the whole tier, a late-tier spike, or a split such as "11-13 S-, 14-16 S." Do not treat a level 14 feature as first appearing in Tier 4.
 
 9. Do not treat official overlap as inherently invalid.
    - A homebrew subclass overlapping an official subclass’s theme, role, or mechanic is not automatically a design failure.
@@ -161,6 +180,7 @@ Known verified terminology note: `Origin Feat(s)` is `起源专长`, as found in
 ```
 
    - `具体理由` must be specific to that homebrew and tier. Mention the actual feature, spell, action economy, resource loop, scaling, official baseline comparison, or boundary issue that causes the score. Do not repeat generic phrases.
+   - `具体理由` must also explain whether the score comes mainly from the base class, from the homebrew's actual increment, or from their interaction. A strong base class cannot erase a weak homebrew increment, and a strong homebrew increment can raise a weaker chassis only when it actually solves real tier problems.
 
 12. Write improvement advice in the review file.
    - Do not rely on a central `homebrews\Rankings\README.md` for improvement advice.

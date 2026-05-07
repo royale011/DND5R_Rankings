@@ -276,7 +276,7 @@ non_first = {
 
 
 def leaderboard(title, data):
-    order = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
+    order = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
     tiers = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
     lines = [f"## {title}", ""]
     for idx, tier in enumerate(tiers):
@@ -294,7 +294,7 @@ def leaderboard(title, data):
     return "\n".join(lines).rstrip()
 
 
-summary_path = PAL / "0x总评.md"
+summary_path = PAL / "README.md"
 summary = summary_path.read_text(encoding="utf-8")
 start = summary.index("## 分阶段子职排行榜")
 end = summary.index("## 设计相关评分")

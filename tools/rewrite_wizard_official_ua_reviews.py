@@ -11,7 +11,7 @@ ASPECTS = [
     "战场分隔", "召唤 / 伙伴", "技能使用", "制造",
 ]
 TIERS = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
-RANK_ORDER = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
+RANK_ORDER = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
 
 
 def scores(**overrides):
@@ -319,7 +319,7 @@ def write_base():
     nonfirst_lb = {**EGW, **UA}
     text += "\n" + leaderboard("分阶段子职排行榜", official_lb)
     text += "\n\n" + leaderboard("UA/合作方/第三方子职分阶段排行榜", nonfirst_lb) + "\n"
-    (OUT / "0x总评.md").write_text(text, encoding="utf-8")
+    (OUT / "README.md").write_text(text, encoding="utf-8")
 
 
 def cleanup_names():
@@ -344,7 +344,7 @@ def cleanup_names():
 
 
 def update_record():
-    rec = ROOT / "Rankings" / "record.md"
+    rec = ROOT / "Rankings" / "changelog.md"
     current = rec.read_text(encoding="utf-8") if rec.exists() else ""
     if "法师正式与UA重评" in current:
         return

@@ -20,7 +20,7 @@ ASPECTS = [
     "制造",
 ]
 TIERS = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
-RANK_ORDER = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
+RANK_ORDER = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
 
 
 def table(rows):
@@ -506,7 +506,7 @@ def write_base():
         "本轮依据`DND5e_chm\\玩家手册2024\\角色职业\\术士`的2024术士文本校准，并参考社区对2024术士普遍强化、时械/畸变高评价、狂野仍受随机性限制的讨论。"
     )
     text += "\n" + lb_section("分阶段子职排行榜", OFFICIAL) + "\n\n" + lb_section("UA/合作方/第三方子职分阶段排行榜", UA) + "\n"
-    (OUT / "0x总评.md").write_text(text, encoding="utf-8")
+    (OUT / "README.md").write_text(text, encoding="utf-8")
 
 
 def write_subclasses():
@@ -542,7 +542,7 @@ def rename_nonfirst_party_files():
 
 
 def update_record():
-    rec = ROOT / "Rankings" / "record.md"
+    rec = ROOT / "Rankings" / "changelog.md"
     stamp = datetime.now().strftime("%Y-%m-%d")
     entry = f"""
 

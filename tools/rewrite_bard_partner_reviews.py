@@ -2,7 +2,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CLASS_DIR = ROOT / "Rankings" / "吟游诗人"
-RECORD = ROOT / "Rankings" / "record.md"
+RECORD = ROOT / "Rankings" / "changelog.md"
 
 
 def table(rows):
@@ -146,7 +146,7 @@ def main():
     for filename, text in docs.items():
         write(filename, text)
 
-    entry = "\n## 2026-05-05 Bard partner/third-party completion pass\n- Read `DND5e_chm\\不全书.wcp` and confirmed Bard non-first-party subclasses after `合作内容分割线`: `悲剧学院（塔尔多雷）`, `安魂学院（鬼魅幽谷）`, `旅路学院（谦卑林）`, `暗影学院（黯潮之书）`, `交易学院（狮鹫鞍包）`, `面具学院（胧忆岛）`, `灵哨学院（歪曲之月）`, and `戏剧学院（克苏鲁）`.\n- Rewrote all eight Bard partner/third-party subclass reviews by actual local text instead of source-status discounting.\n- Key calibration: `旅路学院（谦卑林）` and `灵哨学院（歪曲之月）` reach S from Tier 2 because their modular tricks / travel and rail control create unusually wide support and battlefield control; `悲剧学院（塔尔多雷）` is S across tiers for strong fate manipulation but not S+ due to risk, limits, and lack of full-ecosystem dominance.\n- Reviewed official and UA Bard rankings during the pass. No official/UA rank changes were made; the non-first-party files are separated into the standalone leaderboard in `0x总评.md`.\n"
+    entry = "\n## 2026-05-05 Bard partner/third-party completion pass\n- Read `DND5e_chm\\不全书.wcp` and confirmed Bard non-first-party subclasses after `合作内容分割线`: `悲剧学院（塔尔多雷）`, `安魂学院（鬼魅幽谷）`, `旅路学院（谦卑林）`, `暗影学院（黯潮之书）`, `交易学院（狮鹫鞍包）`, `面具学院（胧忆岛）`, `灵哨学院（歪曲之月）`, and `戏剧学院（克苏鲁）`.\n- Rewrote all eight Bard partner/third-party subclass reviews by actual local text instead of source-status discounting.\n- Key calibration: `旅路学院（谦卑林）` and `灵哨学院（歪曲之月）` reach S from Tier 2 because their modular tricks / travel and rail control create unusually wide support and battlefield control; `悲剧学院（塔尔多雷）` is S across tiers for strong fate manipulation but not S+ due to risk, limits, and lack of full-ecosystem dominance.\n- Reviewed official and UA Bard rankings during the pass. No official/UA rank changes were made; the non-first-party files are separated into the standalone leaderboard in `README.md`.\n"
     record = RECORD.read_text(encoding="utf-8")
     if "## 2026-05-05 Bard partner/third-party completion pass" not in record:
         RECORD.write_text(record + entry, encoding="utf-8")

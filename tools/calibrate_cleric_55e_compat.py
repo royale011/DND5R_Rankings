@@ -2,7 +2,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CLERIC = ROOT / "Rankings" / "牧师"
-RECORD = ROOT / "Rankings" / "record.md"
+RECORD = ROOT / "Rankings" / "changelog.md"
 
 
 REPLACEMENTS = {

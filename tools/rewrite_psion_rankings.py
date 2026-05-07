@@ -61,7 +61,7 @@ def base_scores(**overrides):
 
 
 FILES = {
-    "0x总评.md": {
+    "README.md": {
         "title": "灵能使（UA）总评",
         "summary": "灵能使是UA满施法职业，最新基础职业、才赋选项、法术表、蜕变者、念动使、传心师均采用`其他\\新UA\\灵能二期`；`裂空使`使用一期`其他\\新UA\\灵能`，因为二期说明没有重测该子职，社区讨论也普遍理解为它测试反馈已经足够好，暂未在二期重写。它不是正式出版职业，评分按实际功能处理，不因UA身份降权。",
         "review": """灵能使的核心不是“另一张法师表”，而是用`灵能施法`、`灵能力量`、`灵能才赋`和专属心灵/念动法术制造一个偏控制、心灵沟通、位移和特殊资源管理的满施法者。它的法术表非常强：低环有`护盾术`、`睡眠术`、`塔莎狂笑术`、`侦测思想`、`沉默术`、`塔莎心灵鞭`；中阶有`催眠图纹`、`恐惧术`、`反制/解除类工具中的解除魔法`、`召唤星界实体`、`放逐术`、`困惑术`、`任意门`、`支配人类`、`怪物定身术`、`心灵静爆`、`心灵遥控`、`传送法阵`；高阶有`力场监牢`、`海市蜃楼`、`传送术`、`迷宫术`、`支配怪物`、`心灵屏障`、`预警术`、`变身术`、`时间停止`和`心灵尖啸`。没有`祈愿术`使它的终局上限低于最顶层法师，但它仍是货真价实的高阶满施法者。
@@ -252,8 +252,8 @@ def write_review(path, data):
 
 
 def leaderboard():
-    ranks = ["S+", "S", "A", "B", "C", "D", "E", "E-", "F"]
-    subclasses = {k: v for k, v in FILES.items() if k != "0x总评.md"}
+    ranks = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+    subclasses = {k: v for k, v in FILES.items() if k != "README.md"}
     lines = ["## 分阶段子职排行榜", "", "本职业本身为UA职业，因此本排行榜列出当前灵能使生态内的全部子职；文件名仍保留`（UA）`标记，避免未来正式版混淆。"]
     for idx, tier in enumerate(["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]):
         lines.append("")
@@ -271,14 +271,14 @@ def leaderboard():
 
 
 def append_leaderboard():
-    path = OUT / "0x总评.md"
+    path = OUT / "README.md"
     text = path.read_text(encoding="utf-8").rstrip()
     text += "\n\n" + leaderboard() + "\n"
     path.write_text(text, encoding="utf-8")
 
 
 def update_record():
-    rec = ROOT / "Rankings" / "record.md"
+    rec = ROOT / "Rankings" / "changelog.md"
     current = rec.read_text(encoding="utf-8") if rec.exists() else ""
     marker = "2026-05-05 灵能使UA重评"
     if marker in current:
@@ -288,7 +288,7 @@ def update_record():
 ## {marker}
 
 - 重写UA职业`灵能使`及其子职评审。采用最新本地边界：基础职业、灵能才赋、法术表、`蜕变者`、`念动使`、`传心师`使用`其他\\新UA\\灵能二期`；`裂空使`因二期未更新，保留一期`其他\\新UA\\灵能`文本。
-- 旧无来源标记子职文件清理为`蜕变者（UA）.md`、`念动使（UA）.md`、`传心师（UA）.md`、`裂空使（UA）.md`。由于基础职业本身为UA，`0x总评.md`的`分阶段子职排行榜`列出全部当前子职。
+- 旧无来源标记子职文件清理为`蜕变者（UA）.md`、`念动使（UA）.md`、`传心师（UA）.md`、`裂空使（UA）.md`。由于基础职业本身为UA，`README.md`的`分阶段子职排行榜`列出全部当前子职。
 - 社区校准采用2025年UA讨论：二期总体反馈较正面，念动使被视为机械最强之一，裂空使因测试表现好未在二期重测；蜕变者的主要疑点仍是d6满施法者近战防御不足。评分按实际功能，不因UA身份压低。
 """
     rec.write_text(current.rstrip() + entry + "\n", encoding="utf-8")

@@ -37,7 +37,8 @@ Unmarked filenames are reserved for current official first-party published or of
 
 2. Read project criteria.
    - Before substantial official ranking work, consult `Rankings\changelog.md`.
-   - Preserve the established scoring scale, S+ restraint, Tier definitions, and “overall is not an average” rule.
+   - Use the current rank order exactly: `S+ > S > S- > A+ > A > A- > B > C > D > E > E- > F`.
+   - Preserve S+ restraint, Tier definitions, and “overall is not an average” rule.
 
 3. Locate the local rules text.
    - Use `rg` over `DND5e_chm` for Chinese name, English name, and distinctive feature names.
@@ -136,6 +137,12 @@ Unmarked filenames are reserved for current official first-party published or of
 ```
 
    - `具体理由` must be specific to that class/subclass/build and tier. Do not use generic wording such as “表现稳定” without naming the feature, spell list, action economy, role compression, or limitation that causes the score.
+   - In class summary files, `综合评分` is the class chassis's practical strength in that tier.
+   - In subclass files, `综合评分` is the resulting character option's practical strength in that tier, not a pure subclass-module score. Every subclass `综合评分` reason must separate or clearly imply:
+     - `职业底盘贡献`: what the base class supplies.
+     - `子职增量`: what the subclass adds beyond the chassis.
+     - `限制器`: opportunity cost, action/resource conflict, table sensitivity, timing, spell lock-in, target access, or other real limiter.
+   - Do not let a strong class chassis erase subclass differences. Use `S`, `S-`, `A+`, `A`, and `A-` granularity to show whether the subclass materially improves the chassis or mostly rides it. Conversely, do not score a full-caster subclass as `S` solely because the class spell list is strong; say when the power mainly comes from the class chassis and the subclass increment is narrower.
    - For build files, `具体理由` must name the build's actual level split, delayed features, ability-score pressure, spell-slot progression, action economy, and the point where the multiclass combination becomes stronger or weaker than staying single-class.
    - `Rankings\构筑` is for multiclass or cross-system build packages, not pure class / pure subclass optimization writeups. If a community "build" is simply one class/subclass from level 1-20 with feat choices, do not create a build file for it; fold that analysis into the relevant class/subclass review instead. This avoids conflict with direct subclass review and keeps build rankings from duplicating subclass rankings. Exception: if the user explicitly asks for a named community package whose identity depends on cross-version rules, legacy options, magic-item assumptions, or a distinct play package that is not represented by the subclass review, it may be included as a clearly marked cross-system build file; the file must state why it is not just a duplicate subclass review and must separate default strength from table-permission strength.
 
@@ -145,14 +152,56 @@ Unmarked filenames are reserved for current official first-party published or of
    - Tier 3: levels 11-16.
    - Tier 4: levels 17-20.
    - Categories: `近战伤害者`, `远程伤害者`, `法术伤害者`, `防御和生存`, `治疗和临时生命`, `团队增益`, `反制施法者`, `减益`, `战场分隔`, `召唤 / 伙伴`, `技能使用`, `制造`.
-   - `S`: top of the relevant comparison set.
-   - `S+`: only when it clearly exceeds the whole ecosystem, not merely its own class.
-   - `E`: can technically do it but is among the worst options.
-   - `E-`: only when it is the uniquely worst real participant.
-   - `F`: no meaningful rules access to that function.
+   - Use only these ranks, in this order: `S+`, `S`, `S-`, `A+`, `A`, `A-`, `B`, `C`, `D`, `E`, `E-`, `F`.
+   - Do not add `SS`, `S++`, `EX`, `X`, or any other rank above `S+`. Do not add `B+`, `B-`, `C+`, `C-`, `D+`, `D-`, `E+`, `E--`, or other lower-rank subdivisions. Keep `E-` because it separates near-zero contribution from full `F`.
+   - `S+`: ecosystem-breaking apex. Reserved for options that reshape encounter math, action economy, concentration ownership, d20 outcomes, spell delivery, resource ownership, or whole-party defense/offense with unusually low cost, broad reliability, or low counterplay. It is not merely "best in one class."
+   - `S`: top-tier primary engine. Broad, reliable, and capable of serving as the party's main win condition or problem-solving engine in that tier, but not low-cost / low-interaction enough for `S+`.
+   - `S-`: top-tier with a real limiter. Usually still above `A+` because of full-caster, near-full-caster, martial apex, half-caster, or equivalent problem-solving strength, but constrained by spell lock-in, narrower list, lack of `祈愿术`, lack of `法术反制`, concentration pressure, table-sensitive rulings, fixed high-level choices, short-rest dependence, subclass timing, limited prepared/known spell pressure, target-access problems, narrow encounter role, magic-item dependence, or lower adaptability.
+   - `A+`: elite but conditional. Can compete with `S-` in a major role or under favorable assumptions, but lacks the breadth, daily adaptability, encounter-rewriting ceiling, or tier-wide reliability of true S-tier options.
+   - `A`: strong default. Reliable and optimized, above baseline, but not a top-tier ecosystem engine.
+   - `A-`: strong but narrow or tier-fragile. Good at its intended role, but with clear gaps in scaling, breadth, resource flow, action economy, encounter dependence, target access, durability, or campaign dependence.
+   - `B`: competent and playable. Has a real role, can be optimized, and is not a trap, but does not strongly compete with `A-`/`A` options in breadth, reliability, scaling, or encounter impact.
+   - `C`: underpowered, narrow, or campaign-dependent. Can work in favorable tables or with support, but has clear mechanical limitations and is meaningfully below normal optimized options.
+   - `D`: weak. Has structural deficiencies, poor scaling, unreliable action economy, poor resource conversion, severe role mismatch, or dependence on unusual assumptions.
+   - `E`: mostly dysfunctional. Only small parts of the kit matter, or the intended role is barely supported.
+   - `E-`: near-zero contribution with a tiny exception.
+   - `F`: functionally absent or failed. No meaningful support for the evaluated role, or the feature actively fails its expected job.
+   - Lower-rank precision rule: do not create subranks below `A-`. If an option feels like high `B`, either make it `A-` if it is genuinely strong but narrow/tier-fragile, or keep `B` and explain it is near the upper edge. If it feels like low `B`, keep `B` if competent/playable or move to `C` if meaningfully underpowered. Treat high/low `C` and `D` in prose unless they clearly cross a boundary. Use `E-` only for almost no contribution; use `F` for absent/failed roles.
    - Overall score is based on team role and high-impact functions, not arithmetic average. Control, anti-caster tools, team buffs, healing, summoning, battlefield division, and high-level problem solving weigh more than raw DPR.
+   - Do not mechanically roll existing `S` entries down to `A-`, mechanically uplift lower-ranked entries because their class chassis is strong, or force a distribution. Each changed rank must update the `综合评分` reason with the real strength, limiter, timing, opportunity cost, or table sensitivity.
+   - Design-quality scores do not change merely because power-rank granularity changed. Design scores remain separate unless the analysis itself changes.
    - Partner, UA, and third-party published classes/subclasses must be ranked by their actual balance and functionality, not intentionally lowered because of source status. If community feedback is scarce, combine careful local text analysis, action economy, resource math, spell/feat/item interactions, and comparison against existing official rankings to assign the proper rank.
    - If a partner, UA, or third-party option breaks the expected class boundary, count that in its balance ranking. Give `S+` only when it exceeds the ceiling of the broader class/subclass ecosystem, not merely when it exceeds its own base class. If it is merely strong, specialized, or above its class baseline, use the appropriate normal rank.
+   - Full-caster and near-full-caster compression standard:
+     - For full casters whose class chassis is already `S` or `S-` in Tier 3-4, use `S-` as the default high-tier bucket for "strong caster chassis + useful but non-decisive subclass."
+     - Use `S` when the subclass materially improves encounter-winning functions: spell success or save-failure enforcement, d20 result control, anti-magic reliability, party protection, concentration protection that changes real spell uptime, battlefield reality-shaping, broad action-economy leverage, spell delivery or concentration ownership changes, or major preparation/scroll/spellbook economy that reliably changes encounter outcomes.
+     - Use `S+` only when the subclass crosses normal ecosystem boundaries, not merely because it is attached to a strong full caster.
+     - Use `A+` for strong caster options that compete with `S-` in a major lane but lack enough breadth, reliability, adaptability, or encounter-rewriting power. Use `A`/`A-` when the class chassis and subclass package remain strong/playable but are notably narrow, late, table-sensitive, or outcompeted by same-class options.
+     - Treat pact-caster / near-full-caster cases such as `魔契师` separately from ordinary full casters. `玄奥秘法` grants high-level spell access, but fixed choices, short-rest dependence, pact-slot structure, invocation opportunity cost, and limited reconfiguration are real limiters.
+   - Non-full-caster and mixed-chassis standard:
+     - Do not evaluate non-full-casters by prepared full-caster criteria. Lack of high-level spells is not an automatic penalty by itself; judge what the option actually contributes to winning encounters, surviving pressure, controlling space, solving noncombat problems, and supporting allies.
+     - Do not overrate non-full-casters solely for DPR. High-tier rank requires asking whether damage can be delivered against real targets while surviving, contributing against unreachable/resistant enemies, and remaining relevant beside high-level spellcasters.
+     - For martial and mostly martial options, evaluate at least: target access; damage reliability; action/bonus/reaction/concentration pressure; compatibility with `武器精通`, `狡诈动作`, Rage, Focus, Smite, `猎人印记`, fighting styles, subclass or companion commands; control riders; defense/recovery; party leverage; noncombat impact; scaling across tiers; item and party assumptions; and encounter diversity.
+     - `S+` for a non-full-caster is possible but extremely rare and requires whole-ecosystem distortion comparable to the caster standard. `S` requires more than strong DPR: top damage plus target access, defenses, control, party leverage, and/or noncombat utility that can act as a primary engine. `S-` fits apex non-full-casters with real limits such as melee dependence, resource pressure, narrow utility, weapon access, weak anti-caster tools, or weaker Tier 3-4 problem-solving than full casters. `A+` fits elite martial/half-caster/skill options that dominate one major lane without enough breadth for `S-`.
+   - Half-caster, third-caster, and gish standard:
+     - Evaluate spellcasting as part of the whole action economy, not as a separate bonus. Check concentration conflict with attacking, smiting, commanding a companion, bonus-action marks, Rage-like states, or subclass commands.
+     - Do not credit half-casters with full-caster flexibility. Limited slots, delayed spell levels, prepared/known pressure, concentration conflict, and action economy are real limits.
+     - Do not underrate half-casters whose spell access directly solves martial problems: mobility, flight, condition removal, aura support, burst, defenses, battlefield control, or anti-caster utility.
+     - For Paladin-like options, distinguish personal damage from aura/team protection. For Ranger-like options, separate base martial chassis, exploration/skill tools, spell utility, companion/subclass actions, and concentration/bonus-action pressure. For Artificer-like options, distinguish reliable class-granted item/crafting power from campaign-dependent treasure assumptions. For Eldritch Knight / Arcane Trickster / spellcasting martial subclasses, ask whether spellcasting improves the normal best turn, compensates for target-access/defense problems, or merely adds low-level utility the tier has outgrown.
+   - Skill-first and utility-first standard:
+     - Skill dominance can affect overall rank, but does not automatically compensate for severe combat failure unless the option's intended ecosystem role is explicitly noncombat.
+     - Expertise, Reliable Talent-style effects, broad proficiencies, tools, stealth, social control, investigation, travel, and scouting justify `A`/`A+` or higher only when they meaningfully alter campaign problem-solving in addition to acceptable combat performance.
+     - For Rogue-like options, judge combat contribution and noncombat contribution separately. Do not rank a skill-first option high solely because it has many proficiencies if actual checks are replaceable by spells, rituals, familiars, summons, or party redundancy.
+   - Weapon Mastery and 2024 martial-floor rule:
+     - `武器精通` improves floor, tactical texture, and weapon choice, and must be counted. It does not by itself solve high-tier full-caster disparity.
+     - Check whether mastery triggers reliably, helps allies or only the user, has target/size/save/range/weapon-property limits, duplicates a common advantage/control source, or can be swapped/stacked meaningfully. Fighter-style broad mastery access differs from narrower access.
+   - Magic item and optimization assumptions:
+     - Default rankings may assume ordinary optimized character building and normal availability of rules-legal feats/species/backgrounds.
+     - Do not assume specific rare / very rare / legendary magic items, monster allies, or campaign rewards unless stated. For martials, note when rank depends on magic weapons, flight, damage type, or target access. For casters, note costly components, scroll availability, downtime, spellbook access, and table-sensitive spell interactions. Keep assumptions symmetrical.
+   - Within-tier timing rule:
+     - If a feature arrives mid-tier, especially level 10, 11, 14, 15, 17, or 18, the `综合评分` reason must state whether the rank reflects the whole tier, a late-tier spike, or a split such as "11-13 S-, 14-16 S."
+     - Do not write Tier 4 as if a level 14 feature first appears in Tier 4. For Bard, level 10 `魔法奥秘` is an end-of-Tier-2 spike; Tier 2 reasons must distinguish levels 5-9 from level 10 when needed. For Fighter, level 11 and 20 attack-scaling belong in the correct tiers. For Monk, Rogue, Paladin, Ranger, Barbarian, and other non-full-casters, evaluate whether breakpoints arrive early enough in the tier to justify tier-wide ranks.
+   - Future calibration workflow: standards/tooling passes do not require mass rewriting. Future recalibration should be done in controlled class-specific batches: verify local `DND5e_chm` text, update individual files first, update `综合评分` reasons for every changed rank, regenerate class/root `README.md` from file-level scores, and document changes in `Rankings\changelog.md`.
 
 9. Apply design-score separation.
    - Four design items: `设计质量`, `主题`, `能力设计质量`, `主题与能力关联度`.
@@ -174,11 +223,13 @@ Unmarked filenames are reserved for current official first-party published or of
 
 For every class `README.md`, after all subclasses of that class have been evaluated or revised, add or update `## 分阶段子职排行榜`.
 
-Also add or update `## UA/合作方/第三方子职分阶段排行榜` whenever that class has any UA, partner, or third-party subclass review files. This second leaderboard uses the same Tier/rank bucket structure, but it contains only UA / partner / third-party subclass entries, including non-first-party subclasses that were excluded from `## 分阶段子职排行榜`.
+Also add or update `## UA/合作方/第三方子职分阶段排行榜` whenever that class has any UA, partner, or third-party subclass review files. This second leaderboard uses the same table structure, but it contains only UA / partner / third-party subclass entries, including non-first-party subclasses that were excluded from `## 分阶段子职排行榜`.
 
 For root `Rankings\README.md`, add or update `## 分阶段子职排行榜` only after all classes/subclasses are complete and the user asks to create or update the root summary. Root `分阶段子职排行榜` is now a practical ecosystem leaderboard: include official first-party subclasses, the explicit EGtW partner exceptions, and all valid multiclass / cross-system build files under `Rankings\构筑` in the same Tier/rank buckets so builds compete directly with official subclasses. Under the same condition, add or update root `## UA/合作方/第三方子职分阶段排行榜` if any such non-first-party subclass review files exist.
 
-The section groups subclasses and, for root `README.md` only, builds by Tier and by their `综合评分` rank. Use verified Chinese class/subclass names from `DND5e_chm`; for builds, use the current build filename/title from `Rankings\构筑`. Skip any rank bucket that has no entry in that Tier. Each bullet reason should come from that subclass/build file’s `综合评分` -> `具体理由` for the same Tier; condense if needed, but do not replace it with a generic reason.
+The section lists subclasses and, for root `README.md` only, builds in one table per Tier under third-level headings `### Tier 1（1-4）`, `### Tier 2（5-10）`, `### Tier 3（11-16）`, and `### Tier 4（17-20）`. Do not group entries by rank buckets inside those tables. Use verified Chinese class/subclass names from `DND5e_chm`; for builds, use the current build filename/title from `Rankings\构筑`. Each table row reason must come from that subclass/build file’s `综合评分` -> `具体理由` for the same Tier; condense if needed, but do not replace it with a generic reason.
+
+Use this rank order exactly when sorting every generated leaderboard table within each Tier: `S+`, `S`, `S-`, `A+`, `A`, `A-`, `B`, `C`, `D`, `E`, `E-`, `F`. Leaderboards must be regenerated from file-level `综合评分` tables, not hand-edited to force a distribution.
 
 Strict consistency rule: `分阶段子职排行榜` and `UA/合作方/第三方子职分阶段排行榜` must be generated from the actual current subclass/build review file, not from memory, old notes, previous summaries, or a separate hand-written rank list. For every listed subclass/build and Tier, first read that file’s `## 综合评分` table and use its `综合强度` as the bucket and its same-row `具体理由` as the bullet reason. If the leaderboard rank disagrees with the standalone file, the standalone file is authoritative unless you deliberately recalibrate that file itself in the same pass and update its `综合评分` table. Never “correct” only the summary while leaving a contradictory standalone review.
 
@@ -194,55 +245,57 @@ The excluded entries must not disappear from class/root summaries. Put them into
 - Include UA, partner, and third-party subclasses/classes reviewed under that class.
 - Include EGtW `回音骑士`, `时间魔法`, and `重力魔法` here as partner entries even though they are also explicitly allowed in the official first-party leaderboard by project exception.
 - Do not include first-party official published or official legacy subclasses in this section.
-- Use the same rank and reason source rule as `## 分阶段子职排行榜`: each bullet reason should come from that subclass file’s same-Tier `综合评分` -> `具体理由`, condensed only as needed.
+- Use the same rank and reason source rule as `## 分阶段子职排行榜`: each table row reason should come from that subclass file’s same-Tier `综合评分` -> `具体理由`, condensed only as needed.
 - If a class has no UA / partner / third-party subclass files, omit the section rather than creating an empty heading.
 
-Naming format differs by summary scope:
-- In a single class `README.md`, list each item as `子职中文名：理由`, because the class context is already explicit.
-- In root `Rankings\README.md`, list subclass items as `职业中文名 - 子职中文名：理由`, so readers can identify the class immediately.
-- In root `Rankings\README.md`, list build items as `构筑 - 构筑文件名去掉.md：理由`, so readers can distinguish builds from subclasses while still seeing them in the same rank buckets.
+Naming/table format differs by summary scope:
+- In a single class `README.md`, use columns: `阶段`, `评级`, `子职`, `具体理由`. The class context is already explicit, so do not add a `职业` column.
+- In root `Rankings\README.md`, use columns: `阶段`, `评级`, `职业`, `子职`, `具体理由`. The extra `职业` column lets readers identify the class immediately.
+- In root `Rankings\README.md`, build rows use `职业` = `构筑` and `子职` = the build filename/title without `.md`.
+- The `子职` column name is intentionally short for readability, but its meaning remains `子职-出版物名称`: it must retain source / publication markers such as `（UA）`, `（EGW）`, `（鬼魅幽谷）`, etc. when those markers are part of the review filename.
+- In README leaderboard sections, split the list into four third-level Tier subsections. Each subsection still keeps the `阶段` column, and the `阶段` cell values should use compact labels `T1`, `T2`, `T3`, and `T4` to reduce table width. This is only a presentation shorthand for `Tier 1（1-4）`, `Tier 2（5-10）`, `Tier 3（11-16）`, and `Tier 4（17-20）`; standalone review files should keep their full `综合评分` Tier labels.
 
 Required structure:
 
 ```markdown
 ## 分阶段子职排行榜
 
-Tier 1（1-4）:
-- S+:
-  - 子职中文名：该子职在 Tier 1 的综合评分具体理由。
-- S:
-  - 子职中文名：该子职在 Tier 1 的综合评分具体理由。
-- A:
-  - 子职中文名：该子职在 Tier 1 的综合评分具体理由。
+### Tier 1（1-4）
 
-Tier 2（5-10）:
-- A:
-  - 子职中文名：该子职在 Tier 2 的综合评分具体理由。
-```
+| 阶段 | 评级 | 子职 | 具体理由 |
+|---|---|---|---|
+| T1 | S+ | 子职中文名 | 该子职在 Tier 1 的综合评分具体理由。 |
+| T1 | S | 子职中文名 | 该子职在 Tier 1 的综合评分具体理由。 |
 
-For root `Rankings\README.md`, use the same buckets but change each bullet to:
+### Tier 2（5-10）
 
-```markdown
-  - 职业中文名 - 子职中文名：该子职在该 Tier 的综合评分具体理由。
-  - 构筑 - 构筑名：该构筑在该 Tier 的综合评分具体理由。
-```
-
-For `## UA/合作方/第三方子职分阶段排行榜`, use the same structure and naming format rules, but include source markers in the item name so readers immediately know why the entry is separated:
-
-```markdown
-## UA/合作方/第三方子职分阶段排行榜
-
-Tier 1（1-4）:
-- S+:
-  - 子职中文名（UA）：该子职在 Tier 1 的综合评分具体理由。
-- A:
-  - 子职中文名（资源缩写或资源中文简称）：该子职在 Tier 1 的综合评分具体理由。
+| 阶段 | 评级 | 子职 | 具体理由 |
+|---|---|---|---|
+| T2 | A | 子职中文名 | 该子职在 Tier 2 的综合评分具体理由。 |
 ```
 
 For root `Rankings\README.md`, use:
 
 ```markdown
-  - 职业中文名 - 子职中文名（来源标记）：该子职在该 Tier 的综合评分具体理由。
+### Tier 1（1-4）
+
+| 阶段 | 评级 | 职业 | 子职 | 具体理由 |
+|---|---|---|---|---|
+| T1 | S+ | 职业中文名 | 子职中文名 | 该子职在该 Tier 的综合评分具体理由。 |
+| T1 | S | 构筑 | 构筑名 | 该构筑在该 Tier 的综合评分具体理由。 |
+```
+
+For `## UA/合作方/第三方子职分阶段排行榜`, use the same table structure and naming format rules, but include source markers in the item name so readers immediately know why the entry is separated:
+
+```markdown
+## UA/合作方/第三方子职分阶段排行榜
+
+### Tier 1（1-4）
+
+| 阶段 | 评级 | 子职 | 具体理由 |
+|---|---|---|---|
+| T1 | S+ | 子职中文名（UA） | 该子职在 Tier 1 的综合评分具体理由。 |
+| T1 | A | 子职中文名（资源缩写或资源中文简称） | 该子职在 Tier 1 的综合评分具体理由。 |
 ```
 
 ## Practical Search Pattern
