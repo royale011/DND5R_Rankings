@@ -64,7 +64,7 @@ Out-of-boundary or overpowered content is included in balance ranking. Do not si
    - Preserve author notes such as `附注`, `Note`, `设计意图`, `设计目标`, `个人意图`, or similar. These notes are part of `原文`.
    - If author notes state personal/table-specific design purpose, normal balance/function ranks still use the full ecosystem standard, but the review must also include `设计相关评分 - 个人期望`.
    - If the source says it is `基于...改编` / `based on...`, verify the origin resource before judging personal design purpose and adaptation quality. Prefer local project resources first (`DND5e_chm`, `5e Reference`, `Rankings`, `homebrews`, PDFs or text files named by the source). If the source cannot be verified locally and network is unavailable or not requested, state the uncertainty rather than inventing the baseline.
-   - Explicit baseline rule: for `看门狗 Watch Dog`, consult `5e Reference\My New D20 Modern Campaign.pdf` before evaluating the referenced UA/D20 Modern baseline.
+   - For `看门狗 Watch Dog` or any homebrew that references 5e-era UA / legacy-compatible modern firearm rules, follow the official skill's `DND2014_legacy\其他\UA\城市规则.html` baseline and firearm-category mapping. Use the CN translated legacy source, not an external or obsolete PDF path, as the review source.
 
 4. Compare current source against existing review.
    - If no ranking exists, create a new file and include `原文`.
