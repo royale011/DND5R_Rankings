@@ -11,7 +11,7 @@ ASPECTS = [
     "战场分隔", "召唤 / 伙伴", "技能使用", "制造",
 ]
 TIERS = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
-RANK_ORDER = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+RANK_ORDER = ["S+", "S", "S-", "A+", "A", "A-", "B+", "B", "C", "D", "E", "E-", "F"]
 
 
 def scores(**overrides):

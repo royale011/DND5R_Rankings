@@ -88,7 +88,7 @@ def extract_overall(path):
 
 
 def render_leaderboard(title, intro, names):
-    order = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+    order = ["S+", "S", "S-", "A+", "A", "A-", "B+", "B", "C", "D", "E", "E-", "F"]
     data = {tier: {} for tier in TIERS}
     for name in names:
         path = ROGUE / f"{name}.md"

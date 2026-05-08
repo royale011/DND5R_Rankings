@@ -252,7 +252,7 @@ def write_review(path, data):
 
 
 def leaderboard():
-    ranks = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+    ranks = ["S+", "S", "S-", "A+", "A", "A-", "B+", "B", "C", "D", "E", "E-", "F"]
     subclasses = {k: v for k, v in FILES.items() if k != "README.md"}
     lines = ["## 分阶段子职排行榜", "", "本职业本身为UA职业，因此本排行榜列出当前灵能使生态内的全部子职；文件名仍保留`（UA）`标记，避免未来正式版混淆。"]
     for idx, tier in enumerate(["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]):

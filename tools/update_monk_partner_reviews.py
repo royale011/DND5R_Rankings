@@ -113,7 +113,7 @@ def bucket(files):
 
 
 def render_leaderboard(title, intro, files):
-    order = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+    order = ["S+", "S", "S-", "A+", "A", "A-", "B+", "B", "C", "D", "E", "E-", "F"]
     data = bucket(files)
     out = [f"## {title}", ""]
     if intro:

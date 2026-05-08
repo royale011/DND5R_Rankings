@@ -1,3 +1,42 @@
+## 血猎手渎魂圣约评测（2026-05-08）
+- 新增 `Rankings\血猎手\渎魂圣约（血猎手）.md`，按本地 `DND5e_chm\第三方\血猎手\渎魂结社.htm` 文本评测。
+- 评测前单独判断宗主选择是否需要拆分：结论是不需要拆成多文件。宗主会明显改变分项功能，例如巨灵补短飞行、天界补治疗/回生、不朽者补 `沉默术` / `降咒`、邪魔补火力、旧日支配者补信息/加速；但核心仍是血猎手武器底盘、少量短休魔契法术位、已知法术锁定和无 `玄奥秘法` / 无祈唤的限制。
+- 单文件中新增 `宗主选择校准` 小节，综合评分按合理优化会选择较强宗主、但不把最佳单一宗主视为所有分项默认常态处理。
+- 更新 `血猎手\README.md` 范围说明，并重建职业 README 与根 README，使渎魂圣约进入 UA/合作方/第三方子职分阶段排行榜。
+
+## B+ power-rank calibration pass（2026-05-08）
+- Reviewed current non-archive `综合评分` rows using `A-` or `B` under the new `B+` definition. This pass did not force a distribution and did not mass-convert all high-B language.
+- Promoted only entries whose existing feature analysis justified “clearly above ordinary B but not A-,” with updated one-by-one reasons naming the concrete edge and limiter.
+- Main updates: Fighter class Tier 3-4, Monk class Tier 4, Rogue class Tier 2, Ranger class Tier 2, Blood Hunter class Tier 3, `战斗大师` Tier 4, `武士` Tier 3-4, `魔射手（UA）` Tier 3-4, `魂刃` Tier 3-4, `世界树道途` Tier 4, `先祖守卫道途` Tier 3-4, `巨人道途` Tier 3-4, `诡术师` Tier 4, and `妖精漫游者` Tier 4.
+- Second pass reviewed remaining `B` rows only, without rechecking `A-`. Additional `B+` calibrations were applied where the option is clearly carried above ordinary `B` by a strong class chassis or a concrete support/tool package while the subclass/build increment remains too narrow for `A-`: `奇械师` Tier 1, low-tier weak-increment Druid/Wizard subclasses (`孢子结社`, `梦境结社`, `守望结社`, `变化学派`, `塑能师`, `血魔法`), `王冠之誓` Tier 2-4, `破誓者` Tier 3-4, and `不朽者` Tier 3-4.
+- Final conservative `B`-only pass found one remaining clear mismatch: `勇士` Tier 3-4 was raised to `B+` because three/four attacks, `英雄战士`, and `幸存者` make it a high-B low-management weapon option, while its lack of control/support/problem-solving keeps it below `A-`.
+- Kept ordinary `B` where the option remains playable but narrow, highly item/table dependent, or lacks enough scaling/team leverage. Kept `A-` where the file still proves a genuinely strong but narrow/tier-fragile package rather than merely high-B competence.
+- Regenerated class README leaderboards and root README from file-level `综合评分` tables so `B+` sorting is reflected in summaries.
+
+## Design-score update: allow B- only for design rankings（2026-05-08）
+- Updated official and homebrew skills to allow `B-` exclusively for design-related scores. `B-` is not a power/function/overall rank and must not appear in `综合评分`, functional aspect tables, or generated leaderboards.
+- Defined design `B-` as below ordinary acceptable `B` because of noticeable clunkiness, underdeveloped scaling, weak feature cohesion, awkward compatibility, excessive bookkeeping, or unclear payoff, but not structurally poor enough for `C`.
+- Updated root `README.md` to distinguish power rank order from design-only `B-`.
+- Restored `血猎手` class `能力设计质量` to design `B-` with a revised reason explaining why its high-level feature design is below ordinary `B` but not `C`.
+- Calibrated selected current official design scores to `B-` where the prior `B`/`C` reason already described “below ordinary B but not failed design”: `不朽者` design quality, `魔射手` design quality / feature design quality, `低语学院` feature design quality, `自然领域` feature design quality, `王冠之誓` design quality, `咒剑` feature design quality, and `剑舞学院` design quality.
+
+## Rank scale update: allow B+ as the only lower-mid subrank（2026-05-08）
+- Updated official and homebrew skills to use rank order `S+ > S > S- > A+ > A > A- > B+ > B > C > D > E > E- > F`.
+- Defined `B+` as the honest “high competent / near-strong” bucket: clearly above ordinary playable `B`, with a concrete feature/resource/role/design reason, but still lacking the breadth, scaling, target access, team leverage, or reliability required for `A-`.
+- Kept `B-`, `C+`, `C-`, `D+`, `D-`, and `E+` disallowed because they do not yet have stable project definitions. Design scores may use `B+`, but the reason must still explain why it is above `B` and below `A-`.
+- Updated root `README.md` and rank-order tooling (`rebuild_class_leaderboards_from_reviews.py`, `update_root_summary.py`, and historical rewrite helpers) so generated leaderboards sort `B+` between `A-` and `B`.
+- Converted current non-archive “B 上沿 / 接近 A-” design wording in `血猎手` reviews to explicit `B+` with revised one-by-one reasons. No mass power-rank recalibration was performed.
+
+## 血猎手兼容补丁与第三方职业评测（2026-05-08）
+- 更新 official ranking skill：对 5e 时代合作/第三方基础职业不默认完整现代化；当前显式兼容补丁为 `血猎手 Blood Hunter` 与 `邪狱使 Illrigger` 在 5.5e / 2024 环境下评测时视为 1 级获得 `武器精通 Weapon Mastery`。这只是武职底线兼容补丁，不自动补入其他 2024 职业结构。
+- 规定 `血猎手` 与 `邪狱使` 的职业级 `README.md` 必须明确告知读者已采用该默认兼容补丁。
+- 新增 `Rankings\血猎手\README.md`、`弑灵圣约（血猎手）.md`、`化狼圣约（血猎手）.md`、`突变圣约（血猎手）.md`；本轮按用户范围未评测 `渎魂圣约`。
+
+## Standards update: `祈愿术` prerequisites include casting time（2026-05-08）
+- Verified local `DND5e_chm\玩家手册2024\法术详述\9环.htm` text for `祈愿术`: when duplicating another spell, the caster does not need to satisfy any prerequisite required by the target spell, including costly material components, to make that spell take effect.
+- Updated official ranking skill to state the project interpretation explicitly: target-spell prerequisites include the target spell's casting time, components, ordinary spell-list access, slot expenditure, and other casting prerequisites unless a more specific local rule preserves a downstream limit.
+- Clarified that this applies equally to every option that actually casts `祈愿术`, including class, subclass, build, feature, item, and homebrew access routes. Ranking differences should come from access timing, frequency, restrictions, spell/preparation economy, proxy abuse, and downstream limits, not from changing what `祈愿术` itself does.
+
 ## README 排行榜分 Tier 分表结构调整（2026-05-08）
 - 更新 official ranking skill：`分阶段子职排行榜` 与 `UA/合作方/第三方子职分阶段排行榜` 改为在二级标题下按 `### Tier 1（1-4）`、`### Tier 2（5-10）`、`### Tier 3（11-16）`、`### Tier 4（17-20）` 分成四张表。
 - 每张表仍保留 `阶段` 列，并继续使用 `T1` / `T2` / `T3` / `T4` 作为紧凑显示；排序和理由仍从单文件 `综合评分` 回读生成。

@@ -276,7 +276,7 @@ non_first = {
 
 
 def leaderboard(title, data):
-    order = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+    order = ["S+", "S", "S-", "A+", "A", "A-", "B+", "B", "C", "D", "E", "E-", "F"]
     tiers = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
     lines = [f"## {title}", ""]
     for idx, tier in enumerate(tiers):

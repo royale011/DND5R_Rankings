@@ -6,7 +6,7 @@ RANKINGS = ROOT / "Rankings"
 
 TIER_LABELS = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
 TIER_SHORT = ["T1", "T2", "T3", "T4"]
-RANK_ORDER = ["S+", "S", "S-", "A+", "A", "A-", "B", "C", "D", "E", "E-", "F"]
+RANK_ORDER = ["S+", "S", "S-", "A+", "A", "A-", "B+", "B", "C", "D", "E", "E-", "F"]
 SUMMARY_FILE = "README.md"
 
 
