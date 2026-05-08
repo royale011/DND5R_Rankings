@@ -1,3 +1,19 @@
+## 5E UA Modern Magic 子职兼容校准（2026-05-09）
+- 明确 official ranking skill：所有5e-era子职，包括5E UA、合作方和第三方旧版子职，凡旧文本在1-2级授予的子职能力或子职法术，在5.5e/2024兼容评估中都视为3级获得。
+- 重评 `城市领域（5E UA）`、`科技魔法（5E UA）`、`机械之灵（5E UA）`：三者均不再把旧UA 1-2级特性计入角色1-2级强度；Tier 1 理由现在明确区分1-2级空窗与3-4级子职上线。
+- 本轮继续默认启用 `DND2014_legacy\其他\UA\城市规则.html` 和 `新法术.html` 的城市规则、现代风格法术与科技魔法法术；评分仍按现代/都市/科技战役环境给功能价值，同时在理由中明确普通奇幻环境的掉档风险。
+
+## 5E UA 秘术师评审（2026-05-09）
+- 新增 `秘术师（5E UA）` 职业与六个修会评审：`具现者修会`、`觉醒者修会`、`不朽者修会`、`漫游者修会`、`魂刃修会`、`巫觋修会`。明确该职业是旧5E UA `Mystic`，不是2026新UA `灵能使 Psion`。
+- 本地来源使用 `DND2014_legacy\其他\UA\职业\秘术师` 下职业、修会、灵能灵术与灵能天赋文本。兼容补丁按 skill 执行：1级修会特性按3级获得；19级`属性值提升`替换为5.5e终局基线`传奇恩惠`；不授予`武器精通`。
+- 社区校准：Reddit、D&D Beyond 和旧指南讨论普遍认为 Mystic 低中级过度万能、灵术组合和动作经济容易越界；少数意见指出其高等级缺少真正6-9环法术生态、资源用尽后会明显疲软。本轮评分按本地文本与当前项目标准折中：Tier 2 评价最高，Tier 3-4 因缺少顶级满施法生态回落，不机械给 S+。
+- 工具更新：`rebuild_class_leaderboards_from_reviews.py` 将 `秘术师` 识别为非一方基础职业，使其 class README 的 `分阶段子职排行榜` 包含全部修会，而不是把所有修会排除到 UA/合作方/第三方表。
+
+## 5E UA Modern Magic 子职评审（2026-05-09）
+- Added the first 5e-era UA Modern Magic subclass reviews using the `5E UA` source marker: `牧师/城市领域（5E UA）`, `魔契师/机械之灵（5E UA）`, and `法师/科技魔法（5E UA）`.
+- Local-source baseline: `DND2014_legacy\其他\UA\职业\牧师-城市领域.html`, `邪术师-机械之灵.html`, `法师-科技魔法.html`, plus `城市规则.html` and `新法术.html`. The review assumes the Modern Magic urban/technomagic environment is enabled for these three subclasses.
+- Community calibration: available discussion is sparse, but repeatedly frames Modern Magic as creative, highly setting-dependent, with City Domain often seen as unusually strong, Ghost in the Machine as flavorful but technology-dependent, and Technomancy as a cool but environment-bound Wizard option. Scores combine those comments with local text and current 5.5e ranking standards.
+
 ## 铳士枪手专长与终局兼容补丁校准（2026-05-08）
 - 更新 official ranking skill：`铳士 Gunslinger` 评测专用默认假设现在允许并通常考虑 TCE `枪手 Gunner` 作为 Tier 2 起的通用专长选择；该专长本地文本给予枪械熟练、敏捷+1、忽略枪械 `装填`、以及近身远程攻击不因敌对生物5尺内而劣势。这个口径只用于铳士，不外推到其他职业。
 - 因 `枪手` 能忽略 `装填`，铳士在默认 `文艺复兴枪械` 环境下不再被长期视为“单枪额外攻击被装填压死”；但专长位仍是机会成本，工业/现代枪械仍不作为默认环境。
