@@ -45,6 +45,12 @@ def extract_overall(path: Path) -> list[tuple[str, str]]:
     return rows
 
 
+def display_name_for_path(class_dir: Path, path: Path) -> str:
+    if class_dir.name == "法师" and path.parent.name == "神圣奇术":
+        return f"神圣奇术（5E UA） - {path.stem}"
+    return path.stem
+
+
 def is_non_first_party(stem: str) -> bool:
     if "（" not in stem or "）" not in stem:
         return False
@@ -94,10 +100,16 @@ def rebuild_class(class_name: str) -> None:
     official: dict[str, list[tuple[str, str]]] = {}
     non_first: dict[str, list[tuple[str, str]]] = {}
 
-    for path in sorted(class_dir.glob("*.md"), key=lambda p: p.name):
+    paths = list(class_dir.glob("*.md"))
+    if class_name == "法师" and (class_dir / "神圣奇术").exists():
+        paths.extend((class_dir / "神圣奇术").glob("*.md"))
+
+    for path in sorted(paths, key=lambda p: str(p.relative_to(class_dir))):
         if path.name == SUMMARY_FILE:
             continue
-        stem = path.stem
+        if path.parent.name == "神圣奇术" and path.name == SUMMARY_FILE:
+            continue
+        stem = display_name_for_path(class_dir, path)
         non_first_party = is_non_first_party(stem)
         try:
             rows = extract_overall(path)

@@ -50,6 +50,12 @@ def is_egw_exception(name: str) -> bool:
     return name.endswith("（EGW）")
 
 
+def display_subclass_name(class_dir: Path, path: Path) -> str:
+    if class_dir.name == "法师" and path.parent.name == "神圣奇术":
+        return f"神圣奇术（5E UA） - {path.stem}"
+    return path.stem
+
+
 def class_dirs():
     dirs = []
     for p in sorted(ROOT.iterdir(), key=lambda x: x.name):
@@ -73,13 +79,18 @@ def subclass_entries():
     official = []
     nonfirst = []
     for d in class_dirs():
-        for p in sorted(d.glob("*.md"), key=lambda x: x.name):
+        paths = list(d.glob("*.md"))
+        if d.name == "法师" and (d / "神圣奇术").exists():
+            paths.extend((d / "神圣奇术").glob("*.md"))
+        for p in sorted(paths, key=lambda x: str(x.relative_to(d))):
             if p.name == SUMMARY_FILE:
+                continue
+            if p.parent.name == "神圣奇术" and p.name == SUMMARY_FILE:
                 continue
             scores = extract_overall(p)
             if not scores:
                 continue
-            sub = p.stem
+            sub = display_subclass_name(d, p)
             entry = {
                 "class_name": d.name,
                 "item_name": sub,
