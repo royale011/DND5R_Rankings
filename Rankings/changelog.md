@@ -1,3 +1,10 @@
+## 设计评分理由去模板化与设计子档规则扩展（2026-05-09）
+- 更新 official / homebrew ranking skills：明确 `设计质量` 是主题、能力设计、主题关联、复杂度、兼容性、边界、滥用风险与生态健康的总体设计判断；`能力设计质量` 只评价机制本身，不能再复用 `设计质量` 的理由。
+- 设计评分允许在确有必要时使用设计专用 `C+`、`C-`、`D+`、`D-`、`E+`，延续既有 `B+` / `B-` 设计子档规则；这些子档仍不得用于功能分项或 `综合评分`。
+- 新增 `tools\audit_design_scores.py` 用于审计 active review 的 `设计相关评分` 表、同文件重复理由和跨文件重复理由；新增 `tools\rewrite_design_score_reasons.py` 作为本轮官方文件设计理由重写的可复核脚本。
+- 本轮只处理 root `Rankings`，不处理 `homebrews\Rankings`。重点重写德鲁伊、法师、神圣奇术映射、斯翠海文跨职业UA，以及部分战士/游荡者合作方文件中的模板化 `设计质量`、`主题`、`能力设计质量`、`主题与能力关联度` 理由。
+- 校验结果：374 个 active official review 含 `设计相关评分`，同文件 `设计质量` / `能力设计质量` 完全重复理由从 38 处降为 0，跨文件完全重复的非表头设计理由清零。
+
 ## 全评测文件目录结构更新（2026-05-09）
 - 更新 official 与 homebrew ranking skills：所有活跃评测 Markdown 文件都需要维护 `## 目录`，不再只要求 root / class `README.md`。目录应位于标题后、首个正文段落前，并链接文档内 `##` / `###` 标题。
 - 扩展 `tools\update_readme_toc.py`：保留旧函数接口以兼容 root summary 生成脚本，但实际维护范围扩展到 root `README.md`、`Rankings` 下所有活跃评测 Markdown，以及 `homebrews\Rankings` 下的当前评测文件。`changelog.md` 与 `Archive` 文件保持跳过。
