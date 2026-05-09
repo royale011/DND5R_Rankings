@@ -56,6 +56,10 @@ def display_subclass_name(class_dir: Path, path: Path) -> str:
     return path.stem
 
 
+def is_theurgy_mapping(class_dir: Path, path: Path) -> bool:
+    return class_dir.name == "法师" and path.parent.name == "神圣奇术"
+
+
 def class_dirs():
     dirs = []
     for p in sorted(ROOT.iterdir(), key=lambda x: x.name):
@@ -91,14 +95,18 @@ def subclass_entries():
             if not scores:
                 continue
             sub = display_subclass_name(d, p)
+            theurgy_mapping = is_theurgy_mapping(d, p)
+            marked_nonfirst = is_marked_nonfirst_party(sub)
             entry = {
                 "class_name": d.name,
                 "item_name": sub,
                 "scores": scores,
                 "kind": "subclass",
-                "marked": is_marked_nonfirst_party(sub),
+                "marked": marked_nonfirst or theurgy_mapping,
             }
-            if is_marked_nonfirst_party(sub):
+            if theurgy_mapping:
+                nonfirst.append(entry)
+            elif marked_nonfirst:
                 nonfirst.append(entry)
                 if is_egw_exception(sub):
                     official.append(entry)

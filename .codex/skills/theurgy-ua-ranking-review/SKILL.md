@@ -60,7 +60,7 @@ Theurgy is not a root-level class and must not be added as a base class to root 
 
 `神圣奇术（5E UA） - [牧师领域中文名]`
 
-The root `Rankings\README.md` must use the same display format and also place all Theurgy-domain combinations in `UA/合作方/第三方子职分阶段排行榜`.
+The root `Rankings\README.md` must use the same display format. For root `Rankings\README.md` only, all Theurgy-domain combinations, including mappings based on official first-party Cleric domains, must be excluded from root `分阶段子职排行榜` and placed only in root `UA/合作方/第三方子职分阶段排行榜`, because Theurgy itself is a 5E UA Wizard subclass.
 
 ## Review Focus
 
