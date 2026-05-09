@@ -1,6 +1,8 @@
 from pathlib import Path
 import re
 
+from update_readme_toc import add_or_update_toc
+
 ROOT = Path("Rankings")
 TIERS = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
 TIER_SHORT = {"Tier 1（1-4）": "T1", "Tier 2（5-10）": "T2", "Tier 3（11-16）": "T3", "Tier 4（17-20）": "T4"}
@@ -199,7 +201,7 @@ def main():
     doc.append("## 更新说明")
     doc.append("本次总评从当前各职业、子职与构筑文件的`综合评分`表回读生成排行榜。根`分阶段子职排行榜`已按新标准加入构筑，使其直接与官方子职竞争；UA、合作方、第三方子职仍保留在独立排行榜中，EGW子职按项目例外同时出现在两个排行榜。")
     doc.append("")
-    (ROOT / SUMMARY_FILE).write_bytes(("\n".join(doc).rstrip() + "\n").encode("utf-8"))
+    (ROOT / SUMMARY_FILE).write_bytes(add_or_update_toc("\n".join(doc).rstrip() + "\n").encode("utf-8"))
 
     # Standards updates are recorded manually in Rankings/changelog.md.
     # This script only regenerates Rankings/README.md from file-level 综合评分 tables.

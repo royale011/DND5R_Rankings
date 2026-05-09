@@ -55,6 +55,7 @@ Theurgy is not a root-level class and must not be added as a base class to root 
 
 - Include `分阶段子职排行榜` for Theurgy mappings based on official first-party Cleric domains.
 - Include `UA/合作方/第三方子职分阶段排行榜` for Theurgy mappings based on UA, partner, or third-party Cleric domains.
+- Include and maintain an up-to-date `## 目录` near the top, following the official README table-of-contents rule.
 
 `Rankings\法师\README.md` must include all Theurgy-domain combinations in the Wizard UA / partner / third-party leaderboard, because Theurgy itself is 5E UA. Use this display format:
 

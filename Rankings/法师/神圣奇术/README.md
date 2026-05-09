@@ -1,5 +1,33 @@
 # 神圣奇术（5E UA）
 
+## 目录
+
+- [兼容版原文](#兼容版原文)
+  - [神圣奇术](#神圣奇术)
+  - [神圣奇术规则（by 落雨随枫）](#神圣奇术规则by-落雨随枫)
+  - [神圣启迪 Divine Inspiration](#神圣启迪-divine-inspiration)
+  - [奥术入信 Arcane Initiate](#奥术入信-arcane-initiate)
+  - [引导奥秘 Channel Arcana](#引导奥秘-channel-arcana)
+  - [引导奥秘：神圣奥能 Channel Arcana: Divine Arcana](#引导奥秘神圣奥能-channel-arcana-divine-arcana)
+  - [奥术侍僧 Arcane Acolyte](#奥术侍僧-arcane-acolyte)
+  - [奥术祭司 Arcane Priest](#奥术祭司-arcane-priest)
+  - [奥术大祭司 Arcane High Priest](#奥术大祭司-arcane-high-priest)
+- [队伍定位摘要](#队伍定位摘要)
+- [详细评价](#详细评价)
+- [分项评分](#分项评分)
+- [综合评分](#综合评分)
+- [设计相关评分](#设计相关评分)
+- [分阶段子职排行榜](#分阶段子职排行榜)
+  - [Tier 1（1-4）](#tier-11-4)
+  - [Tier 2（5-10）](#tier-25-10)
+  - [Tier 3（11-16）](#tier-311-16)
+  - [Tier 4（17-20）](#tier-417-20)
+- [UA/合作方/第三方子职分阶段排行榜](#ua合作方第三方子职分阶段排行榜)
+  - [Tier 1（1-4）](#tier-11-4-1)
+  - [Tier 2（5-10）](#tier-25-10-1)
+  - [Tier 3（11-16）](#tier-311-16-1)
+  - [Tier 4（17-20）](#tier-417-20-1)
+
 ## 兼容版原文
 
 ### 神圣奇术
