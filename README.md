@@ -47,7 +47,8 @@ git commit -m "Update DND5e_chm submodule"
 3. 用 `DND5e_chm` 核查职业、子职、专长、法术、物品、规则原文和中文译名。
 4. 如需社区意见，必须确认评论讨论的是同一版本规则；不匹配的旧版评论只能作为背景，不可直接套用。
 5. 修改对应的 `Rankings/[职业]/README.md`、子职文件或 `Rankings/构筑/*.md`。
-6. 如果更新了标准、校准逻辑或大范围结论，把记录添加到 `Rankings/changelog.md` 文件开头。
+6. 如果新增或修改非 homebrew 牧师领域评审，同时检查是否需要新增或更新 `Rankings/法师/神圣奇术/[牧师领域].md`。神圣奇术本体是 5E UA 法师子职，因此这些映射在法师与根 README 的跨来源排行榜中显示为 `神圣奇术（5E UA） - [牧师领域]`。
+7. 如果更新了标准、校准逻辑或大范围结论，把记录添加到 `Rankings/changelog.md` 文件开头。
 
 ## 官方职业 / 子职评审标准
 
@@ -72,8 +73,8 @@ git commit -m "Update DND5e_chm submodule"
 可用脚本在 `tools` 下。常用示例：
 
 ```powershell
-python .\tools\update_root_summary.py
 python .\tools\rebuild_class_leaderboards_from_reviews.py
+python .\tools\update_root_summary.py
 ```
 
 其他 `rewrite_*` 脚本多数是针对历史某一轮重写或校准的专用脚本。运行前先读脚本内容，确认它的目标文件和假设。
@@ -163,6 +164,7 @@ homebrews/Rankings/[职业或类型]/Archive/[子职名] - [YYYYMMDD HHMMSS].md
 - 如果更新排行榜，排行榜的等级和理由必须取自对应子职/构筑文件的 `综合评分` 表。
 - 构筑目录只收录真正的多职业或跨系统构筑，不收录纯职业优化包。
 - 官方、UA、合作方、第三方内容可以各自获得真实强度评分；但排行榜收录规则要按 skill 执行。
+- 根 `Rankings/README.md` 的 `分阶段子职排行榜` 只放官方第一方、EGW 项目例外和有效构筑；UA、合作方、第三方子职放入独立排行榜。神圣奇术映射即使对应官方牧师领域，也按神圣奇术本体的 5E UA 来源，只进入根 `UA/合作方/第三方子职分阶段排行榜`。
 - 如果改变评分标准或校准逻辑，在 `Rankings/changelog.md` 文件开头新增记录。
 
 提交前建议检查：
