@@ -51,6 +51,7 @@ Out-of-boundary or overpowered content is included in balance ranking. Do not si
    - Use subdirectories by class/type, such as `牧师`, `圣武士`, `法师`, `游荡者`, etc.
    - Keep root `Rankings` as calibration/reference only, not as a homebrew output target.
    - `homebrews\Rankings\README.md` is deprecated. Do not create or update it.
+   - Do not create 神圣奇术 / Theurgy mappings for homebrew Cleric domains unless the user explicitly asks for that mapping. If explicitly requested, put the mapped review files under `homebrews\Rankings\法师\神圣奇术`, but do not create `homebrews\Rankings\法师\神圣奇术\README.md`; homebrew Theurgy mappings remain ordinary standalone subclass review files, not a class-like Theurgy hub.
 
 2. Read standards in this order.
    - Read this homebrew skill.
@@ -71,6 +72,7 @@ Out-of-boundary or overpowered content is included in balance ranking. Do not si
    - If ranking exists, compare the current source Chinese text to its `## 原文` section.
    - If source changed, first archive the current ranking file to:
      `homebrews\Rankings\[class]\Archive\[subclass name] - [YYYYMMDD HHMMSS].md`
+   - If source changed for an explicitly requested homebrew Theurgy mapping under `homebrews\Rankings\法师\神圣奇术`, archive the old mapped review under `homebrews\Rankings\法师\神圣奇术\Archive`, not directly under the Wizard directory.
    - If only standards, wording, or calibration changed and source text did not change, update in place without archive.
 
 5. Build official context and score.
