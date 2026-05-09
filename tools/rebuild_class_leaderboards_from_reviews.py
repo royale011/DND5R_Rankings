@@ -12,7 +12,7 @@ SUMMARY_FILE = "README.md"
 
 def write_utf8_lf(path: Path, text: str) -> None:
     path.write_bytes((text.rstrip() + "\n").encode("utf-8"))
-NON_FIRST_PARTY_BASE_CLASSES = {"灵能使", "秘术师"}
+NON_FIRST_PARTY_BASE_CLASSES = {"灵能使", "秘术师", "血猎手", "邪狱使", "铳士", "拳斗士"}
 
 
 def split_row(line: str) -> list[str]:
