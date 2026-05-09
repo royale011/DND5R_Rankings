@@ -2,6 +2,15 @@
 
 Current long-run task started: 2026-05-04.
 
+## 目录
+
+- [Goal](#goal)
+- [Rewrite Order](#rewrite-order)
+- [Current Status](#current-status)
+- [Completed Class Notes](#completed-class-notes)
+- [Per-Class Checklist](#per-class-checklist)
+- [Current Calibration Notes](#current-calibration-notes)
+
 ## Goal
 Rewrite official / partner class and subclass reviews so `详细评价` reads like the homebrew reviews:
 

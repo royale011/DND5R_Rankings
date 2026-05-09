@@ -52,7 +52,8 @@ Out-of-boundary or overpowered content is included in balance ranking. Do not si
    - Keep root `Rankings` as calibration/reference only, not as a homebrew output target.
    - `homebrews\Rankings\README.md` is deprecated. Do not create or update it.
    - Do not create 神圣奇术 / Theurgy mappings for homebrew Cleric domains unless the user explicitly asks for that mapping. If explicitly requested, put the mapped review files under `homebrews\Rankings\法师\神圣奇术`, but do not create `homebrews\Rankings\法师\神圣奇术\README.md`; homebrew Theurgy mappings remain ordinary standalone subclass review files, not a class-like Theurgy hub.
-   - If a future user explicitly asks to create any homebrew `README.md`, include an up-to-date `## 目录` near the top and maintain it when headings change. Do not create homebrew README files by default.
+   - Every active homebrew review Markdown file, including standalone subclass files, must include an up-to-date `## 目录` near the top and maintain it when headings change. Skip `homebrews\Rankings\changelog.md` and files under `Archive`.
+   - If a future user explicitly asks to create any homebrew `README.md`, include the same up-to-date `## 目录` near the top and maintain it when headings change. Do not create homebrew README files by default.
 
 2. Read standards in this order.
    - Read this homebrew skill.

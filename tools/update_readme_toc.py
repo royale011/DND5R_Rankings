@@ -75,8 +75,42 @@ def tracked_readmes() -> list[Path]:
     return [Path(line) for line in output.splitlines() if line.strip()]
 
 
+def tracked_ranking_markdown() -> list[Path]:
+    output = subprocess.check_output(
+        ["git", "-c", "core.quotePath=false", "ls-files", "Rankings/*.md", "Rankings/**/*.md"],
+        text=True,
+        encoding="utf-8",
+    )
+    paths: list[Path] = []
+    for line in output.splitlines():
+        if not line.strip():
+            continue
+        path = Path(line)
+        if path.name == "changelog.md" or "Archive" in path.parts:
+            continue
+        paths.append(path)
+    return paths
+
+
+def active_homebrew_markdown() -> list[Path]:
+    root = Path("homebrews") / "Rankings"
+    if not root.exists():
+        return []
+    paths: list[Path] = []
+    for path in root.rglob("*.md"):
+        if path.name == "changelog.md" or "Archive" in path.parts:
+            continue
+        paths.append(path)
+    return paths
+
+
 def main() -> None:
-    for path in tracked_readmes():
+    seen: set[Path] = set()
+    paths = tracked_readmes() + tracked_ranking_markdown() + active_homebrew_markdown()
+    for path in paths:
+        if path in seen:
+            continue
+        seen.add(path)
         text = path.read_text(encoding="utf-8")
         updated = add_or_update_toc(text)
         if updated != text:
