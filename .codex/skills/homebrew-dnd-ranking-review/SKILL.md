@@ -27,7 +27,6 @@ The following content used to be duplicated in this homebrew skill. Do not resta
 - 2024 spell-timing and “one spell with a spell slot per turn” analysis: official `Build the actual rules context before scoring`.
 - Resource counting, action economy, concentration, unwanted interruption, severe costs, and feature-overlap analysis: official `Build the actual rules context before scoring`.
 - “On par with” comparisons, damage-dice face counting, abuse-path auditing, `暗示术` / `群体暗示术`, high-level abuse frameworks, Divine Intervention / Wish / Glyph / Demiplane compression, and scroll / Magical Secrets / spell-list lock-in standards: official `Build the actual rules context before scoring`.
-  - Especially preserve the official skill's `祈愿术` standard: the verified local 2024 text says the caster does not need to satisfy any prerequisite required by the target spell, including costly material components, to make the duplicated spell take effect. In this project, that includes the target spell's casting time unless a more specific local rule says otherwise. Apply this equally to any homebrew, subclass, build, item, or official route that actually casts `祈愿术`; differences in ranking come from access timing, frequency, restrictions, spell-list/preparation economy, proxy abuse, and downstream limits, not from changing what `祈愿术` itself does.
 - Species, 起源专长, general feats, magic items, opportunity cost, replaceability, `猎人印记` vs `脆弱诅咒`, and resource-conversion comparisons: official `Build the actual rules context before scoring`.
 - Official compatibility assumptions used as calibration baselines, including third-party 5e-era class patches and narrow class-specific feat assumptions, must be read from the official skill rather than redefined here. Current examples include `血猎手` / `邪狱使` compatibility patches and the `铳士`-only `枪手` assumption; do not generalize those assumptions to unrelated homebrews unless the homebrew review explicitly compares to that published option.
 - Rank order and rank definitions: official `Use the same scoring system`. This includes the current allowance for `B+` as the only lower-mid power subrank. Design-only subranks such as `B-`, `C+`, `C-`, `D+`, `D-`, and `E+` may be used only under the official design-score rule when the reason truly needs that precision; do not use those design-only subranks for power/function/overall rankings.
@@ -43,6 +42,10 @@ Never evaluate a homebrew interaction with official content from model memory. I
 If a homebrew source contains both English and Chinese, use the Chinese text as authoritative for the archived `原文` unless the user says otherwise. Preserve homebrew-created names as written in the source. For official / partner / UA / third-party names embedded in homebrew text, use the verified Chinese translation from `DND5e_chm` in the review whenever it can be found.
 
 Out-of-boundary or overpowered content is included in balance ranking. Do not silently “fix” it before scoring. Point it out in `详细评价` and `修改建议` as future refinement material.
+
+If a homebrew uses a design pattern that already exists in official 2024 rules but the official rule itself leaves a relevant wording boundary unresolved, do not demand that the homebrew solve that official ambiguity as a mandatory wording fix. Examples include `祈愿术` duplicating spells and `进阶神圣干预` choosing `祈愿术`. In this situation, the review should state that the official RAW is itself poorly bounded or table-ruling-sensitive. The absence of extra regulator wording in the homebrew is not, by itself, a `必须修改` item and should not by itself lower `设计质量` or `能力设计质量`; apply design penalties only for ambiguity, abuse paths, or resource loops introduced beyond the comparable official pattern.
+
+When a review has suggestions for fixing that comparable official RAW problem, put them in a standalone `## 官方RAW修复建议` section rather than inside `详细评价`, `横向对照与不确定点`, or `修改建议`. This section is for official-rule repair options and their table impact, not for required homebrew changes. For power, functionality, and balance ranks related to that official ambiguity, use a conservative RAI assumption by default: credit the homebrew for the clear intended official function, but do not score it around the most permissive RAW exploit unless the homebrew itself explicitly creates or requires that exploit.
 
 ## Required Workflow
 
@@ -89,6 +92,7 @@ Out-of-boundary or overpowered content is included in balance ranking. Do not si
    - Output in Simplified Chinese.
    - Include `原文`.
    - Include team/rules position, feature-level `详细评价`, per-tier `分项评分`, vertical `综合评分`, `设计相关评分`, official baseline comparison / uncertainty notes, and `修改建议`.
+   - If the review identifies an official RAW ambiguity and has suggestions on how to fix that official wording, include `## 官方RAW修复建议` as its own section and include it in the TOC.
    - If the source has personal design-purpose sections, include `设计相关评分 - 个人期望` after normal design scoring.
    - If the source is an explicit adaptation, include adaptation discussion in `详细评价`, `横向对照与不确定点`, or a dedicated `改编基准` section.
    - Do not repeat generic scoring boilerplate. Explain actual features, actions, resources, saves, concentration, interactions, official comparisons, and Tier curve.
