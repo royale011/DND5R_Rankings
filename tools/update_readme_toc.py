@@ -111,6 +111,8 @@ def main() -> None:
         if path in seen:
             continue
         seen.add(path)
+        if not path.exists():
+            continue
         text = path.read_text(encoding="utf-8")
         updated = add_or_update_toc(text)
         if updated != text:
