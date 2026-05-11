@@ -18,7 +18,7 @@
 ## 仓库内容
 
 - `.codex`：项目级 Codex skills。这里保存评分流程、资料核查规则、文件结构、命名规则和 changelog 规则。
-- `tools`：批量生成、校准或整理评分文件的本地脚本。这些脚本主要服务于已有工作流，不保证都是通用 CLI。
+- `tools`：可复用的评分维护脚本，只保留排行榜重建、根总评同步、目录维护和设计评分审计等基础设施。一次性 `rewrite_*` / `calibrate_*` / `generate_*` 批处理脚本不纳入版本库。
 - `Rankings`：官方、UA、合作方与第三方公开内容的评分与评审产物。
 - `DND5e_chm`：资料 submodule，指向 `https://github.com/DND5eChm/DND5e_chm`。用于核查最新 5.5e / 2024 内容，应保持更新。
 - `DND2014_legacy`：资料 submodule，同样指向 `https://github.com/DND5eChm/DND5e_chm.git`，但固定在当前 revision。用于保留纯 5e 时代资料，尤其是未来复核 5e UA 子职；不要为了 5e UA 评审而更新它。
@@ -86,14 +86,16 @@ git commit -m "Update DND5e_chm submodule"
 
 评审文字应具体到特性与规则，而不是重复分项表。例如：一个 14 级才取得核心现实改写能力的子职，Tier 3 理由应说明 11-13 级和 14-16 级的差异；一个依赖优势、标记或专注的武器子职，应先检查同职业底盘、武器精通、法术、专长和物品是否已经提供可替代入口。
 
-可用脚本在 `tools` 下。常用示例：
+可用维护脚本在 `tools` 下：
 
 ```powershell
 python .\tools\rebuild_class_leaderboards_from_reviews.py
 python .\tools\update_root_summary.py
+python .\tools\update_readme_toc.py
+python .\tools\audit_design_scores.py
 ```
 
-其他 `rewrite_*` 脚本多数是针对历史某一轮重写或校准的专用脚本。运行前先读脚本内容，确认它的目标文件和假设。
+`tools` 不再跟踪一次性重写/校准脚本。临时批处理可以在本地创建，但除非它已经变成可复用维护基础设施，否则不要提交。
 
 ## 如何添加 Homebrew 内容
 

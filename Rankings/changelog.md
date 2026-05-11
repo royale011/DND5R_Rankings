@@ -1,3 +1,15 @@
+## 2026-05-11 tools目录瘦身与维护脚本边界
+
+- 审计 `tools` 目录后，只保留可复用维护基础设施：`rebuild_class_leaderboards_from_reviews.py`、`update_root_summary.py`、`update_readme_toc.py`、`audit_design_scores.py`。
+- 移除历史一次性 `rewrite_*`、`calibrate_*`、`generate_*` 等批处理脚本；这些脚本可在本地为某轮重写临时创建，但默认不纳入版本库。
+- 更新 `.gitignore`、root `README.md`、official skill 与 homebrew skill，明确 `tools` 的跟踪边界；新增 `tools\README.md` 说明保留脚本用途。
+
+## 2026-05-11 至圣斩附赠动作校准
+
+- 更新 official ranking skill：明确本地2024 `至圣斩 Divine Smite` 是1环圣武士法术，施法时间为命中近战武器或徒手打击后的附赠动作；它可以命中后付费爆发，但不是2014版无动作职业特性。
+- 后续评审凡是把 `至圣斩` 作为触发器、资源入口或伤害比较对象，都必须同时计算附赠动作压力，以及和 `神恩`、`猎人印记`、`脆弱诅咒`、双持客附赠动作攻击、引导神力激活、子职命令等计划的冲突。
+- 回查圣武士全体评分：当前综合评级不需要因该补正降档。`防护灵光`、誓言灵光、坐骑/复原/状态清除、以及少数子职的真实每命中增伤路线仍支撑原有横向位置；本轮只同步修正 `荣耀之誓`、`奉献之誓`、`巨灵贵族之誓` 和圣武士 README 中可能把 `至圣斩` 触发写得过轻的理由。
+
 ## 2026-05-11 魔契师短休、链契单位与移动伤害校准
 
 - 更新 official ranking skill：新增魔契师 T1-T2 短休法术位核算、`邪魔活力`固定临时生命、`链之魔契`作为便宜战斗/侦察单位的评价标准；同一标准也适用于 T1 取得魔契师等级的构筑，例如 The Celestial Generalist、Sorlock、圣武士/魔契师与勇气吟游诗人/魔契师路线。
