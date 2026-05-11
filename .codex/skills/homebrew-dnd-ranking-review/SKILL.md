@@ -75,8 +75,9 @@ Discuss RAI / RAW effects on power, functionality, or balance ranking only when 
    - Use the current file in `homebrews`.
    - Archive the Chinese source text in `原文`; if both English and Chinese are present, use Chinese only unless the user asks otherwise.
    - Preserve author notes such as `附注`, `Note`, `设计意图`, `设计目标`, `个人意图`, or similar. These notes are part of `原文`.
+   - For the ordinary public-release review, treat author notes as out-of-scope evidence. Do not use note contents to justify `详细评价`, balance/function ranks, `综合评分`, or ordinary public-facing design ranks. Those sections evaluate only the playable rules text, public-facing theme text, and mechanics outside the note section.
    - If author notes state personal/table-specific design purpose, normal balance/function ranks still use the full ecosystem standard, but the review must also include `设计相关评分 - 个人期望`.
-   - Do not cite or rely on author-note contents when justifying ordinary non-personal design ranks such as `设计质量`, `主题`, `能力设计质量`, or `主题与能力关联度`. Those ranks judge the text and mechanics as public-facing material. Mention note contents only in `设计相关评分 - 个人期望` or personal-intent advice, and only under the aspect they actually inform, such as stated private goal, intended table power, author fantasy, or adaptation purpose.
+   - Do not cite or rely on author-note contents when justifying ordinary non-personal design ranks such as `设计质量`, `主题`, `能力设计质量`, or `主题与能力关联度`. Those ranks judge the text and mechanics as public-facing material. Mention note contents only in `设计相关评分 - 个人期望`, personal-intent advice, or a neutral source-change note such as `本次改动判断`, and only under the aspect they actually inform, such as stated private goal, intended table power, author fantasy, adaptation purpose, or pending author questions.
    - If the source says it is `基于...改编` / `based on...`, verify the origin resource before judging personal design purpose and adaptation quality. Prefer local project resources first (`DND5e_chm`, `5e Reference`, `Rankings`, `homebrews`, PDFs or text files named by the source). If the source cannot be verified locally and network is unavailable or not requested, state the uncertainty rather than inventing the baseline.
    - For `看门狗 Watch Dog` or any homebrew that references 5e-era UA / legacy-compatible modern firearm rules, follow the official skill's `DND2014_legacy\其他\UA\城市规则.html` baseline and firearm-category mapping. Use the CN translated legacy source, not an external or obsolete PDF path, as the review source.
 
@@ -102,7 +103,7 @@ Discuss RAI / RAW effects on power, functionality, or balance ranking only when 
    - Include team/rules position, feature-level `详细评价`, per-tier `分项评分`, vertical `综合评分`, `设计相关评分`, official baseline comparison / uncertainty notes, and `修改建议`.
    - If the review identifies an official RAW ambiguity and has suggestions on how to fix that official wording, include `## 官方RAW修复建议` as its own section and include it in the TOC.
    - If the source has personal design-purpose sections, include `设计相关评分 - 个人期望` after normal design scoring.
-   - Keep note-derived content out of the ordinary `设计相关评分` table. The normal design table may discuss public text, mechanics, clarity, theme expression, and ecosystem health; the personal table may discuss whether the notes' stated goals are achieved.
+   - Keep note-derived content out of `详细评价`, `分项评分`, `综合评分`, and the ordinary `设计相关评分` table. The normal design table may discuss public text, mechanics, clarity, theme expression, and ecosystem health; the personal table may discuss whether the notes' stated goals are achieved.
    - If the source is an explicit adaptation, include adaptation discussion in `详细评价`, `横向对照与不确定点`, or a dedicated `改编基准` section.
    - Do not repeat generic scoring boilerplate. Explain actual features, actions, resources, saves, concentration, interactions, official comparisons, and Tier curve.
 
@@ -167,7 +168,7 @@ Open the matched local source before writing. Search results are not enough when
 - Giving high design scores just because a feature is powerful.
 - Maintaining improvement advice only in `homebrews\Rankings\README.md` instead of each review file.
 - Treating personal design intent as if it changed normal balance ranks, rather than adding `设计相关评分 - 个人期望`.
-- Citing author notes in ordinary non-personal design ranks. Note contents belong in `设计相关评分 - 个人期望` or personal-intent advice, not in public-facing design justification.
+- Citing author notes in `详细评价`, ordinary balance/function ranks, `综合评分`, or ordinary non-personal design ranks. Note contents belong in `设计相关评分 - 个人期望`, personal-intent advice, or neutral source-change notes, not in public-facing review justification.
 - Treating overlap with an official subclass as automatically invalid when the homebrew does not outperform that official subclass in its main role.
 - Treating `基于...改编` as flavor only. Adaptation claims require checking the origin source and evaluating the quality of the 5.5e/2024 conversion.
 - Using a conservative-RAI / permissive-RAW split for rank decisions when official or reviewed analogues exist. Horizontal calibration comes first; RAI / RAW rank deltas are only for cases without usable references.
