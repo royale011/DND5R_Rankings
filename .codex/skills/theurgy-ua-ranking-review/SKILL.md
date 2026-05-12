@@ -9,6 +9,8 @@ Use this skill for `神圣奇术 Theurgy`, the 5e-era UA Wizard subclass that ma
 
 This is a narrow companion skill. All source-verification, community-calibration, ranking-scale, README, changelog, and tooling rules are the same as `.codex/skills/official-dnd-ranking-review/SKILL.md`; read and follow that skill first.
 
+Follow the official skill's translation and abbreviation rules. Use verified Chinese names for actual classes, subclasses, features, spells, feats, items, and rules terms, but do not force common CN-community abbreviations such as `5E UA`, `DPR`, `RAW`, `RAI`, `DM`, `PC`, `BA`, `OA`, `ASI`, or source abbreviations into Chinese wording.
+
 ## Review Input Boundary
 
 Follow the official skill's independent-review rule. A `神圣奇术` review is based on the latest effective project source, the mapped Cleric-domain source, the mapping rules in this skill, the official ranking skill, and version-matched community discussion. Prompt context, older review files, and source-diff notes are only inspection aids unless a new criterion has first been recorded in the relevant skill / changelog.

@@ -22,7 +22,7 @@ A skill can point to another skill file by path and instruct the agent to read i
 The following content used to be duplicated in this homebrew skill. Do not restate it here; read and follow it from the official skill:
 
 - Local-source verification and no model-memory rule for official content: official `## Non-Negotiable Rule`.
-- Chinese translation requirement, including `起源专长`: official `## Non-Negotiable Rule`.
+- Chinese translation requirement, including `起源专长`, plus the exception that common CN-community abbreviations such as `DPR`, `RAW`, `RAI`, `DM`, `PC`, `UA`, `BA`, `OA`, `ASI`, and source abbreviations do not need forced Chinese translation: official `## Non-Negotiable Rule`.
 - Mojibake / GBK-CP936 handling when local Chinese text displays incorrectly: official `Required Workflow` local-source steps.
 - 2024 spell-timing and “one spell with a spell slot per turn” analysis: official `Build the actual rules context before scoring`.
 - Spell-level comparison wording for light/darkness, suppression, dispelling, and similar effects, including the 2024 `昼明术 Daylight` official pattern and how upcast/effective spell level should be handled: official `Build the actual rules context before scoring`.
@@ -42,7 +42,7 @@ Homebrew reviews still use these shared standards exactly. The homebrew-specific
 
 Never evaluate a homebrew interaction with official content from model memory. If the homebrew mentions an official class, subclass, feature, feat, item, spell, monster stat block, condition, action, or rule term, first verify the current local text in `DND5e_chm`, using the shared verification rules from the official skill.
 
-If a homebrew source contains both English and Chinese, use the Chinese text as authoritative for the archived `原文` unless the user says otherwise. Preserve homebrew-created names as written in the source. For official / partner / UA / third-party names embedded in homebrew text, use the verified Chinese translation from `DND5e_chm` in the review whenever it can be found.
+If a homebrew source contains both English and Chinese, use the Chinese text as authoritative for the archived `原文` unless the user says otherwise. Preserve homebrew-created names as written in the source. For official / partner / UA / third-party names embedded in homebrew text, use the verified Chinese translation from `DND5e_chm` in the review whenever it can be found. Common abbreviations already understood by Chinese D&D communities do not need to be translated into awkward Chinese wording; keep them when they are the clearer community term, and explain once only when context makes them ambiguous.
 
 Out-of-boundary or overpowered content is included in balance ranking. Do not silently “fix” it before scoring. Point it out in `详细评价` and `修改建议` as future refinement material.
 

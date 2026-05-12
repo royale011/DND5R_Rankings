@@ -24,7 +24,7 @@ Follow the official skill's independent-review rule. A Strixhaven mapping review
 - Treat these as `5E UA` resources.
 - Verify names, compatible classes, feature text, subclass spell tables, and prerequisites from local `DND2014_legacy` / `DND5e_chm` Strixhaven UA text before writing.
 - Default to enabling the published Strixhaven context under `DND5e_chm\斯翠海文：混沌研习` when evaluating the UA subclasses. This means Strixhaven spells, feats, backgrounds, magic items, campus assumptions, and other published setting support can be discussed as available context, while the subclass features themselves remain the 5e-era UA subclass features.
-- Use Chinese names from local source where available. Include English names on first mention only when useful for searchability.
+- Use Chinese names from local source where available. Include English names on first mention only when useful for searchability. Follow the official skill's abbreviation rule: common CN-community abbreviations such as `UA`, `DPR`, `RAW`, `RAI`, `DM`, `PC`, `BA`, `OA`, `ASI`, and source abbreviations do not need forced Chinese translation.
 - Apply the project legacy-subclass compatibility rule: old subclass features or subclass spells that would be granted below level 3 are evaluated as coming online at level 3 in the 5.5e / 2024 environment.
 
 ## Core Mapping Rule

@@ -1,3 +1,9 @@
+## 2026-05-13 中文社区常用缩写规则
+
+- Updated official, homebrew, Strixhaven, and Theurgy skills to clarify that common abbreviations already understood by CN D&D communities do not need forced Chinese translation.
+- The Chinese-name verification rule remains unchanged for actual rules objects such as classes, subclasses, features, spells, feats, items, monsters, actions, conditions, weapon masteries, and rule terms. The new exception covers familiar shorthand such as `DPR`, `RAW`, `RAI`, `DM`, `PC`, `NPC`, `DDB`, `UA`, `T1`-`T4`, `ASI`, `BA`, `OA`, `AoE`, and source abbreviations like `PHB`, `DMG`, `MM`, `TCE`, `XGE`, and `EGW`.
+- Updated root `README.md` so contributors do not over-translate community shorthand when writing Chinese-facing reviews.
+
 ## 2026-05-12 独立评审输入边界
 
 - 更新 official、Strixhaven、Theurgy、homebrew skill：所有正式评审都必须从最新核验来源文本、适用 skill 标准、版本匹配的社区讨论重新作出独立判断。
