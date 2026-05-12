@@ -1,3 +1,15 @@
+## 2026-05-12 独立评审输入边界
+
+- 更新 official、Strixhaven、Theurgy、homebrew skill：所有正式评审都必须从最新核验来源文本、适用 skill 标准、版本匹配的社区讨论重新作出独立判断。
+- 明确提示词、当前对话、旧评审、文件差异和版本变化叙述只能提示检查方向，不能决定强度评级、设计评分或公开评审结论；新的事实或标准若要影响未来评分，必须先记录到相关 skill / changelog。
+- 同步 root `README.md` 的官方与 homebrew 评审标准说明。
+
+## 2026-05-12 昼明术式环阶比较措辞校准
+
+- 核对本地2024 `昼明术 Daylight` 文本：其使用“任何三环或更低环阶法术创造的黑暗区域”这一官方模式，没有写成“法术原本环阶”。
+- 更新 official ranking skill：光照/黑暗、压制、解除和类似环阶比较必须先对照本地官方措辞与2024升环施法规则。若官方模式本身使用有效法术环阶写法，不应自动要求homebrew或合作方内容写成“原本环阶”。
+- Homebrew review 通过 `homebrew-dnd-ranking-review` 继承该标准；当前 `迷思卓诺之誓` 评审已按此校准。
+
 ## 2026-05-11 tools目录瘦身与维护脚本边界
 
 - 审计 `tools` 目录后，只保留可复用维护基础设施：`rebuild_class_leaderboards_from_reviews.py`、`update_root_summary.py`、`update_readme_toc.py`、`audit_design_scores.py`。

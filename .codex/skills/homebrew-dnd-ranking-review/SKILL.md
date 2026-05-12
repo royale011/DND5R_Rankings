@@ -25,6 +25,7 @@ The following content used to be duplicated in this homebrew skill. Do not resta
 - Chinese translation requirement, including `起源专长`: official `## Non-Negotiable Rule`.
 - Mojibake / GBK-CP936 handling when local Chinese text displays incorrectly: official `Required Workflow` local-source steps.
 - 2024 spell-timing and “one spell with a spell slot per turn” analysis: official `Build the actual rules context before scoring`.
+- Spell-level comparison wording for light/darkness, suppression, dispelling, and similar effects, including the 2024 `昼明术 Daylight` official pattern and how upcast/effective spell level should be handled: official `Build the actual rules context before scoring`.
 - Resource counting, action economy, concentration, melee / short-range / multi-hit damage-increment resources, 2024 `繁彩球 Chromatic Orb` bounce chance / maximum bounce calibration, unwanted interruption, severe costs, and feature-overlap analysis: official `Build the actual rules context before scoring`.
 - Dual-wield / `迅击` / `双持客` hit-count amplification, including the current conditional Paladin standard, feat-opportunity-cost audit, Fighter `长柄武器大师` / `巨武器大师` comparison, smite-spell comparison, and setup-tempo analysis: official `Build the actual rules context before scoring`.
 - “On par with” comparisons, damage-dice face counting, abuse-path auditing, `暗示术` / `群体暗示术`, high-level abuse frameworks, Divine Intervention / Wish / Glyph / Demiplane compression, and scroll / Magical Secrets / spell-list lock-in standards: official `Build the actual rules context before scoring`.
@@ -54,6 +55,15 @@ For power, functionality, and balance ranks related to that official ambiguity, 
 Example: for `迷思卓诺之誓` level-20 `理想宣言`, compare the `祈愿术` access against Wizard as a Tier 4 `S` full-caster package with spellbook / ritual / high-level arcane breadth, Cleric as a Tier 4 `S` class whose `进阶神圣干预` can choose `祈愿术`, and reviewed Wizard multiclass builds that still sit at Tier 4 `S` rather than `S+` when they gain ninth-level spells late. The Paladin feature should receive real credit as a full-caster-boundary, `S`-level endpoint for the roles `祈愿术` actually covers, but it should not inherit Wizard's spellbook economy or Cleric's full divine toolkit; decide the exact feature and overall Tier 4 rank from the feature's actual level-20-only, Heroic-Inspiration-gated, song-ending, cooldown-limited access.
 
 Discuss RAI / RAW effects on power, functionality, or balance ranking only when no usable official reference or reviewed analogue exists. In that case, explain which reading is being scored, why that reading is the most defensible for the project, and how the alternate reading would change the rank.
+
+Every homebrew review must be completed as an individual evaluation of the latest source text. For ordinary public-release review sections, the only valid inputs are:
+- the latest formal homebrew source text outside author-note / meta sections;
+- this skill and the delegated shared standards from the official skill;
+- verified official / UA / partner / third-party calibration files and version-matched community discussion.
+
+Do not let the user prompt, current conversation, previous assistant wording, older review text, source-diff direction, blind-review comments, GPT review files, or change-comparison narrative determine public-facing rankings, public-oriented design scores, `详细评价`, `分项评分`, or `综合评分`. Those materials may tell you what to inspect, but the conclusion must be rebuilt from the latest formal text and the standards. If the user provides a new rule, criterion, or factual assumption that should affect ranking, first record it in the relevant skill or changelog, then evaluate from that rule. If the prompt provides a preferred result, treat it only as a hypothesis to verify.
+
+Version-to-version changes should be discussed in a standalone section such as `本次改动判断` or `版本变化说明`. That section may explain what changed and whether the changed text matters, but the changed-from-previous-version narrative must not appear as a justification inside public `详细评价`, public `设计相关评分`, balance/function ranks, or `综合评分`. Public review content should read as a review of the current version, not as a response to the previous version or to the prompt.
 
 ## Required Workflow
 

@@ -15,6 +15,10 @@ Use this skill for the 5e-era UA `Mages of Strixhaven` subclasses:
 
 This is a narrow companion skill. All source-verification, community-calibration, ranking-scale, README, changelog, and tooling rules are the same as `.codex/skills/official-dnd-ranking-review/SKILL.md`; read and follow that skill first. Do not use this skill for the published Strixhaven background/feat system unless the user specifically asks to compare it to the UA subclass system.
 
+## Review Input Boundary
+
+Follow the official skill's independent-review rule. A Strixhaven mapping review is based on the latest verified local UA source, the base-class mapping rules in this skill, the official ranking skill, and version-matched community discussion. Prompt context, older review files, and source-diff notes are only inspection aids unless a new criterion has first been recorded in the relevant skill / changelog.
+
 ## Local Source Rules
 
 - Treat these as `5E UA` resources.
