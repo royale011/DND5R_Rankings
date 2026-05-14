@@ -1,3 +1,37 @@
+## 2026-05-15 构筑顶端分档复查
+- 复查 `Rankings/构筑` 中所有当前 `S` / `S+` / `EX` 综合评分。当前构筑目录没有 `S+` 或 `EX` 行，也没有任何 `S` 构筑满足升为 `S+` / `EX` 的标准：它们要么是强法师平台带前置防线，要么是高DPR专注炮台，要么是强后勤/探索资源引擎，均未达到低成本、低反制、全生态破界。
+- 保留 `勇气吟游诗人 ／ 魔契师：咒唤微元素炮台`、`制图师奇械师 ／ 盗贼：Dora 探险支援`、`奇械师 1 ／ 预言师法师 X`、`战士 1 ／ 法师 X`、`牧师 1 ／ 法师 X` 的当前 `S` 综合评分，但重写对应理由，明确其强度来源与不升 `S+` / `EX` 的限制。
+- 重新生成职业 README 与根 `Rankings/README.md`，保证构筑排行继续从单文件 `综合评分` 回读。
+
+## 2026-05-15 EX / S+ 第三轮高位校准
+- 复查除吟游诗人、术士外，本职同阶为 `S-` 的职业中所有当前 `S` 综合/分项候选，并横向检查本职不高于 `A+` 的 `S-` 候选、本职不高于 `A` 的 `A+` 候选。结论：绝大多数候选保留原分，因为它们只是低底盘优秀路线、单项突出或场景依赖，不满足 `S+` 所需的反复兑现决定性增量。
+- 上调 `星辰结社` Tier 2-3 综合强度为 `S+`，并把同阶 `团队增益`、`减益` 调为 `S+`：`宇宙预兆`、巨龙星座专注稳定、圣杯/射手切换直接提升关键d20与高环控制/治疗兑现率。
+- 上调 `恩护结社（UA）` Tier 2-4 综合强度为 `S+`，并把同阶 `防御和生存`、`治疗和临时生命`、`团队增益` 调为 `S+`：区域体质豁免加感知、免费复原与反应减伤构成持续队伍防线。
+- 上调 `念动使（UA）` Tier 3 综合强度为 `S+`，并把同阶 `战场分隔`、`减益` 调为 `S+`；上调 `裂空使（UA）` Tier 3 综合强度与 `战场分隔` 为 `S+`。理由分别是无槽/无专注念动力改变专注归属，以及群体传送重排能和高环控制/墙体/危险地形形成遭遇级位置改写。
+- 上调 `契灵宗主（UA）` Tier 3-4 综合强度为 `S+`，并把同阶 `防御和生存`、`团队增益`、`召唤 / 伙伴` 调为 `S+`：团队抗性、免疫、0血保险和伙伴/召唤引擎使它不只是强魔契师，而是高阶队伍防线与伙伴核心。
+
+## 2026-05-15 EX / S+ 第二轮高位校准
+- 按“本职同阶已经是 S 时，子职仍需有独立、反复兑现的决定性增量才进入 S+”的口径复查吟游诗人、术士以及同阶底盘不高于 S-/A+/A 的候选项；大量单项 S 保持原分，不因底盘强度机械上调。
+- 吟游诗人校准：`雄辩学院` Tier 2-3 综合强度上调为 S+，`减益` Tier 2-3 上调为 S+，理由改为围绕`扰乱之语`对关键豁免法术成功率的稳定影响；`逸闻学院` Tier 2 综合强度上调为 S+，`反制施法者` Tier 2 上调为 S+，理由改为6级提前跨表补`法术反制`/防御/控制而非单纯多法术已知。
+- 术士校准：`时械术法` Tier 2-4、`畸变术法` Tier 2-4、`神圣之魂` Tier 4、`符文之子（塔尔多雷）` Tier 4 的综合强度上调为 S+；相关理由分别明确扩表与可靠性、无声/低可见度施法、牧师法表压缩、以及高阶豁免劣势对 S 级术士底盘的真实增量。没有把其他 T4 S 术士子职自动上调。
+- 已重新生成职业 README 与根 `Rankings/README.md` 的分阶段排行榜，确保列表从单文件 `综合评分` 回读。
+
+## 2026-05-15 EX / S+ 顶端强度分档校准
+- 引入仅用于强度 / 功能 / 综合评分的 `EX`：旧 `S+` 中真正全生态破界的含义迁移到 `EX`，用于低成本改写行动经济、d20/豁免、专注归属、法术投送、资源归属或全队攻防的顶点选项。
+- 重新定义 `S+`：它不再表示“生态破界”，而表示在 `S` 级底盘或 `S` 级功能上仍有明确、反复相关的实质增量，但尚未达到 `EX`。
+- 更新官方 / homebrew skill、root README 与排行榜工具 rank order；排行榜仍从单文件 `综合评分` 回读，不手工强行分布。
+- 第一轮校准策略：现有强度 / 功能 / `综合评分` 的旧 `S+` 作为 `EX` 候选处理；现有 `S` 中拥有真实子职/构筑增量者才上调到 `S+`；`S-` 与 `A` 档只在理由和横向比较明显支持时调整。
+
+## 2026-05-15 Bard `祈愿术` Magical Secrets Tier 4 calibration
+- Verified project rule interaction: PHB2024 Bard's `魔法奥秘` expands later prepared-spell choices to Bard / Cleric / Druid / Wizard lists, so a Tier 4 Bard can lock in `祈愿术` once it has 9th-level spell access.
+- Updated official skill to require Bard reviews to count `祈愿术` as a viable T4 Magical Secrets choice while still charging Bard's real limits: prepared-spell pressure, one-spell replacement pace on level-up, scroll-use limits, and lack of Wizard spellbook / daily full-list preparation.
+- Recalibrated Bard Tier 4: Bard base class moves to S, narrow subclass packages that were A+ move to S- because the whole character option now has a real `祈愿术` terminal line, while S- and S subclasses keep their relative placement unless the subclass adds enough success-rate, action-economy, or team-defense leverage to justify S.
+
+## 2026-05-15 Sorlock Tier 4 `祈愿术` build calibration
+- Checked current build reviews for routes that can reach Sorcerer 17+ in Tier 4. The only active build file matching that condition is `术士 ／ 魔契师：Sorlock 爆发炮台`.
+- Recalibrated Sorlock Tier 4 from A+ to S-: Warlock 2 / Sorcerer X reaches Sorcerer 17 and `祈愿术` at character level 19, so the build has a real late-Tier-4 reality-rewrite spike, but it remains delayed compared with pure Sorcerer and does not become an S-tier full-caster chassis for the whole tier.
+- Regenerated root build leaderboard rows from the updated build `综合评分`.
+
 ## 2026-05-14 Sorcerer `祈愿术` correction and Tier 4 recalibration
 - Verified local `DND5e_chm\玩家手册2024\角色职业\术士\术士法术列表.htm`: PHB2024 Sorcerer has `祈愿术` on its class spell list.
 - Updated official skill to require local spell-list verification before using "has / lacks `祈愿术`" as a high-tier limiter; Sorcerer Tier 4 must not be described as lacking default `祈愿术`.

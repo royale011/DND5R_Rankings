@@ -6,7 +6,7 @@ from update_readme_toc import add_or_update_toc
 ROOT = Path("Rankings")
 TIERS = ["Tier 1（1-4）", "Tier 2（5-10）", "Tier 3（11-16）", "Tier 4（17-20）"]
 TIER_SHORT = {"Tier 1（1-4）": "T1", "Tier 2（5-10）": "T2", "Tier 3（11-16）": "T3", "Tier 4（17-20）": "T4"}
-RANKS = ["S+", "S", "S-", "A+", "A", "A-", "B+", "B", "C", "D", "E", "E-", "F"]
+RANKS = ["EX", "S+", "S", "S-", "A+", "A", "A-", "B+", "B", "C", "D", "E", "E-", "F"]
 SUMMARY_FILE = "README.md"
 
 

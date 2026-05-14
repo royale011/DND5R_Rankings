@@ -5,8 +5,6 @@
 - [Tracked Scripts](#tracked-scripts)
 - [Scratch Scripts](#scratch-scripts)
 
-`tools` is intentionally limited to reusable maintenance infrastructure.
-
 ## Tracked Scripts
 
 - `rebuild_class_leaderboards_from_reviews.py`: rebuilds class README subclass leaderboards from file-level `综合评分` tables.

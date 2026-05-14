@@ -50,7 +50,7 @@ If a homebrew uses a design pattern that already exists in official 2024 rules b
 
 When a review has suggestions for fixing that comparable official RAW problem, put them in a standalone `## 官方RAW修复建议` section rather than inside `详细评价`, `横向对照与不确定点`, or `修改建议`. This section is for official-rule repair options and their table impact, not for required homebrew changes.
 
-For power, functionality, and balance ranks related to that official ambiguity, do not default to a conservative-RAI / permissive-RAW split when official references exist. First perform horizontal calibration: identify which official classes, subclasses, spells, features, builds, or spell-list owners already have the same or similar boundary-crossing resource; record their level, resource frequency, action cost, spell-list / preparation economy, current rank in root `Rankings`, and the exact role that resource plays in that rank. Then score the homebrew feature by comparing its timing, chassis, resource chain, synergy, cooldown, scope, and table burden against those official baselines. If the official baseline is `S` and the homebrew has narrower access, later timing, or harsher cost, do not call it `S+` merely because it crosses its own class boundary; if the homebrew adds stronger synergy than the official owner, state the exact rank increase and why.
+For power, functionality, and balance ranks related to that official ambiguity, do not default to a conservative-RAI / permissive-RAW split when official references exist. First perform horizontal calibration: identify which official classes, subclasses, spells, features, builds, or spell-list owners already have the same or similar boundary-crossing resource; record their level, resource frequency, action cost, spell-list / preparation economy, current rank in root `Rankings`, and the exact role that resource plays in that rank. Then score the homebrew feature by comparing its timing, chassis, resource chain, synergy, cooldown, scope, and table burden against those official baselines. If the official baseline is `S` and the homebrew has narrower access, later timing, or harsher cost, do not call it `S+` merely because it crosses its own class boundary; if the homebrew adds stronger synergy than the official owner, state the exact rank increase and why. Use `EX` only for power/function/balance scores that exceed the whole official/UA/partner/third-party ecosystem ceiling; use `S+` for decisive increment above ordinary `S` that is not ecosystem-breaking.
 
 Example: for `迷思卓诺之誓` level-20 `理想宣言`, compare the `祈愿术` access against Wizard as a Tier 4 `S` full-caster package with spellbook / ritual / high-level arcane breadth, Cleric as a Tier 4 `S` class whose `进阶神圣干预` can choose `祈愿术`, and reviewed Wizard multiclass builds that still sit at Tier 4 `S` rather than `S+` when they gain ninth-level spells late. The Paladin feature should receive real credit as a full-caster-boundary, `S`-level endpoint for the roles `祈愿术` actually covers, but it should not inherit Wizard's spellbook economy or Cleric's full divine toolkit; decide the exact feature and overall Tier 4 rank from the feature's actual level-20-only, Heroic-Inspiration-gated, song-ending, cooldown-limited access.
 
@@ -107,7 +107,7 @@ Version-to-version changes should be discussed in a standalone section such as `
    - Use the official skill’s shared rules-context and scoring standards.
    - Strictly compare homebrew balance/functionality against official first-party, UA, partner, and third-party published options already reviewed in root `Rankings`, not merely against its own base class or other homebrews.
    - Do not discount a homebrew because it is homebrew, and do not inflate it because it is only strong inside its own class.
-   - Give `S+` only when it stands at the best-of-the-best ceiling across that full comparison pool.
+   - Give `EX` only when it stands at the best-of-the-best, ecosystem-breaking ceiling across that full comparison pool. Give `S+` when it clearly beats ordinary `S` through real feature increment but does not reach `EX`.
    - Design scores should punish bad boundaries, unclear rules, broken action economy, resource loops, bounded accuracy breaks, and DM-dependent ambiguity, even when the feature is powerful.
    - Do not treat overlap with official subclasses as inherently invalid. Flag overlap only when the homebrew outperforms the official subclass in that official subclass’s main role or makes that niche mostly obsolete.
 
@@ -178,7 +178,7 @@ Open the matched local source before writing. Search results are not enough when
 - Treating a homebrew’s out-of-boundary feature as if it were already nerfed.
 - Forgetting to archive a previous ranking after source text changes.
 - Forgetting `原文`, or archiving English when the Chinese source is present.
-- Calling a subclass `S+` merely because it exceeds its own class boundary.
+- Calling a subclass `S+` merely because it exceeds its own class boundary, or calling it `EX` when it is only a strong `S+` increment rather than ecosystem-breaking.
 - Giving high design scores just because a feature is powerful.
 - Maintaining improvement advice only in `homebrews\Rankings\README.md` instead of each review file.
 - Treating personal design intent as if it changed normal balance ranks, rather than adding `设计相关评分 - 个人期望`.
