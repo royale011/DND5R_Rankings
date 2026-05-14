@@ -1,3 +1,8 @@
+## 2026-05-14 Sorcerer `祈愿术` correction and Tier 4 recalibration
+- Verified local `DND5e_chm\玩家手册2024\角色职业\术士\术士法术列表.htm`: PHB2024 Sorcerer has `祈愿术` on its class spell list.
+- Updated official skill to require local spell-list verification before using "has / lacks `祈愿术`" as a high-tier limiter; Sorcerer Tier 4 must not be described as lacking default `祈愿术`.
+- Recalibrated Sorcerer Tier 4: the base class is now S rather than S-, while subclass files distinguish `祈愿术` / nine-level Sorcerer chassis from actual subclass increment. Narrow subclasses are not automatically S; they are scored from the whole character option plus the subclass's real contribution.
+
 ## 2026-05-13 中文社区常用缩写规则
 
 - Updated official, homebrew, Strixhaven, and Theurgy skills to clarify that common abbreviations already understood by CN D&D communities do not need forced Chinese translation.
