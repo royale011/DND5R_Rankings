@@ -110,6 +110,7 @@ Version-to-version changes should be discussed in a standalone section such as `
    - Give `EX` only when it stands at the best-of-the-best, ecosystem-breaking ceiling across that full comparison pool. Give `S+` when it clearly beats ordinary `S` through real feature increment but does not reach `EX`.
    - Design scores should punish bad boundaries, unclear rules, broken action economy, resource loops, bounded accuracy breaks, and DM-dependent ambiguity, even when the feature is powerful.
    - Do not treat overlap with official subclasses as inherently invalid. Flag overlap only when the homebrew outperforms the official subclass in that official subclass’s main role or makes that niche mostly obsolete.
+   - For homebrew Paladin Sacred Oaths, do not mechanically require the 7th-level feature to be an Aura. Not every official Paladin subclass uses a level-7 aura pattern. The correct question is whether the 7th-level feature opens a meaningful new subclass dimension: team protection, battlefield role, target access, action-economy change, anti-caster value, noncombat identity, or a clearer oath/theme expression. If the subclass also lacks Oath Spells, has an unreliable Channel Divinity, or already spent earlier budget on a narrow combat module, then a 7th-level feature that only increases the same dice/resources/numbers should be criticized as narrow functional growth rather than as "missing an aura."
 
 6. Write the review.
    - Output in Simplified Chinese.
