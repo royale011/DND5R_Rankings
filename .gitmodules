@@ -4,3 +4,10 @@
 [submodule "DND2014_legacy"]
 	path = DND2014_legacy
 	url = https://github.com/DND5eChm/DND5e_chm.git
+[submodule "5etools-src"]
+	path = 5etools-src
+	url = https://github.com/5etools-mirror-3/5etools-src/
+[submodule "5etools-cn"]
+	path = 5etools-cn
+	url = https://github.com/tjliqy/5etools-mirror-2.github.io
+	branch = cn2.0
