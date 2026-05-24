@@ -14,3 +14,6 @@
 [submodule "5etools-homebrew"]
 	path = 5etools-homebrew
 	url = https://github.com/TheGiddyLimit/homebrew
+[submodule "5etools-unearthed-arcana"]
+	path = 5etools-unearthed-arcana
+	url = https://github.com/TheGiddyLimit/unearthed-arcana

@@ -18,7 +18,7 @@ Follow the official skill's independent-review rule. A `神圣奇术` review is 
 ## Effective Source
 
 - Treat `神圣奇术 Theurgy` as a `5E UA` resource.
-- The original 5e UA text is only used for source identity and historical comparison.
+- The original 5e UA text is only used for source identity and historical comparison. When that original source must be checked, prefer the CN online raw-root if available: resolve the relevant Warlock/Wizard UA source through `https://ua.kiwee.top/_generated/index-sources.json` or `https://ua.kiwee.top/_generated/index-props.json`, then fetch the mapped translated JSON path from `https://ua.kiwee.top/`. Use `5etools-unearthed-arcana` as the local EN fallback and sanity check: resolve the relevant Theurgy UA source, usually the Warlock/Wizard UA source entry, through `5etools-unearthed-arcana\_generated\index-sources.json`, then open the referenced JSON. If the CN online JSON is reachable but an individual Chinese entry is missing, use `DND5e_chm` first and `DND2014_legacy` second for translation confirmation before writing a provisional Chinese rendering. Use `DND2014_legacy` / `DND5e_chm` and existing `Rankings` files for Chinese name, local phrasing, and translation confirmation.
 - The effective mechanics for project review are the credited 5.5e-compatible text stored in `Rankings\法师\神圣奇术\README.md`, under the heading `神圣奇术规则（by 落雨随枫）`.
 - Do not use model memory for Theurgy feature text. Re-read `Rankings\法师\神圣奇术\README.md` before every Theurgy review pass.
 
@@ -45,6 +45,7 @@ Use these project rules when mapping a Cleric domain onto Theurgy:
 - Include official, 5E UA, newer UA, partner, and third-party published Cleric domains.
 - Exclude all homebrew Cleric domains. Homebrew Cleric content is not mapped to Theurgy unless the user explicitly requests it later.
 - When a new non-homebrew Cleric-domain review is added under root `Rankings\牧师`, create or update the corresponding Theurgy review in the same pass.
+- Domain source selection follows the official skill's same-name version-precedence rule. Use the latest official published domain as the primary mapped official version; if no official version exists, use the latest UA / prerelease version from `5etools-unearthed-arcana` when available. If the latest official version is 2014 / 5e and a separate 2024 / 5.5e UA update exists, create separate Theurgy mappings for both versions with their source markers instead of letting either one overwrite the other.
 
 ## Output Structure
 

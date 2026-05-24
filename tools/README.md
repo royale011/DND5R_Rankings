@@ -12,6 +12,8 @@
 - `update_readme_toc.py`: maintains `## 目录` sections for active README and review Markdown files.
 - `audit_design_scores.py`: audits design-score tables and repeated design-score reason patterns.
 
+Damage math lives in `../dpr`, not in this maintenance-script directory. Use `python -m dpr.examples.baselines` for the current pilot DPR samples.
+
 ## Scratch Scripts
 
 Do not commit one-off `rewrite_*`, `calibrate_*`, `generate_*`, or source-migration helper scripts. Those scripts are useful while doing a specific batch rewrite, but they should remain local scratch files unless they become stable reusable infrastructure.
