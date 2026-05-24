@@ -19,6 +19,7 @@ __pycache__/
 /tools/*.py
 !/tools/audit_design_scores.py
 !/tools/rebuild_class_leaderboards_from_reviews.py
+!/tools/rebuild_official_review_checklist.py
 !/tools/update_readme_toc.py
 !/tools/update_root_summary.py
 !/tools/README.md

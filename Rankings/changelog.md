@@ -1,3 +1,17 @@
+## 2026-05-24 checklist发布日期列与同路线去重修正
+- 更新 official / homebrew / Strixhaven / Theurgy skills：`official-review-checklist.md` 必须包含 `Resource release date` 列，优先读取 5etools `_meta.sources[].dateReleased`，再使用项目手工元数据、源文件、`DND5e_chm` / `DND2014_legacy` 与必要网页确认。组合来源（如神圣奇术映射）按来源顺序列出组合日期。
+- 追加 UA 专用日期兜底：当 UA JSON 本体缺少 `dateReleased` 时，用 `5etools-unearthed-arcana\_generated\index-sources.json` 定位源文件，再用 `index-timestamps.json` 的 `p` 时间戳补全发布日期；本规则暂不用于合作方 / 第三方 `未知` 日期。`UATheMysticClass` 因本地 UA 仓库缺少原始职业文件，按网页确认记录为 2017-03-13。
+- 明确 checklist 去重不是按字符串精确匹配，而是按同一职业 / 子职路线归并。`(UA)`、`(Revised)`、`(Revisited)`、`v2` 等测试版本标记本身不构成独立职业 / 子职身份；除非项目规则要求历史对照，否则只保留当前版本规则下的有效条目。
+- 清单生成器新增同路线 UA 后继映射与审计输出：同世代已有官方版本的 UA 测试条目会移除；2014 官方 + 2024 UA 的并列例外仍保留；不确定继承关系时宁可保留并待人工复核。
+- 修正 Artificer 清单基准：`Eberron: Forge of the Artificer`（`EFA`，当前公开发售日期 2025-12-09）作为奇械师底盘、炼金师、装甲师、魔炮师、战地匠师、制图师的当前来源。旧 `TCE` 奇械师同名子职、旧 `UAArtificer` / `UAArtificerRevisited`、以及已被 EFA 覆盖的 `XUA2025EberronUpdates` 同名条目从 checklist 中移除；EFA 未覆盖的独立 UA / 合作方子职继续保留。
+- 更新 `tools/rebuild_official_review_checklist.py`，用于从现有清单和本地 5etools 元数据重建带发布日期的 checklist，并固化当前 Artificer 与 UA 同路线去重规则。本轮生成 499 条待评审清单行；所有 UA `未知` 日期已补齐，合作方 / 第三方 `未知` 日期按本轮范围保留。本轮只更新标准与清单，不批量重写评审文件。
+
+## 2026-05-24 资源版本选择与清单去重标准
+- 更新 official skill：同名或同路线资源冲突时必须先查本地结构化元数据和源文件日期，再必要时用网页搜索确认出版日期。可用本地依据包括 5etools 实体字段、`5etools-src` 生成数据、`5etools-unearthed-arcana` / `5etools-homebrew` 的 `_generated/index-meta.json`、`index-sources.json`、`index-timestamps.json`、源文件名、`DND5e_chm`、`DND2014_legacy` 与既有 `Rankings`。
+- 明确合作方 / 第三方版本规则：如果同一职业 / 子职有 2014 / 5e 与 2024 / 5.5e 两版，默认只把 2024 / 5.5e 版作为当前评审和 checklist 目标；旧版只在用户要求历史或兼容对照时保留。这个规则不同于“2014 官方 + 2024 UA”并存例外。
+- 保留官方 / UA 规则：同年代官方与 UA 冲突时用最新官方；2014 官方与 2024 UA 分别保留；只有 UA 时用最新 UA。Theurgy 映射和 Strixhaven skill 同步引用该版本选择标准。
+- 清理 `official-review-checklist.md`：移除 72 条已被 2024 官方、2024 UA 同年代官方、或 2024 合作方 / 第三方重写覆盖的冗余条目；保留 594 条待评审条目，其中官方 133、UA 229、合作方 / 第三方 232。`符文抄录者` 仍仅作为显式排除项记录，不进入表格。
+
 ## 2026-05-17 DPR分类与计算工具试点
 - 更新 official skill：后续新评审和重评不再使用单纯 `近战伤害者` / `远程伤害者` / `法术伤害者` 三分法，改用 `近距爆发DPR（15尺内）`、`近距持续DPR（15尺内）`、`近距范围DPR（15尺内）`、`远程爆发DPR`、`远程持续DPR`、`远程范围DPR`。旧文件不在本轮批量改写，未来按职业/子职重评逐步迁移。
 - 明确 `近距` 的默认阈值为15尺：它覆盖 `咒唤微元素群` 的核心风险区间，同时避免把30尺中短程效果和贴身/短距输出混在同一风险层级。评审理由仍需记录接触/5尺、10尺、15尺、30尺、60尺+、120尺+ 等更细距离。

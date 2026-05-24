@@ -45,7 +45,8 @@ Use these project rules when mapping a Cleric domain onto Theurgy:
 - Include official, 5E UA, newer UA, partner, and third-party published Cleric domains.
 - Exclude all homebrew Cleric domains. Homebrew Cleric content is not mapped to Theurgy unless the user explicitly requests it later.
 - When a new non-homebrew Cleric-domain review is added under root `Rankings\牧师`, create or update the corresponding Theurgy review in the same pass.
-- Domain source selection follows the official skill's same-name version-precedence rule. Use the latest official published domain as the primary mapped official version; if no official version exists, use the latest UA / prerelease version from `5etools-unearthed-arcana` when available. If the latest official version is 2014 / 5e and a separate 2024 / 5.5e UA update exists, create separate Theurgy mappings for both versions with their source markers instead of letting either one overwrite the other.
+- Domain source selection follows the official skill's same-name version-precedence and publish-date audit rules. Use the latest official published domain as the primary mapped official version; if no official version exists, use the latest UA / prerelease version from `5etools-unearthed-arcana` when available. If the latest official version is 2014 / 5e and a separate 2024 / 5.5e UA update exists, create separate Theurgy mappings for both versions with their source markers instead of letting either one overwrite the other. For partner / third-party domains, if both 2014 / 5e and 2024 / 5.5e versions exist, map only the 2024 / 5.5e version by default unless the user asks for a legacy comparison.
+- When Theurgy mappings are represented in a checklist, follow the official skill's release-date column and same-lineage dedupe rules. Combined-source rows should keep both the Theurgy UA source and the mapped domain source, with release dates listed in the same source order.
 
 ## Output Structure
 

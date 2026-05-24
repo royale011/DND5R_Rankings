@@ -8,6 +8,7 @@
 ## Tracked Scripts
 
 - `rebuild_class_leaderboards_from_reviews.py`: rebuilds class README subclass leaderboards from file-level `综合评分` tables.
+- `rebuild_official_review_checklist.py`: rebuilds `official-review-checklist.md` with resource release dates and current same-lineage version cleanup.
 - `update_root_summary.py`: rebuilds root `Rankings/README.md` summary tables from current review files.
 - `update_readme_toc.py`: maintains `## 目录` sections for active README and review Markdown files.
 - `audit_design_scores.py`: audits design-score tables and repeated design-score reason patterns.
