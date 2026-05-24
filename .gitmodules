@@ -11,3 +11,6 @@
 	path = 5etools-cn
 	url = https://github.com/tjliqy/5etools-mirror-2.github.io
 	branch = cn2.0
+[submodule "5etools-homebrew"]
+	path = 5etools-homebrew
+	url = https://github.com/TheGiddyLimit/homebrew
