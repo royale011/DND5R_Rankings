@@ -15,6 +15,8 @@ Use this skill for the 5e-era UA `Mages of Strixhaven` subclasses:
 
 This is a narrow companion skill. All source-verification, community-calibration, ranking-scale, README, changelog, and tooling rules are the same as `.codex/skills/official-dnd-ranking-review/SKILL.md`; read and follow that skill first. Do not use this skill for the published Strixhaven background/feat system unless the user specifically asks to compare it to the UA subclass system.
 
+The official skill's DPR calculation and `开放改进问题` requirements apply here. For each base-class mapping, calculate DPR only for routes that are legal for that mapped class progression. If the Strixhaven subclass changes a DPR aspect from the base class, include the subclass DPR-delta table; if it enables an aspect the base class lacks, calculate and rank that aspect normally. If no DPR aspect changes, state that it follows the mapped base class. `开放改进问题` should focus on the UA multi-class mapping, delayed/missing feature slots, published Strixhaven context, and any RAW/RAI ambiguity created by using one subclass across multiple base classes.
+
 ## Review Input Boundary
 
 Follow the official skill's independent-review rule. A Strixhaven mapping review is based on the latest verified local UA source, the base-class mapping rules in this skill, the official ranking skill, and version-matched community discussion. Prompt context, older review files, and source-diff notes are only inspection aids unless a new criterion has first been recorded in the relevant skill / changelog.

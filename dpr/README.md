@@ -97,7 +97,7 @@ Generate the default/item/condition calibration matrix:
 python -m dpr.cli matrix
 ```
 
-This writes ignored local files under `loot/`:
+This writes tracked calibration files under `loot/`:
 
 - `loot/dpr-calibration-matrix.md`
 - `loot/dpr-calibration-matrix.json`

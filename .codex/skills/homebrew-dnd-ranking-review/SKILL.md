@@ -28,7 +28,7 @@ The following content used to be duplicated in this homebrew skill. Do not resta
 - 2024 spell-timing and “one spell with a spell slot per turn” analysis: official `Build the actual rules context before scoring`.
 - Spell-level comparison wording for light/darkness, suppression, dispelling, and similar effects, including the 2024 `昼明术 Daylight` official pattern and how upcast/effective spell level should be handled: official `Build the actual rules context before scoring`.
 - Resource counting, action economy, concentration, stored-spell timing and caster identity such as `储法戒指` / `奥法暂滞`-style storage, same-subclass feature stacking, base-class chassis stacking, exact `武器攻击` / `近战武器攻击` / `远程武器攻击` wording, melee / short-range / multi-hit damage-increment resources, 2024 `繁彩球 Chromatic Orb` bounce chance / maximum bounce calibration, Paladin `神恩` / smite-spell concentration exception handling, unwanted interruption, severe costs, and feature-overlap analysis: official `Build the actual rules context before scoring`.
-- Six-category DPR scoring, including `近距爆发DPR（15尺内）`, `近距持续DPR（15尺内）`, `近距范围DPR（15尺内）`, `远程爆发DPR`, `远程持续DPR`, `远程范围DPR`, the 15-foot near-range threshold, finer distance tags, cold-start / prebuffed / setup-amortized burst windows, long-rest / short-rest / per-encounter / sustained repeatability labels, and all-hit ceiling vs expected-DPR separation: official `Use the same scoring system`.
+- Six-category DPR scoring, including `近距爆发DPR（15尺内）`, `近距持续DPR（15尺内）`, `近距范围DPR（15尺内）`, `远程爆发DPR`, `远程持续DPR`, `远程范围DPR`, the 15-foot near-range threshold, finer distance tags, cold-start / prebuffed / setup-amortized burst windows, long-rest / short-rest / per-encounter / sustained repeatability labels, all-hit ceiling vs expected-DPR separation, build-available route calculation, strongest legal route listing, base-class all-aspect DPR tables, subclass DPR-delta tables, and brief `F` explanations for impossible DPR aspects: official `Use the same scoring system` and `Write feature-level reviews`.
 - Dual-wield / `迅击` / `双持客` hit-count amplification, including the current conditional Paladin standard, feat-opportunity-cost audit, Fighter `长柄武器大师` / `巨武器大师` comparison, smite-spell comparison, and setup-tempo analysis: official `Build the actual rules context before scoring`.
 - “On par with” comparisons, damage-dice face counting, abuse-path auditing, `暗示术` / `群体暗示术`, high-level abuse frameworks, Divine Intervention / Wish / Glyph / Demiplane compression, and scroll / Magical Secrets / spell-list lock-in standards: official `Build the actual rules context before scoring`.
 - Species, 起源专长, general feats, magic items, opportunity cost, replaceability, `猎人印记` vs `脆弱诅咒`, and resource-conversion comparisons: official `Build the actual rules context before scoring`.
@@ -124,7 +124,7 @@ Version-to-version changes should be discussed in a standalone section such as `
 6. Write the review.
    - Output in Simplified Chinese.
    - Include `原文`.
-   - Include team/rules position, feature-level `详细评价`, per-tier `分项评分`, vertical `综合评分`, `设计相关评分`, official baseline comparison / uncertainty notes, and `修改建议`.
+   - Include team/rules position, feature-level `详细评价`, per-tier `分项评分`, vertical `综合评分`, `设计相关评分`, official baseline comparison / uncertainty notes, DPR calculation sections when the homebrew affects DPR, and `修改建议`.
    - If the review identifies an official RAW ambiguity and has suggestions on how to fix that official wording, include `## 官方RAW修复建议` as its own section and include it in the TOC.
    - If the source has personal design-purpose sections, include `设计相关评分 - 个人期望` after normal design scoring.
    - Keep note-derived content out of `详细评价`, `分项评分`, `综合评分`, and the ordinary `设计相关评分` table. The normal design table may discuss public text, mechanics, clarity, theme expression, and ecosystem health; the personal table may discuss whether the notes' stated goals are achieved.
@@ -164,6 +164,7 @@ Version-to-version changes should be discussed in a standalone section such as `
      - `主观口味批评`: criticism based on tone, theme preference, elegance, or overlap taste rather than mechanical defect.
    - For public-release advice, compare against official / UA / partner / third-party calibrated ecosystem standards.
    - For personal-intent advice, judge whether the text achieves the stated author purpose without pretending that personal intent changes normal balance ranks.
+   - Homebrew reviews may also include `## 开放改进问题` when the issue is better framed as a design question than a direct fix. Use the same independent-improvement logic as the official skill, but keep formal public-purpose judgment separate from notes, prompts, blind reviews, and private author discussion. If the open question comes from note-derived material, place it in the personal/notes-related section rather than using it to justify public ranking.
 
 8. Update records.
    - Prepend concise changes to `homebrews\Rankings\changelog.md` when a new evaluation, archive, standard change, or calibration occurs.

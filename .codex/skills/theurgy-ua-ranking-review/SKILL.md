@@ -9,6 +9,8 @@ Use this skill for `神圣奇术 Theurgy`, the 5e-era UA Wizard subclass that ma
 
 This is a narrow companion skill. All source-verification, community-calibration, ranking-scale, README, changelog, and tooling rules are the same as `.codex/skills/official-dnd-ranking-review/SKILL.md`; read and follow that skill first.
 
+The official skill's DPR calculation and `开放改进问题` requirements apply here. For `神圣奇术` as the base mapping hub, list DPR only where the Wizard + Theurgy package or mapped domain creates a meaningful route; impossible aspects receive the official brief `F` explanation. For individual domain mappings, add DPR calculations only when the mapped domain changes a Wizard/Theurgy baseline aspect, such as adding close-range riders, weapon incentives, spell AoE, or damage conversion. `开放改进问题` should focus on Theurgy's domain-spell lock-in, level-14 domain-17 compression, Wizard/Cleric chassis mismatch, and mapped-domain RAW ambiguities rather than repeating generic Wizard commentary.
+
 Follow the official skill's translation and abbreviation rules. Use verified Chinese names for actual classes, subclasses, features, spells, feats, items, and rules terms, but do not force common CN-community abbreviations such as `5E UA`, `DPR`, `RAW`, `RAI`, `DM`, `PC`, `BA`, `OA`, `ASI`, or source abbreviations into Chinese wording.
 
 ## Review Input Boundary

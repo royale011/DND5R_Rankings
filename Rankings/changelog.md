@@ -1,3 +1,10 @@
+## 2026-05-24 DPR计算落点与开放改进问题标准
+- 更新 official / homebrew / Strixhaven / Theurgy skills：六类 DPR 不再只是评分分类，后续新评审和实质重评必须把可行路线实际算出来。职业底盘文件需要覆盖六个 DPR 面向；无法完成的面向写简短原因并给 `F`，不强行造表。
+- 明确子职 DPR 计算落点：子职文件只在相对职业底盘有实质差异、开启新 DPR 面向、改变最强合法路线或把底盘 `F` 面向变为可行时新增计算表。构筑文件按完整路线列出相关 DPR 计算。
+- 新增构筑可行性要求：DPR 路线必须是升级过程中可成立的 build-available 路线，不能默认中途任意改专长、战斗风格、法术选择或武器方向；若最强合法路线不同于代表性路线，必须分开列出并说明评级由哪条路线驱动。
+- 明确 `dpr` / `loot` 定位：矩阵和计算工具是校准辅助，不替代本地规则文本、行动经济、目标接触、资源恢复、专注风险和横向职业比较。`loot` 现在作为可追踪校准草案保留。
+- 新增 `开放改进问题` 标准：官方、UA、合作方、第三方公开内容也可以记录可能更好的 RAW 文字、RAI 边界、资源/动作调节、特性节奏、主题表达或兼容补丁。若问题源自上游官方 RAW 模糊，应直接指出该上游模糊，而不是把它误判为被评审选项的单独错误。本轮只更新标准和说明，不批量改写评审文件。
+
 ## 2026-05-24 checklist发布日期列与同路线去重修正
 - 更新 official / homebrew / Strixhaven / Theurgy skills：`official-review-checklist.md` 必须包含 `Resource release date` 列，优先读取 5etools `_meta.sources[].dateReleased`，再使用项目手工元数据、源文件、`DND5e_chm` / `DND2014_legacy` 与必要网页确认。组合来源（如神圣奇术映射）按来源顺序列出组合日期。
 - 追加 UA 专用日期兜底：当 UA JSON 本体缺少 `dateReleased` 时，用 `5etools-unearthed-arcana\_generated\index-sources.json` 定位源文件，再用 `index-timestamps.json` 的 `p` 时间戳补全发布日期；本规则暂不用于合作方 / 第三方 `未知` 日期。`UATheMysticClass` 因本地 UA 仓库缺少原始职业文件，按网页确认记录为 2017-03-13。
