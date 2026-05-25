@@ -36,6 +36,9 @@ Current primitives:
 - sequential `Vex` attack chains where each hit can grant Advantage to the next attack
 - saving throw damage, including half-on-save and no-damage-on-save
 - direct damage that is conditional on another successful routine step
+- limited hit-pool riders, such as Battle Master dice spent only after successful hits
+- dice-floor modeling for Great Weapon Fighting
+- crit-only flat damage, such as Vorpal Sword's +30 damage when decapitation cannot apply
 - AoE target counts
 - per-hit riders such as `咒唤微元素群`, `魂灵环绕`, `神恩`, `猎人印记`, and `脆弱诅咒`
 - multi-action samples such as `动作如潮`
@@ -125,4 +128,9 @@ Current benchmark notes:
 - The same extreme branch has a separate Paralyzed-target variant; it is condition-dependent and should not be treated as the ordinary DPR line.
 - CME-bound weapon/ray/beam routines are categorized as `close_burst` or `close_sustained` when the added damage requires the target to be within 15 feet.
 - Champion Fighter weapon attacks use expanded critical range in the relevant benchmark rows.
+- The current Fighter polearm rows use Great Weapon Fighting, Great Weapon Master, Polearm Master, and Graze. Great Weapon Master is modeled as applying to each qualifying Attack-action hit, not to Polearm Master bonus-action hits.
+- Great Weapon Fighting uses the broad benchmark reading: eligible attack damage dice showing 1 or 2 count as 3. Rows that apply this to riders such as CME, Spirit Shroud, Divine Favor, Radiant Strikes, Booming Blade, or Searing Smite mark that assumption as table-sensitive.
+- Graze miss damage is modeled as ability modifier only and never triggers hit riders such as CME, smite damage, Great Weapon Master, Vorpal Sword, Radiant Strikes, Frenzy, or Battle Master dice.
+- Ordinary Eldritch Knight uses PHB 2024 True Strike for War Magic replacement. The item-ceiling Eldritch Knight row uses Booming Blade only for the non-PHB extreme branch, and excludes Booming Blade's movement damage.
+- Vorpal Sword item-ceiling rows model +30 damage as crit-only flat damage when the target cannot be beheaded.
 - Vex chains are stateful: if one attack misses, the next attack does not gain Vex Advantage from that missed attack.

@@ -1,3 +1,9 @@
+## 2026-05-25 SRD 5.2.1转换参考标准
+- 将本地 `converting-to-srd-5.2.1.pdf` 作为被忽略的官方 SRD 5.1 -> SRD 5.2.1 转换参考。该 PDF 不进入版本库，不作为评审文件引用来源；可复用转换规则写入 skill 后，再用 5etools、`DND5e_chm`、`DND2014_legacy` 和既有 `Rankings` 核查具体文本。
+- 更新 official skill：新增 SRD 5.2.1 转换流程，先处理重命名术语，再按内容类型检查职业/子职、法术、物品、怪物、动作、条件、专长、起源、装备、卷轴/制作和怪物格式等规则漂移，最后规范术语身份和大小写。
+- 补充系统性漂移审计：`D20 Test`、`Heroic Inspiration`、工具+技能熟练优势、Attack / Magic / Utilize / Study / Search / Influence / Hide / Help action、Surprise、Prone/Speed 0、移动穿越空间、水下穿刺武器、豁免伤害掷骰、击倒、Armor Training、Character Origin、Species、Origin Feats、multiclass、AC计算、药水附赠动作、Ritual、Always-Prepared spells、每回合一道消耗法术位法术、专注DC上限、主动失败豁免、条件、AoE、物品/毒药/诅咒/传染/载具/陷阱/怪物格式等。
+- 补充职业结构转换审计：旧版子职必须与当前 2024 职业底盘核对，避免重复计算已由新底盘覆盖的能力。除既有牧师 `神圣秩序` / `受祝击` 规则外，新增德鲁伊旧子职 armor/cantrip 类底盘补丁需要与 `原初秩序` 等当前底盘核对。本轮只更新标准，不批量重写评审文件。
+
 ## 2026-05-24 DPR计算落点与开放改进问题标准
 - 更新 official / homebrew / Strixhaven / Theurgy skills：六类 DPR 不再只是评分分类，后续新评审和实质重评必须把可行路线实际算出来。职业底盘文件需要覆盖六个 DPR 面向；无法完成的面向写简短原因并给 `F`，不强行造表。
 - 明确子职 DPR 计算落点：子职文件只在相对职业底盘有实质差异、开启新 DPR 面向、改变最强合法路线或把底盘 `F` 面向变为可行时新增计算表。构筑文件按完整路线列出相关 DPR 计算。

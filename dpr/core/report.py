@@ -101,6 +101,17 @@ def markdown_report(rows: tuple[RankedRoutineResult, ...]) -> str:
                 f"- {event.name}: trigger={event.trigger_chance:.3f}, targets={event.target_count}, "
                 f"all-triggered={event.all_triggered_damage:.2f}, expected={event.expected_damage:.2f}"
             )
+        for event in row.result.hit_pool_events:
+            lines.append(
+                f"- {event.name}: dice={event.dice_count}, spent={event.expected_spent_dice:.2f} expected/"
+                f"{event.all_spent_dice} all-hit, all-hit={event.all_hit_damage:.2f}, "
+                f"expected={event.expected_damage:.2f}"
+            )
+        for event in row.result.miss_reroll_events:
+            lines.append(
+                f"- {event.name}: uses={event.uses}, trigger={event.trigger_chance:.3f}, "
+                f"all-hit={event.all_hit_damage:.2f}, expected={event.expected_damage:.2f}"
+            )
         if row.result.resources:
             lines.append(f"- Resources: {', '.join(row.result.resources)}")
         for note in row.result.notes:

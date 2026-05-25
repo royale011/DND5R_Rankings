@@ -68,6 +68,10 @@ def _calculation(row: RankedRoutineResult) -> str:
         parts.append(f"{event.count}x {event.name}")
     for event in row.result.conditional_events:
         parts.append(f"{event.name} if trigger chance {event.trigger_chance:.3f}")
+    for event in row.result.hit_pool_events:
+        parts.append(f"{event.name}, {event.expected_spent_dice:.2f}/{event.dice_count} dice expected")
+    for event in row.result.miss_reroll_events:
+        parts.append(f"{event.name}, trigger chance {event.trigger_chance:.3f}")
     return "; ".join(parts)
 
 
@@ -177,6 +181,8 @@ def markdown_matrix(rows: tuple[CalibrationRow, ...]) -> str:
         f"- EX is assigned by horizontal dominance, not by a fixed HP percentage. A row must be at least {MIN_THRESHOLD_RANK_FOR_EX} by threshold and at least {DOMINANCE_RATIO_FOR_EX:.1f}x the next comparable same-level/category row.",
         "- `幻影师护臂` is only an item-ceiling assumption. It can create EX ceiling evidence, but does not change default ranks.",
         "- Vex-derived benchmark rows are excluded from this matrix, although the calculator still supports Vex chains.",
+        "- Great Weapon Master is modeled as per qualifying Attack-action hit. It is not applied to Polearm Master or Illusionist's Bracers bonus-action hits.",
+        "- Great Weapon Fighting is modeled with the broad benchmark reading: eligible attack damage dice of 1-2 count as 3. This is table-sensitive when applied to rider dice.",
         "",
         "| Level | Category | Option | Variant | Routine | Ref CR | HP x Targets | AC | All-hit | Expected | % HP | 阈值评级 | Dominance | 默认校准评级 | 上限评级 | Assumptions |",
         "|---:|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---:|---|---|---|",

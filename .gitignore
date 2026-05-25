@@ -4,6 +4,7 @@
 /official-review-checklist.md
 
 # Local reference files and generated binaries
+/converting-to-srd-5.2.1.pdf
 *.pdf
 *.chm
 

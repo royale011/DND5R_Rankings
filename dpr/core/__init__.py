@@ -7,6 +7,8 @@ from .model import (
     DamageDice,
     DamageRoutine,
     DirectDamageEvent,
+    HitPoolDamageEvent,
+    MissRerollEvent,
     SaveEvent,
     VexChainEvent,
 )
@@ -19,6 +21,8 @@ __all__ = [
     "DamageDice",
     "DamageRoutine",
     "DirectDamageEvent",
+    "HitPoolDamageEvent",
+    "MissRerollEvent",
     "SaveEvent",
     "VexChainEvent",
     "RoutineResult",

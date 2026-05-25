@@ -27,9 +27,12 @@ class DamageDice:
     sides: int
     crit_doubles: bool = True
     label: str = ""
+    minimum_roll: int = 1
 
     @property
     def average(self) -> float:
+        if self.minimum_roll > 1:
+            return self.count * sum(max(roll, self.minimum_roll) for roll in range(1, self.sides + 1)) / self.sides
         return self.count * (self.sides + 1) / 2
 
 
@@ -47,6 +50,7 @@ class AttackEvent:
     crit_min: int = 20
     crit_on_hit: bool = False
     miss_damage: float = 0.0
+    crit_flat_damage: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -101,6 +105,26 @@ class ConditionalDamageEvent:
 
 
 @dataclass(frozen=True)
+class HitPoolDamageEvent:
+    """Limited damage dice that can be spent only on successful hits."""
+
+    name: str
+    trigger_event_names: tuple[str, ...]
+    dice_count: int
+    die_sides: int
+    crit_doubles: bool = True
+
+
+@dataclass(frozen=True)
+class MissRerollEvent:
+    """A limited reroll that can be spent on one missed attack."""
+
+    name: str
+    trigger_event_names: tuple[str, ...]
+    uses: int = 1
+
+
+@dataclass(frozen=True)
 class DamageRoutine:
     """A complete damage routine for one turn or one repeated round."""
 
@@ -114,6 +138,8 @@ class DamageRoutine:
     save_events: tuple[SaveEvent, ...] = ()
     direct_events: tuple[DirectDamageEvent, ...] = ()
     conditional_events: tuple[ConditionalDamageEvent, ...] = ()
+    hit_pool_events: tuple[HitPoolDamageEvent, ...] = ()
+    miss_reroll_events: tuple[MissRerollEvent, ...] = ()
     category: DprCategory | None = None
     level: int | None = None
     resources: tuple[str, ...] = ()

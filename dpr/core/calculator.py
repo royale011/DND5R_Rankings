@@ -2,7 +2,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .model import AttackEvent, ConditionalDamageEvent, DamageRoutine, DirectDamageEvent, SaveEvent, VexChainEvent
+from .model import (
+    AttackEvent,
+    ConditionalDamageEvent,
+    DamageRoutine,
+    DirectDamageEvent,
+    HitPoolDamageEvent,
+    MissRerollEvent,
+    SaveEvent,
+    VexChainEvent,
+)
 
 
 @dataclass(frozen=True)
@@ -61,6 +70,25 @@ class ConditionalEventResult:
 
 
 @dataclass(frozen=True)
+class HitPoolEventResult:
+    name: str
+    dice_count: int
+    expected_spent_dice: float
+    all_spent_dice: int
+    all_hit_damage: float
+    expected_damage: float
+
+
+@dataclass(frozen=True)
+class MissRerollEventResult:
+    name: str
+    uses: int
+    trigger_chance: float
+    all_hit_damage: float
+    expected_damage: float
+
+
+@dataclass(frozen=True)
 class RoutineResult:
     name: str
     all_hit_damage: float
@@ -75,6 +103,8 @@ class RoutineResult:
     save_events: tuple[SaveEventResult, ...]
     direct_events: tuple[DirectEventResult, ...]
     conditional_events: tuple[ConditionalEventResult, ...]
+    hit_pool_events: tuple[HitPoolEventResult, ...]
+    miss_reroll_events: tuple[MissRerollEventResult, ...]
     notes: tuple[str, ...]
 
 
@@ -164,8 +194,12 @@ def calculate_event(event: AttackEvent) -> EventResult:
     dice_average = sum(d.average for d in event.damage)
     crit_extra = sum(d.average for d in event.damage if d.crit_doubles)
     normal_hit_damage = dice_average + event.flat_damage
-    expected_per_attack = hit_chance * normal_hit_damage + crit_chance * crit_extra + miss_chance * event.miss_damage
-    all_hit_per_attack = normal_hit_damage + crit_extra if event.crit_on_hit else normal_hit_damage
+    expected_per_attack = (
+        hit_chance * normal_hit_damage
+        + crit_chance * (crit_extra + event.crit_flat_damage)
+        + miss_chance * event.miss_damage
+    )
+    all_hit_per_attack = normal_hit_damage + crit_extra + event.crit_flat_damage if event.crit_on_hit else normal_hit_damage
     return EventResult(
         name=event.name,
         count=event.count,
@@ -272,6 +306,71 @@ def calculate_conditional_event(
     )
 
 
+def _poisson_binomial_distribution(probabilities: list[float]) -> list[float]:
+    distribution = [1.0]
+    for probability in probabilities:
+        next_distribution = [0.0] * (len(distribution) + 1)
+        for hits, chance in enumerate(distribution):
+            next_distribution[hits] += chance * (1 - probability)
+            next_distribution[hits + 1] += chance * probability
+        distribution = next_distribution
+    return distribution
+
+
+def calculate_hit_pool_event(
+    event: HitPoolDamageEvent,
+    attack_results_by_name: dict[str, EventResult],
+) -> HitPoolEventResult:
+    probabilities: list[float] = []
+    for name in event.trigger_event_names:
+        result = attack_results_by_name[name]
+        probabilities.extend([result.hit_chance] * result.count)
+    distribution = _poisson_binomial_distribution(probabilities)
+    expected_spent_dice = sum(min(hits, event.dice_count) * chance for hits, chance in enumerate(distribution))
+    all_spent_dice = min(len(probabilities), event.dice_count)
+    die_average = (event.die_sides + 1) / 2
+    return HitPoolEventResult(
+        name=event.name,
+        dice_count=event.dice_count,
+        expected_spent_dice=expected_spent_dice,
+        all_spent_dice=all_spent_dice,
+        all_hit_damage=all_spent_dice * die_average,
+        expected_damage=expected_spent_dice * die_average,
+    )
+
+
+def calculate_miss_reroll_event(
+    event: MissRerollEvent,
+    attack_results_by_name: dict[str, EventResult],
+) -> MissRerollEventResult:
+    no_prior_miss_chance = 1.0
+    expected_damage = 0.0
+    trigger_chance = 0.0
+
+    if event.uses != 1:
+        raise ValueError("MissRerollEvent currently supports exactly one reroll use.")
+
+    for name in event.trigger_event_names:
+        result = attack_results_by_name[name]
+        miss_group_chance = 1 - (1 - result.miss_chance) ** result.count
+        trigger_here = no_prior_miss_chance * miss_group_chance
+        trigger_chance += trigger_here
+
+        expected_reroll_damage = result.expected_damage / result.count if result.count else 0.0
+        incremental_damage = expected_reroll_damage - result.miss_damage
+        expected_damage += trigger_here * incremental_damage
+
+        no_prior_miss_chance *= 1 - miss_group_chance
+
+    return MissRerollEventResult(
+        name=event.name,
+        uses=event.uses,
+        trigger_chance=trigger_chance,
+        all_hit_damage=0.0,
+        expected_damage=expected_damage,
+    )
+
+
 def calculate_routine(routine: DamageRoutine) -> RoutineResult:
     events = tuple(calculate_event(event) for event in routine.events)
     attack_results_by_name = {event.name: event for event in events}
@@ -279,18 +378,24 @@ def calculate_routine(routine: DamageRoutine) -> RoutineResult:
     save_events = tuple(calculate_save_event(event) for event in routine.save_events)
     direct_events = tuple(calculate_direct_event(event) for event in routine.direct_events)
     conditional_events = tuple(calculate_conditional_event(event, attack_results_by_name) for event in routine.conditional_events)
+    hit_pool_events = tuple(calculate_hit_pool_event(event, attack_results_by_name) for event in routine.hit_pool_events)
+    miss_reroll_events = tuple(calculate_miss_reroll_event(event, attack_results_by_name) for event in routine.miss_reroll_events)
     return RoutineResult(
         name=routine.name,
         all_hit_damage=sum(event.all_hit_damage for event in events)
         + sum(event.all_hit_damage for event in vex_events)
         + sum(event.all_failed_damage for event in save_events)
         + sum(event.damage for event in direct_events)
-        + sum(event.all_triggered_damage for event in conditional_events),
+        + sum(event.all_triggered_damage for event in conditional_events)
+        + sum(event.all_hit_damage for event in hit_pool_events)
+        + sum(event.all_hit_damage for event in miss_reroll_events),
         expected_damage=sum(event.expected_damage for event in events)
         + sum(event.expected_damage for event in vex_events)
         + sum(event.expected_damage for event in save_events)
         + sum(event.damage for event in direct_events)
-        + sum(event.expected_damage for event in conditional_events),
+        + sum(event.expected_damage for event in conditional_events)
+        + sum(event.expected_damage for event in hit_pool_events)
+        + sum(event.expected_damage for event in miss_reroll_events),
         range_band=routine.range_band,
         burst_window=routine.burst_window,
         recovery=routine.recovery,
@@ -301,5 +406,7 @@ def calculate_routine(routine: DamageRoutine) -> RoutineResult:
         save_events=save_events,
         direct_events=direct_events,
         conditional_events=conditional_events,
+        hit_pool_events=hit_pool_events,
+        miss_reroll_events=miss_reroll_events,
         notes=routine.notes,
     )
