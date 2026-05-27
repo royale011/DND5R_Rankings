@@ -1,0 +1,108 @@
+<!--
+DPR NEXT BACKUP
+
+This file preserves the experimental six-category DPR standards and calculation-tool workflow that were active before the current public review workflow returned to the legacy damage aspects.
+
+Maintenance rule: when the active SKILL.md changes for reasons unrelated to damage-aspect taxonomy or DPR calculation workflow, sync the same non-DPR change into this backup file. Future changes to six-category DPR aspects, DPR calculation tables, near-range burst anchors, and related tooling guidance should be made here first, not in the active SKILL.md, until the new DPR system is explicitly re-enabled.
+-->
+
+---
+name: theurgy-ua-ranking-review
+description: Use when reviewing or ranking the 5e-era UA Wizard subclass 神圣奇术 Theurgy and its required mapping to every non-homebrew Cleric domain in this DND5R_Rankings project. Applies the official-dnd-ranking-review workflow, plus Theurgy-specific compatibility wording, output directory structure, and Cleric-domain synchronization rules.
+---
+
+# Theurgy UA Ranking Review
+
+Use this skill for `神圣奇术 Theurgy`, the 5e-era UA Wizard subclass that maps onto Cleric domains.
+
+This is a narrow companion skill. All source-verification, community-calibration, ranking-scale, README, changelog, and tooling rules are the same as `.codex/skills/official-dnd-ranking-review/SKILL.md`; read and follow that skill first.
+
+The official skill's DPR calculation and `开放改进问题` requirements apply here. For `神圣奇术` as the base mapping hub, list DPR only where the Wizard + Theurgy package or mapped domain creates a meaningful route; impossible aspects receive the official brief `F` explanation. For individual domain mappings, add DPR calculations only when the mapped domain changes a Wizard/Theurgy baseline aspect, such as adding close-range riders, weapon incentives, spell AoE, or damage conversion. `开放改进问题` should focus on Theurgy's domain-spell lock-in, level-14 domain-17 compression, Wizard/Cleric chassis mismatch, and mapped-domain RAW ambiguities rather than repeating generic Wizard commentary.
+
+Follow the official skill's translation and abbreviation rules. Use verified Chinese names for actual classes, subclasses, features, spells, feats, items, and rules terms, but do not force common CN-community abbreviations such as `5E UA`, `DPR`, `RAW`, `RAI`, `DM`, `PC`, `BA`, `OA`, `ASI`, or source abbreviations into Chinese wording.
+
+## Review Input Boundary
+
+Follow the official skill's independent-review rule. A `神圣奇术` review is based on the latest effective project source, the mapped Cleric-domain source, the mapping rules in this skill, the official ranking skill, and version-matched community discussion. Prompt context, older review files, and source-diff notes are only inspection aids unless a new criterion has first been recorded in the relevant skill / changelog.
+
+## Effective Source
+
+- Treat `神圣奇术 Theurgy` as a `5E UA` resource.
+- The original 5e UA text is only used for source identity and historical comparison. When that original source must be checked, prefer the CN online raw-root if available: resolve the relevant Warlock/Wizard UA source through `https://ua.kiwee.top/_generated/index-sources.json` or `https://ua.kiwee.top/_generated/index-props.json`, then fetch the mapped translated JSON path from `https://ua.kiwee.top/`. Use `5etools-unearthed-arcana` as the local EN fallback and sanity check: resolve the relevant Theurgy UA source, usually the Warlock/Wizard UA source entry, through `5etools-unearthed-arcana\_generated\index-sources.json`, then open the referenced JSON. If the CN online JSON is reachable but an individual Chinese entry is missing, use `DND5e_chm` first and `DND2014_legacy` second for translation confirmation before writing a provisional Chinese rendering. Use `DND2014_legacy` / `DND5e_chm` and existing `Rankings` files for Chinese name, local phrasing, and translation confirmation.
+- Follow the official skill's SRD 5.2.1 conversion audit when checking old Theurgy wording or mapped legacy Cleric domains. The project-effective text below remains authoritative, but action names, spell preparation, always-prepared spells, Channel Divinity resource assumptions, armor/weapon training, Magic action, Study action, and level-3 subclass-entry conversion must still be checked against current 2024 class rules before scoring.
+- The effective mechanics for project review are the credited 5.5e-compatible text stored in `Rankings\法师\神圣奇术\README.md`, under the heading `神圣奇术规则（by 落雨随枫）`.
+- Do not use model memory for Theurgy feature text. Re-read `Rankings\法师\神圣奇术\README.md` before every Theurgy review pass.
+
+## Core Compatibility Rules
+
+Use these project rules when mapping a Cleric domain onto Theurgy:
+
+- All domain spells and Cleric spells added to the spellbook by Theurgy count as Wizard spells for the Theurgy character.
+- Other Wizards cannot copy Cleric spells gained by Theurgy from that spellbook.
+- `奥术入信 Arcane Initiate`: whenever the character gains a Wizard level, one Wizard spell that would be added to the spellbook may be replaced by a spell from the chosen Cleric domain, limited by spell slots. After all domain spells are added, the replacement may use any Cleric-list spell, still limited by spell slots.
+- `引导奥秘 Channel Arcana` uses the domain's level-3 Channel Divinity option through the Theurgy Channel Arcana resource.
+- If a Theurgy feature uses wording that refers to Cleric level, replace it with Wizard level.
+- Channel Arcana / Channel Divinity use count follows the multiclass Channel Divinity rule.
+- Save DC for Channel Arcana effects equals Wizard spell save DC.
+- Wisdom-based uses/effects from mapped Cleric-domain features become Intelligence-based.
+- If a mapped domain feature points to Cleric spells, it points to the Theurgy character's Wizard spells.
+- `奥术侍僧 Arcane Acolyte` at Wizard 6 grants the chosen domain's level-3 non-Channel-Divinity benefits, but never grants weapon or armor proficiency.
+- `奥术祭司 Arcane Priest` at Wizard 10 grants the chosen domain's level-6 benefit.
+- `奥术大祭司 Arcane High Priest` at Wizard 14 grants the chosen domain's level-17 benefit.
+
+## Domain Scope
+
+- Map Theurgy to every existing non-homebrew Cleric domain that has a root `Rankings\牧师` review.
+- Include official, 5E UA, newer UA, partner, and third-party published Cleric domains.
+- Exclude all homebrew Cleric domains. Homebrew Cleric content is not mapped to Theurgy unless the user explicitly requests it later.
+- When a new non-homebrew Cleric-domain review is added under root `Rankings\牧师`, create or update the corresponding Theurgy review in the same pass.
+- Domain source selection follows the official skill's same-name version-precedence and publish-date audit rules. Use the latest official published domain as the primary mapped official version; if no official version exists, use the latest UA / prerelease version from `5etools-unearthed-arcana` when available. If the latest official version is 2014 / 5e and a separate 2024 / 5.5e UA update exists, create separate Theurgy mappings for both versions with their source markers instead of letting either one overwrite the other. For partner / third-party domains, if both 2014 / 5e and 2024 / 5.5e versions exist, map only the 2024 / 5.5e version by default unless the user asks for a legacy comparison.
+- When Theurgy mappings are represented in a checklist, follow the official skill's release-date column and same-lineage dedupe rules. Combined-source rows should keep both the Theurgy UA source and the mapped domain source, with release dates listed in the same source order.
+
+## Output Structure
+
+- Base directory: `Rankings\法师\神圣奇术`.
+- The base file is `Rankings\法师\神圣奇术\README.md`.
+- Standalone review files live under that directory, one file per Cleric-domain mapping.
+- Use the Cleric domain's verified Chinese name and source marker in the Theurgy file name, preserving UA / partner / third-party markers where applicable.
+
+Theurgy is not a root-level class and must not be added as a base class to root `Rankings\README.md`.
+
+## Leaderboard Rules
+
+`Rankings\法师\神圣奇术\README.md` should behave like a class README for the Theurgy mapping set:
+
+- Include `分阶段子职排行榜` for Theurgy mappings based on official first-party Cleric domains.
+- Include `UA/合作方/第三方子职分阶段排行榜` for Theurgy mappings based on UA, partner, or third-party Cleric domains.
+- Include and maintain an up-to-date `## 目录` near the top, following the official README table-of-contents rule.
+
+`Rankings\法师\README.md` must include all Theurgy-domain combinations in the Wizard UA / partner / third-party leaderboard, because Theurgy itself is 5E UA. Use this display format:
+
+`神圣奇术（5E UA） - [牧师领域中文名]`
+
+The root `Rankings\README.md` must use the same display format. For root `Rankings\README.md` only, all Theurgy-domain combinations, including mappings based on official first-party Cleric domains, must be excluded from root `分阶段子职排行榜` and placed only in root `UA/合作方/第三方子职分阶段排行榜`, because Theurgy itself is a 5E UA Wizard subclass.
+
+## Review Focus
+
+Each Theurgy-domain review must explicitly separate:
+
+- Wizard chassis contribution: spellbook, rituals, prepared Wizard list, `奥术回想`, `记忆法术`, high-level Wizard spells, `法术精通`, and `招牌法术`.
+- Theurgy base package: domain/Cleric spellbook conversion, Channel Arcana, `神圣奥能`, and Cleric-list access pressure.
+- Domain increment: the actual mapped domain spells and features at Wizard 3 / 6 / 10 / 14.
+- Cleric spell access timing: before every chosen domain spell has been added to the spellbook, `奥术入信` is mostly locked to that domain's domain-spell list. A normal Cleric domain has ten domain spells, but the actual open-Cleric-list timing depends on domain-spell redundancy, Wizard spellbook access, and scroll-scribing assets. In the best reasonable case, if the reviewer can identify the two domain spells that are actually worth taking through `奥术入信` at lower levels, the remaining domain spells are already Wizard spells or can be acquired as Wizard spells through ordinary spellbook / scroll-scribing rules, and the DM allows enough scroll, gold, and downtime support, the theoretical minimum level for the first free Cleric-list replacement is Wizard level 10. In the worst normal case, the Theurgy Wizard must spend levels 3-12 adding all ten domain spells, so open Cleric-list replacement starts at level 13. From the first open pick onward, this is still only one Cleric-list replacement per Wizard level; it is not the same as a true Cleric preparing from the whole Cleric list every day. Like Bard `魔法奥秘 Magical Secrets`, early free picks may need to backfill low-level staples that the character did not previously have, rather than immediately taking the highest-level Cleric spells. Every Theurgy-domain review must state whether that domain is closer to the level-10 early-open case, the level-13 worst case, or a middle case, and whether the domain spells themselves are strong enough that the delay is acceptable. Domains with weak, narrow, redundant, or low-level-heavy domain spells delay access to the open Cleric list and should not be scored as if the Theurgy Wizard freely chooses from the whole Cleric list from level 3. Domains with strong always-useful domain spells or fewer painful redundancies reach the open-Cleric-list phase with less opportunity cost.
+- Chassis synergy check: do not assume a Cleric-domain feature remains equally good on a Wizard. If the mapped domain encourages melee, weapon attacks, standing in a duration aura, armor/shield tanking, or repeated front-line concentration, ask whether the Wizard chassis can actually support that plan. In 5.5e / 2024, `克敌先击 True Strike` no longer grants advantage; it is an action-cast cantrip that makes one attack with a proficient weapon worth at least 1 CP, uses the spellcasting ability for that attack and damage roll, can convert the damage type to radiant, and gains extra radiant damage at cantrip breakpoints. A Wizard can also use `魔法学徒（德鲁伊） Magic Initiate (Druid)` as an `起源专长` route to obtain `橡棍术 Shillelagh`, improving staff/club-based melee ability. These are real melee patches, but they do not grant armor/shield proficiency, Extra Attack, martial durability, free advantage, or a front-line action loop; they also carry origin-feat, bonus-action/setup, weapon, and action-opportunity costs. Domains such as War- or Death-style packages must be scored by actual Wizard usability, not by how well they work on Cleric.
+- Abuse vigilance: some mapped domains can create unusual timing or multiclass openings because Theurgy moves a Cleric domain's level-17 feature to Wizard level 14. The main warning case is `奥秘领域 Arcana Domain`: if its level-17 feature grants high-level Wizard spells, a Theurgy Wizard may receive those spell choices at Wizard 14. A pure Wizard 14 cannot yet cast 8th- or 9th-level spells, but a multiclass character may later obtain 8th/9th-level spell slots through the multiclass spellcasting rules while keeping those granted spells known/in the spellbook, then combine them with other class benefits such as Sorcerer metamagic, Bardic Inspiration or martial Bard features, Artificer utility, Paladin/Ranger martial chassis, or Paladin aura if ability scores allow. Treat these as abuse vectors to analyze explicitly; do not automatically declare them `EX` or `S+`, but do not ignore the rule interaction.
+- Limits: level-up-only spellbook replacement pressure, prepared spell pressure, action economy, concentration conflict, Channel Arcana use limits, table sensitivity of Cleric spell access as Wizard spells, and whether the domain feature still works cleanly when moved to an Intelligence-based Wizard.
+
+Do not score every Theurgy mapping as `S` merely because the Wizard chassis is strong. If the domain contributes little beyond spell access, say that the result mainly rides the Wizard chassis and use the appropriate `S-` / `A+` / lower rank.
+
+Theurgy-domain reviews must not be generated with a fixed repeating paragraph shell. Avoid using the same three headings or stock clauses in every mapped-domain file, such as repeatedly splitting every `详细评价` into `领域法术与开放牧师表时间` / `映射特性与法师底盘` / `本轮校准结论`, or repeatedly saying that a score cannot be raised only because of the Wizard chassis. Those checks remain required, but the prose must be written around the actual mapped domain: what its domain spells do to `奥术入信`, what its Channel Divinity option does through `引导奥秘`, whether its non-Channel features survive on a Wizard, whether it asks for armor/weapon/front-line behavior the Wizard does not have, and whether the level-14 early domain-17 mapping creates a real boundary issue. `队伍定位调整`, `详细评价`, `综合评分` reasons, and design-score reasons should read as domain-specific analysis, not as a template with the domain name replaced.
+
+## Mapping Examples
+
+Use these as sanity checks when building a full review:
+
+- `神圣奇术（5E UA） - 知识领域`: level 3 gains Theurgy base package, `神圣奥能`, and the domain's level-3 Channel Divinity option through `引导奥秘`; level 6 gains the domain's level-3 non-Channel-Divinity benefits through `奥术侍僧`, excluding weapon/armor proficiency; level 10 gains the domain's level-6 feature; level 14 gains the domain's level-17 feature. Any Wisdom-based wording becomes Intelligence-based.
+- `神圣奇术（5E UA） - 生命领域`: level 6 does not grant heavy armor or weapon proficiency even if a legacy source would; the mapped healing feature matters only if the Theurgy Wizard actually prepares and casts healing spells. Domain spells become Wizard spells in the spellbook, but prepared-spell pressure remains real.
+- `神圣奇术（5E UA） - 光明领域`: level 3 can use the domain's Channel Divinity option through Channel Arcana; level 6 receives the domain's level-3 non-Channel-Divinity defensive/light feature; level 10 receives the domain's level-6 protection/reaction-style feature if present in the verified source; level 14 receives the domain's level-17 offensive light/fire feature. Check whether action/reaction and concentration costs compete with normal Wizard defenses and control.
+- `神圣奇术（5E UA） - 和平领域`: if using the mapped official/legacy domain source, do not assume the Theurgy Wizard gets a Cleric's whole domain package at level 3. Channel Divinity comes through Channel Arcana at level 3, non-Channel level-3 benefits arrive at Wizard 6, level-6 benefits at Wizard 10, and level-17 benefits at Wizard 14. This timing can still be very strong, but the delay and resource channel matter.
