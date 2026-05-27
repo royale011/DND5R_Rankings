@@ -5,6 +5,9 @@ description: Use when reviewing or ranking the 5e-era UA Strixhaven multi-class 
 
 # Strixhaven UA Ranking Review
 
+## DPR-Next Backup Maintenance
+Experimental six-category DPR standards are archived in `SKILL.dpr-next.md` beside this file. This skill currently follows the official skill's legacy damage aspects. Sync non-DPR active-skill changes into the backup; put future six-category DPR workflow edits in the backup unless explicitly re-enabled.
+
 Use this skill for the 5e-era UA `Mages of Strixhaven` subclasses:
 
 - `衡鉴魔法师 Mage of Lorehold`
@@ -15,7 +18,7 @@ Use this skill for the 5e-era UA `Mages of Strixhaven` subclasses:
 
 This is a narrow companion skill. All source-verification, community-calibration, ranking-scale, README, changelog, and tooling rules are the same as `.codex/skills/official-dnd-ranking-review/SKILL.md`; read and follow that skill first. Do not use this skill for the published Strixhaven background/feat system unless the user specifically asks to compare it to the UA subclass system.
 
-The official skill's DPR calculation and `开放改进问题` requirements apply here. For each base-class mapping, calculate DPR only for routes that are legal for that mapped class progression. If the Strixhaven subclass changes a DPR aspect from the base class, include the subclass DPR-delta table; if it enables an aspect the base class lacks, calculate and rank that aspect normally. If no DPR aspect changes, state that it follows the mapped base class. `开放改进问题` should focus on the UA multi-class mapping, delayed/missing feature slots, published Strixhaven context, and any RAW/RAI ambiguity created by using one subclass across multiple base classes.
+The official skill's current legacy damage-aspect rules and `开放改进问题` requirements apply here. For each base-class mapping, discuss damage only for routes that are legal for that mapped class progression. If the Strixhaven subclass changes `近战伤害者`, `远程伤害者`, or `法术伤害者` from the mapped base class, include concrete calculation / comparison in that aspect; if no damage aspect changes, state that it follows the mapped base class. Six-category DPR tables are archived in the official `SKILL.dpr-next.md` and are not active here unless explicitly re-enabled. `开放改进问题` should focus on the UA multi-class mapping, delayed/missing feature slots, published Strixhaven context, and any RAW/RAI ambiguity created by using one subclass across multiple base classes.
 
 ## Review Input Boundary
 

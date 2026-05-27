@@ -5,11 +5,14 @@ description: Use when reviewing or ranking the 5e-era UA Wizard subclass 神圣�
 
 # Theurgy UA Ranking Review
 
+## DPR-Next Backup Maintenance
+Experimental six-category DPR standards are archived in `SKILL.dpr-next.md` beside this file. This skill currently follows the official skill's legacy damage aspects. Sync non-DPR active-skill changes into the backup; put future six-category DPR workflow edits in the backup unless explicitly re-enabled.
+
 Use this skill for `神圣奇术 Theurgy`, the 5e-era UA Wizard subclass that maps onto Cleric domains.
 
 This is a narrow companion skill. All source-verification, community-calibration, ranking-scale, README, changelog, and tooling rules are the same as `.codex/skills/official-dnd-ranking-review/SKILL.md`; read and follow that skill first.
 
-The official skill's DPR calculation and `开放改进问题` requirements apply here. For `神圣奇术` as the base mapping hub, list DPR only where the Wizard + Theurgy package or mapped domain creates a meaningful route; impossible aspects receive the official brief `F` explanation. For individual domain mappings, add DPR calculations only when the mapped domain changes a Wizard/Theurgy baseline aspect, such as adding close-range riders, weapon incentives, spell AoE, or damage conversion. `开放改进问题` should focus on Theurgy's domain-spell lock-in, level-14 domain-17 compression, Wizard/Cleric chassis mismatch, and mapped-domain RAW ambiguities rather than repeating generic Wizard commentary.
+The official skill's current legacy damage-aspect rules and `开放改进问题` requirements apply here. For `神圣奇术` as the base mapping hub, discuss damage only where the Wizard + Theurgy package or mapped domain changes `近战伤害者`, `远程伤害者`, or `法术伤害者`, such as adding close-range riders, weapon incentives, spell AoE, or damage conversion. Impossible or unchanged damage roles should be briefly stated, not expanded into six-category DPR tables. `开放改进问题` remains required when RAW, compatibility wording, or mapped-domain design could be improved.
 
 Follow the official skill's translation and abbreviation rules. Use verified Chinese names for actual classes, subclasses, features, spells, feats, items, and rules terms, but do not force common CN-community abbreviations such as `5E UA`, `DPR`, `RAW`, `RAI`, `DM`, `PC`, `BA`, `OA`, `ASI`, or source abbreviations into Chinese wording.
 
