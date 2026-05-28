@@ -170,6 +170,7 @@ Version-to-version changes should be discussed in a standalone section such as `
      - `强但可接受`: features above baseline that are tolerable because of cost, timing, niche, risk, or intended role.
      - `仅公开发布时是问题`: elements that are fine for a private table or personal fantasy but likely unacceptable for public release.
      - `主观口味批评`: criticism based on tone, theme preference, elegance, or overlap taste rather than mechanical defect.
+   - Do not pad `修改建议` with invented defects. It is valid for `必须修改` to be `无`, and it is useful to say that a feature needs no change when it is clear, thematic, sufficiently regulated, or strong but acceptable. Good review preserves good design instead of only removing risk.
    - For public-release advice, compare against official / UA / partner / third-party calibrated ecosystem standards.
    - For personal-intent advice, judge whether the text achieves the stated author purpose without pretending that personal intent changes normal balance ranks.
    - Homebrew reviews may also include `## 开放改进问题` when the issue is better framed as a design question than a direct fix. Use the same independent-improvement logic as the official skill, but keep formal public-purpose judgment separate from notes, prompts, blind reviews, and private author discussion. If the open question comes from note-derived material, place it in the personal/notes-related section rather than using it to justify public ranking.
