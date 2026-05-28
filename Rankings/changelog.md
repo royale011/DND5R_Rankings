@@ -1,3 +1,9 @@
+## 2026-05-28 简洁规则文本与裁定参考标准
+- Updated official ranking skill and DPR-next backup: official first-party reviews now check `贤者谏言` / Sage Advice only when a real RAW ambiguity, contested boundary, community dispute, or `开放改进问题` depends on it, instead of requiring lookup for every clear feature.
+- Added a standalone reference rule for official rulings: Sage Advice / official rulings are interpretive evidence, not automatic proof that printed wording is well designed; they may clarify RAI while still showing that the original text was too terse.
+- Added partner / third-party clarification weighting: updated text / errata is authoritative, publisher FAQ or official rulings strongly clarify, author social/Discord comments are supporting context, and community speculation only identifies issues to verify.
+- Added design-score wording criteria: concise inherited-rule wording is good, repeated inherited boilerplate can hurt elegance, and self-made exceptions to action economy, spell slots, components, concentration, caster identity, targeting, duration, recharge, hit/save resolution, or resource ownership need enough boundary text to run cross-table.
+
 ## 2026-05-27 DPR-next skill备份与当前伤害分项回退
 - 将试点中的六分法 DPR 标准完整备份为各 skill 目录下的 `SKILL.dpr-next.md`。这些备份保留 `近距爆发DPR（15尺内）`、`近距持续DPR（15尺内）`、`近距范围DPR（15尺内）`、`远程爆发DPR`、`远程持续DPR`、`远程范围DPR`、计算表、`dpr` 工具工作流和相关校准说明。
 - 当前生效评审口径回退到旧三分法：`近战伤害者`、`远程伤害者`、`法术伤害者`。新评审和普通重评不再强制写 `DPR计算摘要` / `DPR计算差异` 或六分项表；需要伤害判断时仍应按具体命中次数、行动经济、资源、专注、射程风险和横向比较进行实际计算。
