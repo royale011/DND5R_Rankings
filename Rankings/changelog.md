@@ -1,3 +1,7 @@
+## 2026-05-29 d20继承与自然骰澄清标准
+- Updated official / homebrew ranking skills and DPR-next backups: reviews should verify the current 2024 local d20 / attack-roll text before citing natural 1 or natural 20 rules, and should not import attack-roll-only rules into all ability checks or saving throws without source support.
+- Added an anti-boilerplate rule: if a feature merely adds a bonus, replacement value, or rider to an attack roll and does not override hit/miss/critical rules, do not demand wording such as "natural 1 still misses"; normal attack-roll inheritance handles that unless the feature creates a real exception.
+
 ## 2026-05-29 长期开放式法术评审标准
 - Updated official ranking skill and DPR-next backup: long-history open-ended spells and rules patterns, especially `祈愿术 Wish`, are normal D&D design rather than automatic defects. Reviews should not penalize a feature merely because it grants or references this kind of historically proven DM-adjudicated spell.
 - Added a stricter distinction between ordinary `Wish` openness and version-specific abuse. Reviews should still flag removed drawbacks, proxy cost laundering, cooldown bypass, no-cost loops, action compression beyond verified rules, or subclass interactions that make the spell exceed historical ecosystem baselines.
