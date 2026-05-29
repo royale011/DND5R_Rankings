@@ -1,3 +1,8 @@
+## 2026-05-29 长期开放式法术评审标准
+- Updated official ranking skill and DPR-next backup: long-history open-ended spells and rules patterns, especially `祈愿术 Wish`, are normal D&D design rather than automatic defects. Reviews should not penalize a feature merely because it grants or references this kind of historically proven DM-adjudicated spell.
+- Added a stricter distinction between ordinary `Wish` openness and version-specific abuse. Reviews should still flag removed drawbacks, proxy cost laundering, cooldown bypass, no-cost loops, action compression beyond verified rules, or subclass interactions that make the spell exceed historical ecosystem baselines.
+- Clarified that subclass-specific "Wish rules" can be worse design when they appear to overwrite official `Wish` globally or create a private subclass-only `Wish`; spell duplication should normally be handled through the spell's own text plus table adjudication unless the source explicitly creates a replacement rule.
+
 ## 2026-05-28 简洁规则文本与裁定参考标准
 - Updated official ranking skill and DPR-next backup: official first-party reviews now check `贤者谏言` / Sage Advice only when a real RAW ambiguity, contested boundary, community dispute, or `开放改进问题` depends on it, instead of requiring lookup for every clear feature.
 - Added a standalone reference rule for official rulings: Sage Advice / official rulings are interpretive evidence, not automatic proof that printed wording is well designed; they may clarify RAI while still showing that the original text was too terse.
