@@ -1,3 +1,7 @@
+## 2026-06-01 失败后修正时点继承标准
+- Updated official ranking skill and DPR-next backup: official same-pattern failed-D20-Test wording, such as 2024 `诗人激励 Bardic Inspiration`, is clear enough to establish a post-failure trigger when paired with "add to the roll/check, possibly turning failure into success."
+- Reviews should no longer require extra wording such as "after you know the check failed" unless the feature lacks a failure trigger, changes who spends the resource, creates a timing/reaction conflict, or must distinguish after-roll-before-result from after-failure timing.
+
 ## 2026-06-01 官方同型措辞与法术规则继承容忍标准
 - Updated official ranking skill and DPR-next backup: current official same-pattern wording is strong evidence that a phrase is clear enough. A review should not demand a more explicit alternative merely because it sounds safer, unless the reviewed text changes the official pattern or creates a real execution ambiguity.
 - Clarified spell-delivery inheritance: when a feature explicitly defines changed boundaries such as action, spell pool, level, casting-time exclusion, no slot, or waived material components, unmentioned target, range, duration, concentration, attack/save, and non-waived components continue to inherit the spell's normal rules. Arbitrary spell pools still require boundary and lookup-burden audit, but a catch-all "unchanged rules still apply" reminder is optional reader comfort rather than a mandatory design fix.
