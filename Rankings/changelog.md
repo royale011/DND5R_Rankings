@@ -1,3 +1,7 @@
+## 2026-06-01 官方同型措辞与法术规则继承容忍标准
+- Updated official ranking skill and DPR-next backup: current official same-pattern wording is strong evidence that a phrase is clear enough. A review should not demand a more explicit alternative merely because it sounds safer, unless the reviewed text changes the official pattern or creates a real execution ambiguity.
+- Clarified spell-delivery inheritance: when a feature explicitly defines changed boundaries such as action, spell pool, level, casting-time exclusion, no slot, or waived material components, unmentioned target, range, duration, concentration, attack/save, and non-waived components continue to inherit the spell's normal rules. Arbitrary spell pools still require boundary and lookup-burden audit, but a catch-all "unchanged rules still apply" reminder is optional reader comfort rather than a mandatory design fix.
+
 ## 2026-05-29 d20继承与自然骰澄清标准
 - Updated official / homebrew ranking skills and DPR-next backups: reviews should verify the current 2024 local d20 / attack-roll text before citing natural 1 or natural 20 rules, and should not import attack-roll-only rules into all ability checks or saving throws without source support.
 - Added an anti-boilerplate rule: if a feature merely adds a bonus, replacement value, or rider to an attack roll and does not override hit/miss/critical rules, do not demand wording such as "natural 1 still misses"; normal attack-roll inheritance handles that unless the feature creates a real exception.
