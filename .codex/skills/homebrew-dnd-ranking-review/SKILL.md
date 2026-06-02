@@ -98,6 +98,8 @@ When assigning ordinary public-facing design ranks, deliberately simulate an out
 
 Version-to-version changes should be discussed in a standalone section such as `本次改动判断` or `版本变化说明`. That section may explain what changed and whether the changed text matters, but the changed-from-previous-version narrative must not appear as a justification inside public `详细评价`, public `设计相关评分`, balance/function ranks, or `综合评分`. Public review content should read as a review of the current version, not as a response to the previous version or to the prompt.
 
+When the user asks for a new review of an existing homebrew file, rebuild the actual `详细评价`, `分项评分`, `综合评分`, and ordinary `设计相关评分` as if the current formal source were a brand-new file. Do not let the diff from the previous source version determine what to praise, criticize, raise, lower, or emphasize. Use previous versions only for the archive workflow and, if useful, a separate `本次改动判断` / `版本变化说明` section. This prevents ranking and review drift caused by reacting to the change history instead of judging the current playable text.
+
 ## Required Workflow
 
 1. Identify scope and output path.
