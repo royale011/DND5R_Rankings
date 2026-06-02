@@ -12,6 +12,8 @@ Use this skill for `神圣奇术 Theurgy`, the 5e-era UA Wizard subclass that ma
 
 This is a narrow companion skill. All source-verification, community-calibration, ranking-scale, README, changelog, and tooling rules are the same as `.codex/skills/official-dnd-ranking-review/SKILL.md`; read and follow that skill first.
 
+This includes the official skill's verified-terminology rule: rules-glossary terms, conditions, actions, and other official rules vocabulary do not need Theurgy-specific definitions when their verified official meaning is sufficient.
+
 The official skill's current legacy damage-aspect rules and `开放改进问题` requirements apply here. For `神圣奇术` as the base mapping hub, discuss damage only where the Wizard + Theurgy package or mapped domain changes `近战伤害者`, `远程伤害者`, or `法术伤害者`, such as adding close-range riders, weapon incentives, spell AoE, or damage conversion. Impossible or unchanged damage roles should be briefly stated, not expanded into six-category DPR tables. `开放改进问题` remains required when RAW, compatibility wording, or mapped-domain design could be improved.
 
 Follow the official skill's translation and abbreviation rules. Use verified Chinese names for actual classes, subclasses, features, spells, feats, items, and rules terms, but do not force common CN-community abbreviations such as `5E UA`, `DPR`, `RAW`, `RAI`, `DM`, `PC`, `BA`, `OA`, `ASI`, or source abbreviations into Chinese wording.
