@@ -1,3 +1,7 @@
+## 2026-06-04 状态关键词与主题表达校准
+- Updated review skills to avoid reducing a verified rules condition to its most common optimization stereotype when judging theme / design alignment. For example, `Invisible` is not automatically a stealth fantasy; in a bright protective aura it may function as a defensive veil or "known light, unknown figures" expression if the surrounding mechanics support that reading.
+- This is a general design-scoring rule for official / UA / partner / third-party / homebrew reviews: judge actual rules context, visibility, light, target knowledge, counterplay, action cost, and play pattern before treating a keyword as theme drift.
+
 ## 2026-06-01 失败后修正时点继承标准
 - Updated official ranking skill and DPR-next backup: official same-pattern failed-D20-Test wording, such as 2024 `诗人激励 Bardic Inspiration`, is clear enough to establish a post-failure trigger when paired with "add to the roll/check, possibly turning failure into success."
 - Reviews should no longer require extra wording such as "after you know the check failed" unless the feature lacks a failure trigger, changes who spends the resource, creates a timing/reaction conflict, or must distinguish after-roll-before-result from after-failure timing.
