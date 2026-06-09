@@ -1,3 +1,7 @@
+## 2026-06-09 RtHW死灵宗主重评
+- 以用户提供的 `Ravenloft: The Horrors Within`（可能官方缩写 `RtHW`）社区中文译文为当前可用原文，重写魔契师 `死灵宗主` 评审，并在文件内保留完整译文记录；该资源仍按当前官方版本评分，不因 5etools / `DND5e_chm` 尚未收录而降权。待本地数据源收录后需要重新核对英文正式文本、中文译名和来源缩写。
+- 删除旧 `死灵宗主（UA）` 评审文件，并将排行榜中的 UA 条目移除；新版正式死灵宗主视为当前官方版本，综合评分校准为 T1 `A+`、T2 `S-`、T3 `S`、T4 `S`。
+
 ## 2026-06-04 状态关键词与主题表达校准
 - Updated review skills to avoid reducing a verified rules condition to its most common optimization stereotype when judging theme / design alignment. For example, `Invisible` is not automatically a stealth fantasy; in a bright protective aura it may function as a defensive veil or "known light, unknown figures" expression if the surrounding mechanics support that reading.
 - This is a general design-scoring rule for official / UA / partner / third-party / homebrew reviews: judge actual rules context, visibility, light, target knowledge, counterplay, action cost, and play pattern before treating a keyword as theme drift.
