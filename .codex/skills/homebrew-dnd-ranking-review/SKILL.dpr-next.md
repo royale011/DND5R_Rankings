@@ -3,7 +3,7 @@ DPR NEXT BACKUP
 
 This file preserves the experimental six-category DPR standards and calculation-tool workflow that were active before the current public review workflow returned to the legacy damage aspects.
 
-Maintenance rule: when the active SKILL.md changes for reasons unrelated to damage-aspect taxonomy or DPR calculation workflow, sync the same non-DPR change into this backup file. Future changes to six-category DPR aspects, DPR calculation tables, near-range burst anchors, and related tooling guidance should be made here first, not in the active SKILL.md, until the new DPR system is explicitly re-enabled.
+Maintenance rule: DPR-next remains worth maintaining as a calibration candidate and difficult-damage audit tool, but it is not ready to replace the active review standard. When the active SKILL.md changes for reasons unrelated to damage-aspect taxonomy or DPR calculation workflow, sync the same non-DPR change into this backup file. Future changes to six-category DPR aspects, DPR calculation tables, near-range burst anchors, and related tooling guidance should continue to be made here first, not in the active SKILL.md, until the new DPR system is explicitly re-enabled for active reviews.
 -->
 
 ---

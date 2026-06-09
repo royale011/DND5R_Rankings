@@ -11,7 +11,7 @@ Do not use this skill for `homebrews` unless the user explicitly asks to compare
 
 ## DPR-Next Backup Maintenance
 
-Experimental six-category DPR standards are archived in `SKILL.dpr-next.md` beside this file. The active workflow currently uses legacy damage aspects. When this active skill changes for reasons unrelated to damage-aspect taxonomy or DPR calculation workflow, sync the same non-DPR change into `SKILL.dpr-next.md`. Future changes to six-category DPR aspects or calculator workflow should go to the backup first unless the user explicitly re-enables DPR-next.
+Experimental six-category DPR standards are archived in `SKILL.dpr-next.md` beside this file. The active workflow currently uses legacy damage aspects. DPR-next remains worth maintaining as a calibration candidate and difficult-damage audit tool, but it is not ready to replace the active review standard. When this active skill changes for reasons unrelated to damage-aspect taxonomy or DPR calculation workflow, sync the same non-DPR change into `SKILL.dpr-next.md`. Future changes to six-category DPR aspects or calculator workflow should continue to go to the backup first unless the user explicitly re-enables DPR-next for active reviews.
 
 ## Non-Negotiable Rule
 
