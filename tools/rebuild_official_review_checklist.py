@@ -17,6 +17,7 @@ class Row:
     name_en: str
     name_cn: str
     source: str
+    note: str = ""
 
 
 MANUAL_SOURCE_DATES = {
@@ -26,6 +27,7 @@ MANUAL_SOURCE_DATES = {
     "XMM": "2025-02-18",
     "EFA": "2025-12-09",
     "FRHoF": "2025-11-11",
+    "RHW": "2026-06-16",
     # Common first-party 5e books used by the current checklist.
     "PHB": "2014-08-19",
     "DMG": "2014-12-09",
@@ -57,6 +59,7 @@ SOURCE_CATEGORY_OVERRIDES = {
     "XDMG": "official",
     "XMM": "official",
     "FRHoF": "official",
+    "RHW": "official",
     "PHB": "official",
     "DMG": "official",
     "MM": "official",
@@ -198,9 +201,11 @@ def parse_rows(text: str) -> list[Row]:
         if not in_table or line.startswith("|---") or not line.startswith("|"):
             continue
         cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if cells and cells[0] == "---":
+            continue
         if len(cells) < 4:
             continue
-        rows.append(Row(cells[0], cells[1], cells[2], cells[3]))
+        rows.append(Row(cells[0], cells[1], cells[2], cells[3], cells[5] if len(cells) > 5 else ""))
     return rows
 
 
@@ -227,7 +232,7 @@ def category_for_source(source: str) -> str:
 
 def source_era(source: str) -> str:
     pieces = source_pieces(source)
-    if any(piece.startswith("XUA") or piece in {"XPHB", "XDMG", "XMM", "EFA", "FRHoF"} for piece in pieces):
+    if any(piece.startswith("XUA") or piece in {"XPHB", "XDMG", "XMM", "EFA", "FRHoF", "RHW"} for piece in pieces):
         return "2024"
     return "2014"
 
@@ -417,12 +422,12 @@ def render(rows: list[Row], dates: dict[str, str]) -> str:
         f"- Strixhaven mapped rows: {strixhaven}",
         f"- Theurgy mapped rows: {theurgy}",
         "",
-        "| Checkbox | Class / Subclass name (EN) | CN name counterpart | Resource abbr. name | Resource release date |",
-        "|---|---|---|---|---|",
+        "| Checkbox | Class / Subclass name (EN) | CN name counterpart | Resource abbr. name | Resource release date | 备注 |",
+        "|---|---|---|---|---|---|",
     ]
     for row in rows:
         lines.append(
-            f"| {row.checked} | {row.name_en} | {row.name_cn} | {row.source} | {date_for_source(row.source, dates)} |"
+            f"| {row.checked} | {row.name_en} | {row.name_cn} | {row.source} | {date_for_source(row.source, dates)} | {row.note} |"
         )
     lines.append("")
     return "\n".join(lines)
