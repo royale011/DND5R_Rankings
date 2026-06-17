@@ -9,6 +9,8 @@
 - [设计相关评分](#设计相关评分)
 
 ## 队伍定位调整
+本轮重核 `Psion Update` 源文确认其关键增量是 `Mutable Form`、`Organic Weapons`、`Extra Attack`、`Flesh Weaver`、`Improved Mutable Form` 与 `Life-Bending Weapons`，并确认二期设计笔记已替换一期版本。
+
 
 蜕变者把灵能使推向肉体改造、智力近战、临时生命和自我修复。它不是纯武职，也不是月亮德鲁伊式替身血条；它更像“满施法者拥有一套可用但有风险的近战形态”。队伍定位因此变成法术控制为主、需要时短时间前压，而不是长期占前排。
 

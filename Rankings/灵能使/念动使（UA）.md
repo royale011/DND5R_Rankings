@@ -9,6 +9,8 @@
 - [设计相关评分](#设计相关评分)
 
 ## 队伍定位调整
+本轮重核 `Psion Update` 源文确认其关键增量是 `Stronger Telekinesis`、`Telekinetic Techniques`、`Destructive Trance`、`Rebounding Field`、`Enhanced Telekinetic Crush` 与新版 `Heightened Telekinesis`；其中 14 级新版可用 4 枚灵能骰无槽施放 `心灵遥控`，并可改为无专注。
+
 
 念动使是灵能使中最稳定的战场控制/防御子职。它把 `护盾术`、飞行、反弹防御、`力场墙`、`心灵遥控`和无专注念动控制集中到一个满施法底盘上。队伍需要它做的不是纯伤害，而是把敌人位置、行动空间、命中结果和专注位都变成可控资源。
 

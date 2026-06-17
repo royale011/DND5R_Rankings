@@ -9,6 +9,8 @@
 - [设计相关评分](#设计相关评分)
 
 ## 队伍定位调整
+本轮重核 `Psion Update` 源文确认其关键增量是 `Mind Infiltrator`、`Telepathic Distraction`、`Bulwark Mind`、`Potent Thoughts`、`Telepathic Bolstering` 与 `Scramble Minds`；其中 `Telepathic Distraction` 是二期新增，用来替换一期的 `Telepathic Hub`。
+
 
 传心师把灵能使从“控制/位移满施法者”推向信息战、精神干扰和队伍容错。它不是灵能使中最暴力的战场分隔者，也不是最高 DPR 路线；它的价值在于隐蔽读心、反应压低敌方命中、强化精神防线、补救队友失败检定/攻击，以及在 14 级用更可控的 `困惑术`制造群体混乱。
 

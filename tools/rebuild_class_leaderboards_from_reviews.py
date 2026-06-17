@@ -12,7 +12,7 @@ SUMMARY_FILE = "README.md"
 
 def write_utf8_lf(path: Path, text: str) -> None:
     path.write_bytes((text.rstrip() + "\n").encode("utf-8"))
-NON_FIRST_PARTY_BASE_CLASSES = {"灵能使", "秘术师", "血猎手", "邪狱使", "铳士", "拳斗士"}
+NON_FIRST_PARTY_BASE_CLASSES = {"Apothecary", "Captain", "Champion", "Messenger", "Monster Hunter", "灵能使", "秘术师", "血猎手", "邪狱使", "铳士", "拳斗士"}
 
 
 def split_row(line: str) -> list[str]:
@@ -129,6 +129,18 @@ def rebuild_class(class_name: str) -> None:
         if not non_first_party or egw_exception or class_name in NON_FIRST_PARTY_BASE_CLASSES:
             official[stem] = rows
 
+    if not official and not non_first:
+        text = summary.read_text(encoding="utf-8")
+        start = text.find("## 分阶段子职排行榜")
+        if start >= 0:
+            search_from = start
+            design = text.find("## 设计相关评分", search_from)
+            if design < 0:
+                write_utf8_lf(summary, text[:start].rstrip())
+            else:
+                write_utf8_lf(summary, text[:start].rstrip() + "\n\n" + text[design:])
+        return
+
     replacement = render_leaderboard("分阶段子职排行榜", official)
     if non_first and class_name not in NON_FIRST_PARTY_BASE_CLASSES:
         replacement += "\n\n" + render_leaderboard("UA/合作方/第三方子职分阶段排行榜", non_first)
@@ -149,9 +161,51 @@ def rebuild_class(class_name: str) -> None:
         write_utf8_lf(summary, text[:start] + replacement + text[design:])
 
 
+def rebuild_theurgy_hub() -> None:
+    hub_dir = RANKINGS / "法师" / "神圣奇术"
+    summary = hub_dir / SUMMARY_FILE
+    if not summary.exists():
+        return
+
+    official: dict[str, list[tuple[str, str]]] = {}
+    non_first: dict[str, list[tuple[str, str]]] = {}
+
+    for path in sorted(hub_dir.glob("*.md"), key=lambda p: p.name):
+        if path.name == SUMMARY_FILE:
+            continue
+        rows = extract_overall(path)
+        if is_non_first_party(path.stem):
+            non_first[path.stem] = rows
+        else:
+            official[path.stem] = rows
+
+    replacement = render_leaderboard("分阶段子职排行榜", official)
+    if non_first:
+        replacement += "\n\n" + render_leaderboard("UA/合作方/第三方子职分阶段排行榜", non_first)
+    replacement += "\n\n"
+
+    text = summary.read_text(encoding="utf-8")
+    start = text.find("## 分阶段子职排行榜")
+    search_from = start if start >= 0 else 0
+    if start >= 0:
+        design = text.find("## 设计相关评分", search_from)
+        if design < 0:
+            write_utf8_lf(summary, text[:start].rstrip() + "\n\n" + replacement)
+            return
+        write_utf8_lf(summary, text[:start] + replacement + text[design:])
+        return
+
+    insert_at = text.find("## 设计相关评分")
+    if insert_at < 0:
+        write_utf8_lf(summary, text.rstrip() + "\n\n" + replacement)
+    else:
+        write_utf8_lf(summary, text[:insert_at] + replacement + text[insert_at:])
+
+
 def main() -> None:
     for class_name in class_dirs():
         rebuild_class(class_name)
+    rebuild_theurgy_hub()
 
 
 if __name__ == "__main__":

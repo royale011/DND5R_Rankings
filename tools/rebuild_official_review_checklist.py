@@ -20,6 +20,14 @@ class Row:
     note: str = ""
 
 
+@dataclass(frozen=True)
+class BuildRow:
+    checked: str
+    file_name: str
+    chassis: str
+    note: str = ""
+
+
 MANUAL_SOURCE_DATES = {
     # First-party 2024 / current books.
     "XPHB": "2024-09-17",
@@ -84,6 +92,26 @@ ARTIFICER_EFA_ROWS = [
     Row("- [ ]", "Artificer - Battle Smith", "奇械师 - 战地匠师", "EFA"),
     Row("- [ ]", "Artificer - Cartographer", "奇械师 - 制图师", "EFA"),
 ]
+
+
+WIZARD_PHB2014_ROWS = [
+    Row("- [ ]", "Wizard - School of Conjuration", "法师 - 咒法学派", "PHB"),
+    Row("- [ ]", "Wizard - School of Enchantment", "法师 - 附魔学派", "PHB"),
+    Row("- [ ]", "Wizard - School of Necromancy", "法师 - 死灵学派", "PHB"),
+    Row("- [ ]", "Wizard - School of Transmutation", "法师 - 变化学派", "PHB"),
+]
+
+
+FORCE_EN_NAME_ROWS = {
+    ("Apothecary - Exorcist", "GuideDrakkenheim"),
+    ("Messenger", "TLotRR"),
+    ("Messenger - Counsellor", "TLotRR"),
+    ("Messenger - Herald", "TLotRR"),
+    ("Tamer - Leader", "HelianasGuidetoMonsterHunting"),
+    ("Treasure Hunter", "TLotRR"),
+    ("Treasure Hunter - Burglar", "TLotRR"),
+    ("Treasure Hunter - Spy", "TLotRR"),
+}
 
 
 ARTIFICER_REMOVE_SOURCES = {
@@ -191,14 +219,42 @@ def load_source_dates() -> dict[str, str]:
     return dates
 
 
+def parse_build_rows(text: str) -> list[BuildRow]:
+    rows: list[BuildRow] = []
+    in_table = False
+    for line in text.splitlines():
+        if line.startswith("| Checkbox | Build file |"):
+            in_table = True
+            continue
+        if not in_table:
+            continue
+        if line.startswith("|---"):
+            continue
+        if not line.startswith("|"):
+            break
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) < 4:
+            continue
+        rows.append(BuildRow(cells[0], cells[1], cells[2], cells[3]))
+    return rows
+
+
 def parse_rows(text: str) -> list[Row]:
     rows: list[Row] = []
     in_table = False
     for line in text.splitlines():
-        if line.startswith("| Checkbox |"):
+        if line.startswith("| Checkbox | Class / Subclass name"):
             in_table = True
             continue
-        if not in_table or line.startswith("|---") or not line.startswith("|"):
+        if not in_table:
+            continue
+        if line.startswith("|---"):
+            continue
+        if not line.startswith("|"):
+            break
+        if line.startswith("| Checkbox |"):
+            break
+        if not line.startswith("|"):
             continue
         cells = [cell.strip() for cell in line.strip("|").split("|")]
         if cells and cells[0] == "---":
@@ -290,12 +346,22 @@ def row_date(row: Row, dates: dict[str, str]) -> str:
     return date_for_source(row.source, dates)
 
 
+def normalize_forced_english_name(row: Row) -> Row:
+    if (row.name_en, row.source) not in FORCE_EN_NAME_ROWS:
+        return row
+    note = "未定位到DND5e_chm/5etools-cn可靠译名；CN名暂回退为英文名"
+    if row.note and row.note != note:
+        note = f"{row.note}；{note}"
+    return Row(row.checked, row.name_en, row.name_en, row.source, note)
+
+
 def cleanup_rows(rows: list[Row], dates: dict[str, str]) -> tuple[list[Row], list[str]]:
     audit: list[str] = []
     cleaned: list[Row] = []
     seen: set[tuple[str, str]] = set()
 
     for row in rows:
+        row = normalize_forced_english_name(row)
         if is_artificer_legacy_duplicate(row):
             audit.append(f"removed Artificer legacy duplicate: {row.name_en} [{row.source}]")
             continue
@@ -323,6 +389,10 @@ def cleanup_rows(rows: list[Row], dates: dict[str, str]) -> tuple[list[Row], lis
     for row in ARTIFICER_EFA_ROWS:
         if (row.name_en, row.source) not in by_key:
             audit.append(f"added latest EFA Artificer row: {row.name_en}")
+        by_key.setdefault((row.name_en, row.source), row)
+    for row in WIZARD_PHB2014_ROWS:
+        if (row.name_en, row.source) not in by_key:
+            audit.append(f"added unreplaced PHB2014 Wizard row: {row.name_en}")
         by_key.setdefault((row.name_en, row.source), row)
     cleaned = list(by_key.values())
 
@@ -401,7 +471,22 @@ def count_special(rows: list[Row]) -> tuple[int, int]:
     return strixhaven, theurgy
 
 
-def render(rows: list[Row], dates: dict[str, str]) -> str:
+def render_build_rows(build_rows: list[BuildRow]) -> list[str]:
+    if not build_rows:
+        return []
+    lines = [
+        "## Existing Build Review Checklist",
+        "",
+        "| Checkbox | Build file | Primary chassis | 备注 |",
+        "|---|---|---|---|",
+    ]
+    for row in build_rows:
+        lines.append(f"| {row.checked} | {row.file_name} | {row.chassis} | {row.note} |")
+    lines.append("")
+    return lines
+
+
+def render(rows: list[Row], build_rows: list[BuildRow], dates: dict[str, str]) -> str:
     counts = {"official": 0, "ua": 0, "partner": 0}
     for row in rows:
         counts[category_for_source(row.source)] += 1
@@ -415,16 +500,20 @@ def render(rows: list[Row], dates: dict[str, str]) -> str:
         "> Redundant same-name or same-lineage entries are cleaned by the project version rules: latest official for same-era official/UA conflicts, separate 2014-official + 2024-UA rows where required, and 2024/5.5e partner or third-party versions over their 2014/5e predecessors.",
         "> Release dates are resolved from 5etools `_meta.sources[].dateReleased` first; UA dates additionally fall back to `5etools-unearthed-arcana\\_generated\\index-sources.json` + `index-timestamps.json`, then narrow manual metadata when local files are incomplete. Partner / third-party `未知` dates are intentionally not resolved by generated timestamps in this pass.",
         "",
-        f"- Total rows: {len(rows)}",
+        f"- Total rows: {len(rows) + len(build_rows)}",
+        f"- Build rows: {len(build_rows)}",
         f"- Official rows: {counts['official']}",
         f"- UA rows: {counts['ua']}",
         f"- Partner / third-party rows: {counts['partner']}",
         f"- Strixhaven mapped rows: {strixhaven}",
         f"- Theurgy mapped rows: {theurgy}",
         "",
+    ]
+    lines.extend(render_build_rows(build_rows))
+    lines.extend([
         "| Checkbox | Class / Subclass name (EN) | CN name counterpart | Resource abbr. name | Resource release date | 备注 |",
         "|---|---|---|---|---|---|",
-    ]
+    ])
     for row in rows:
         lines.append(
             f"| {row.checked} | {row.name_en} | {row.name_cn} | {row.source} | {date_for_source(row.source, dates)} | {row.note} |"
@@ -434,11 +523,14 @@ def render(rows: list[Row], dates: dict[str, str]) -> str:
 
 
 def main() -> None:
-    rows = parse_rows(CHECKLIST.read_text(encoding="utf-8"))
+    text = CHECKLIST.read_text(encoding="utf-8")
+    build_rows = parse_build_rows(text)
+    rows = parse_rows(text)
     dates = load_source_dates()
     rows, audit = cleanup_rows(rows, dates)
-    CHECKLIST.write_text(render(rows, dates), encoding="utf-8", newline="\n")
-    print(f"wrote {CHECKLIST.relative_to(ROOT)} with {len(rows)} rows")
+    CHECKLIST.write_text(render(rows, build_rows, dates), encoding="utf-8", newline="\n")
+    print(f"wrote {CHECKLIST.relative_to(ROOT)} with {len(rows) + len(build_rows)} rows")
+    print(f"build rows: {len(build_rows)}")
     print(f"removed/added audit entries: {len(audit)}")
     for entry in audit[:80]:
         print(f"- {entry}")

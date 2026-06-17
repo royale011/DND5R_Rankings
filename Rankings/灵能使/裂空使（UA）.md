@@ -9,6 +9,8 @@
 - [设计相关评分](#设计相关评分)
 
 ## 队伍定位调整
+本轮重核一期 `The Psion` 源文确认其关键增量是 `Teleportation`、`Warp Propel`、`Teleporter Combat`、`Warp Space`、`Duplicitous Target` 与 `Mass Teleportation`。它没有出现在 `Psion Update` 的二期重测子职里，因此本轮按项目既定规则保留一期机制并用二期灵能使底盘横向评价。
+
 
 裂空使来自一期 `灵能` UA，二期没有重测，但本项目按用户既定规则保留它。它把灵能使从心灵/念动力扩展到空间折叠：短距传送、强制换位、攻击改目标、群体传送和危险地形联动。它的强度高度依赖地图、垂直空间、墙体、陷阱、队友站位和 DM 对传送落点的裁定。
 
