@@ -28,6 +28,16 @@ class BuildRow:
     note: str = ""
 
 
+@dataclass(frozen=True)
+class ExternalCandidate:
+    row: Row
+    publisher: str
+    path: str
+    edition: int
+    date: str
+    existing: bool = False
+
+
 MANUAL_SOURCE_DATES = {
     # First-party 2024 / current books.
     "XPHB": "2024-09-17",
@@ -112,6 +122,21 @@ FORCE_EN_NAME_ROWS = {
     ("Treasure Hunter - Burglar", "TLotRR"),
     ("Treasure Hunter - Spy", "TLotRR"),
 }
+
+
+SOURCE_PUBLISHER_HINTS = {
+    "BH2022": "Matthew Mercer",
+    "BH2020": "Matthew Mercer",
+    "BloodHunter": "Matthew Mercer",
+    "Pugilist2024": "Benjamin Huffman",
+    "SterlingVermin": "Benjamin Huffman",
+}
+
+
+DISCOVER_EXTERNAL_HOMEBREW_DIRS = [
+    ROOT / "5etools-homebrew" / "class",
+    ROOT / "5etools-homebrew" / "subclass",
+]
 
 
 ARTIFICER_REMOVE_SOURCES = {
@@ -262,6 +287,126 @@ def parse_rows(text: str) -> list[Row]:
         if len(cells) < 4:
             continue
         rows.append(Row(cells[0], cells[1], cells[2], cells[3], cells[5] if len(cells) > 5 else ""))
+    return rows
+
+
+def discovered_external_note(existing_note: str = "") -> str:
+    note = "5etools-homebrew class/subclass目录新增；未定位到DND5e_chm/5etools-cn可靠译名，CN名暂用英文"
+    if existing_note:
+        return existing_note
+    return note
+
+
+def external_publisher_from_path(path: Path) -> str:
+    stem = path.stem
+    if ";" in stem:
+        return stem.split(";", 1)[0].strip()
+    return stem.strip()
+
+
+def external_meta_by_file() -> dict[str, dict]:
+    path = ROOT / "5etools-homebrew" / "_generated" / "index-meta.json"
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return {str(key): value for key, value in data.items() if isinstance(value, dict)}
+
+
+def external_date_for_data(data: dict, source: str) -> str:
+    meta = data.get("_meta")
+    if not isinstance(meta, dict):
+        return "未知"
+    for source_entry in meta.get("sources", []) or []:
+        if not isinstance(source_entry, dict):
+            continue
+        if source in {source_entry.get("json"), source_entry.get("abbreviation")}:
+            return str(source_entry.get("dateReleased") or "未知")
+    return "未知"
+
+
+def candidate_sort_key(candidate: ExternalCandidate) -> tuple[int, str, str]:
+    date = candidate.date if candidate.date != "未知" else "0000-00-00"
+    return (candidate.edition, date, candidate.row.source)
+
+
+def discover_external_homebrew_rows(existing_rows: list[Row]) -> list[Row]:
+    """Add dedicated 5etools-homebrew class/subclass-directory entries.
+
+    This intentionally scans only `class/` and `subclass/`, not adventure/book/
+    collection embeds. The latter contains thousands of mixed appendices and is
+    too noisy for the standing checklist unless the project explicitly opens a
+    resource-specific pass.
+    """
+
+    existing_by_name_source = {(row.name_en, row.source): row for row in existing_rows}
+    candidates: list[ExternalCandidate] = []
+    meta = external_meta_by_file()
+    for root in DISCOVER_EXTERNAL_HOMEBREW_DIRS:
+        if not root.exists():
+            continue
+        for path in sorted(root.rglob("*.json")):
+            try:
+                data = json.loads(path.read_text(encoding="utf-8-sig"))
+            except Exception:
+                continue
+            if not isinstance(data, dict):
+                continue
+            rel_key = str(path.relative_to(ROOT / "5etools-homebrew")).replace("\\", "/")
+            file_key = str(path.relative_to(root)).replace("\\", "/")
+            file_meta = meta.get(file_key) or meta.get(rel_key) or meta.get(path.name) or {}
+            edition = int(file_meta.get("e") or 0)
+            publisher = external_publisher_from_path(path)
+
+            def add_candidate(name: str, source: str) -> None:
+                row = existing_by_name_source.get((name, source))
+                existing = row is not None
+                if row is None:
+                    row = Row("- [ ]", name, name, source, discovered_external_note())
+                candidates.append(
+                    ExternalCandidate(
+                        row=row,
+                        publisher=SOURCE_PUBLISHER_HINTS.get(source, publisher),
+                        path=str(path),
+                        edition=edition,
+                        date=external_date_for_data(data, source),
+                        existing=existing,
+                    )
+                )
+
+            for cls in data.get("class", []) or []:
+                if not isinstance(cls, dict) or not cls.get("name") or not cls.get("source"):
+                    continue
+                add_candidate(str(cls["name"]), str(cls["source"]))
+            for subclass in data.get("subclass", []) or []:
+                if (
+                    not isinstance(subclass, dict)
+                    or not subclass.get("name")
+                    or not subclass.get("className")
+                    or not subclass.get("source")
+                ):
+                    continue
+                name = f"{subclass['className']} - {subclass['name']}"
+                add_candidate(str(name), str(subclass["source"]))
+
+    grouped: dict[tuple[str, str], list[ExternalCandidate]] = {}
+    for candidate in candidates:
+        key = (candidate.publisher.lower(), canonical_name(candidate.row))
+        grouped.setdefault(key, []).append(candidate)
+
+    rows: list[Row] = []
+    emitted: set[tuple[str, str]] = set()
+    for group in grouped.values():
+        winner = sorted(group, key=candidate_sort_key)[-1]
+        if winner.existing:
+            continue
+        key = (winner.row.name_en, winner.row.source)
+        if key in emitted:
+            continue
+        emitted.add(key)
+        rows.append(winner.row)
     return rows
 
 
@@ -495,7 +640,8 @@ def render(rows: list[Row], build_rows: list[BuildRow], dates: dict[str, str]) -
     lines = [
         "# Official / UA / Partner / Third-Party Review Checklist",
         "",
-        "> Generated from local 5etools JSON resources for the next full review pass. 规则：同世代优先最新官方；2014 官方 + 2024 UA 并列；无官方时取最新 UA；第三方/合作方只纳入项目资源集。",
+        "> Generated from local 5etools JSON resources for the next full review pass. 规则：同世代优先最新官方；2014 官方 + 2024 UA 并列；无官方时取最新 UA；第三方/合作方纳入项目资源集，并额外纳入 `5etools-homebrew` 专门 `class/` 与 `subclass/` 目录中的职业/子职条目。",
+        "> `5etools-homebrew` 的 adventure/book/collection 内嵌职业/子职暂不整库纳入清单；这些文件噪声很高，除非项目后续打开具体资源批次，否则只作为按资源检索时的候选来源。",
         "> Explicitly excluded: `Rune Scribe | 符文抄录者`, because it is a 3.5e-style prestige class and cannot be reviewed on the normal 5e/5.5e class/subclass progression.",
         "> Redundant same-name or same-lineage entries are cleaned by the project version rules: latest official for same-era official/UA conflicts, separate 2014-official + 2024-UA rows where required, and 2024/5.5e partner or third-party versions over their 2014/5e predecessors.",
         "> Release dates are resolved from 5etools `_meta.sources[].dateReleased` first; UA dates additionally fall back to `5etools-unearthed-arcana\\_generated\\index-sources.json` + `index-timestamps.json`, then narrow manual metadata when local files are incomplete. Partner / third-party `未知` dates are intentionally not resolved by generated timestamps in this pass.",
@@ -526,11 +672,14 @@ def main() -> None:
     text = CHECKLIST.read_text(encoding="utf-8")
     build_rows = parse_build_rows(text)
     rows = parse_rows(text)
+    external_rows = discover_external_homebrew_rows(rows)
+    rows.extend(external_rows)
     dates = load_source_dates()
     rows, audit = cleanup_rows(rows, dates)
     CHECKLIST.write_text(render(rows, build_rows, dates), encoding="utf-8", newline="\n")
     print(f"wrote {CHECKLIST.relative_to(ROOT)} with {len(rows) + len(build_rows)} rows")
     print(f"build rows: {len(build_rows)}")
+    print(f"discovered external homebrew rows: {len(external_rows)}")
     print(f"removed/added audit entries: {len(audit)}")
     for entry in audit[:80]:
         print(f"- {entry}")
