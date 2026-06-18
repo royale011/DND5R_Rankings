@@ -17,6 +17,8 @@ Use this skill for any work under root `Rankings` involving official / partner /
 
 Do not use this skill for `homebrews` unless the user explicitly asks to compare a homebrew against official standards; homebrew output uses `homebrews\Rankings\changelog.md`.
 
+Do not treat raw creator-homebrew entries discovered from external `5etools-homebrew` class/subclass files as public official / UA / partner / third-party checklist material by default. If the source is not an official / UA / partner / clearly public third-party published resource and is instead Patreon, personal-repo, Discord/forum, or otherwise creator-homebrew material, keep it out of `official-review-checklist.md`. Place any private calibration checklist or review under `homebrews\Rankings External` and use the homebrew workflow unless the user explicitly promotes that exact source into the public published-resource scope.
+
 ## Non-Negotiable Rule
 
 Never write or revise a class/subclass feature review from model memory. First verify the current feature names, levels, source tags, and wording in `5etools-src` / `5etools-cn` JSON when available, then confirm the Chinese name and local wording through `DND5e_chm` or, for missing legacy 5e-era material, `DND2014_legacy`.

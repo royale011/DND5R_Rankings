@@ -5,9 +5,11 @@ description: Use for D&D 5.5e/2024/5R homebrew ranking and review work in this p
 
 # Homebrew D&D Ranking Review
 
-Use this skill for any review or ranking under `homebrews\Rankings`.
+Use this skill for any review or ranking under `homebrews\Rankings` or `homebrews\Rankings External`.
 
 Do not write homebrew evaluations into root `Rankings` unless the user explicitly asks to convert or compare against official / partner content. Root official ranking work uses the separate `official-dnd-ranking-review` skill.
+
+Use `homebrews\Rankings External` for private reviews of external creator-homebrew material discovered from raw `5etools-homebrew` class/subclass files, Patreon/personal-repo/Discord/forum releases, or similar sources that are not official / UA / partner / clearly public third-party published resources. These reviews are calibration aids, should remain in a gitignored location, and must not be mixed with root official rankings or the user's own/friends' homebrew creations unless the user explicitly asks to promote or compare a specific source.
 
 ## DPR-Next Backup Maintenance
 
@@ -112,6 +114,7 @@ When the user asks for a new review of an existing homebrew file, rebuild the ac
 
 1. Identify scope and output path.
    - Homebrew outputs go under `homebrews\Rankings`.
+   - External creator-homebrew calibration outputs go under `homebrews\Rankings External`; treat them with this homebrew skill, not the root official workflow.
    - Use subdirectories by class/type, such as `牧师`, `圣武士`, `法师`, `游荡者`, etc.
    - Keep root `Rankings` as calibration/reference only, not as a homebrew output target.
    - `homebrews\Rankings\README.md` is deprecated. Do not create or update it.

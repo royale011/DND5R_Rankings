@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKLIST = ROOT / "official-review-checklist.md"
+EXTERNAL_HOMEBREW_CHECKLIST = ROOT / "homebrews" / "Rankings External" / "external-homebrew-review-checklist.md"
 
 
 @dataclass(frozen=True)
@@ -351,6 +352,23 @@ def discovered_external_note(existing_note: str = "") -> str:
 
 def is_discovered_external_row(row: Row) -> bool:
     return row.note.startswith("5etools-homebrew class/subclass目录新增")
+
+
+def is_cn_only_external_row(row: Row) -> bool:
+    return any(row.name_en == candidate.name_en and row.source == candidate.source for candidate in CN_ONLY_EXTERNAL_ROWS)
+
+
+def is_private_external_homebrew_row(row: Row) -> bool:
+    return is_discovered_external_row(row) or is_cn_only_external_row(row)
+
+
+def is_theurgy_for_private_external_row(row: Row, private_sources: set[str]) -> bool:
+    prefix = "UAWarlockAndWizard + "
+    return (
+        row.name_en.startswith("Wizard - Theurgy - ")
+        and row.source.startswith(prefix)
+        and row.source.removeprefix(prefix) in private_sources
+    )
 
 
 def external_overlap_canonical_name(row: Row) -> str:
@@ -779,6 +797,10 @@ def count_special(rows: list[Row]) -> tuple[int, int]:
     return strixhaven, theurgy
 
 
+def sort_rows(rows: list[Row], dates: dict[str, str]) -> list[Row]:
+    return sorted(rows, key=lambda row: (row.name_en.split(" - ", 1)[0], row.name_en, row.source, row_date(row, dates)))
+
+
 def render_build_rows(build_rows: list[BuildRow]) -> list[str]:
     if not build_rows:
         return []
@@ -803,7 +825,8 @@ def render(rows: list[Row], build_rows: list[BuildRow], dates: dict[str, str]) -
     lines = [
         "# Official / UA / Partner / Third-Party Review Checklist",
         "",
-        "> Generated from local 5etools JSON resources for the next full review pass. 规则：同世代优先最新官方；2014 官方 + 2024 UA 并列；无官方时取最新 UA；第三方/合作方纳入项目资源集；外部 `5etools-homebrew` 自动发现范围缩减为 13 个官方已出版基础职业下的新子职。",
+        "> Generated from local 5etools JSON resources for the next full review pass. 规则：同世代优先最新官方；2014 官方 + 2024 UA 并列；无官方时取最新 UA；第三方/合作方纳入项目资源集。",
+        "> External creator-homebrew rows discovered from raw `5etools-homebrew` class/subclass files are intentionally excluded from this public official checklist. They are written to `homebrews/Rankings External/external-homebrew-review-checklist.md` and should be reviewed with the homebrew workflow in a gitignored location.",
         "> `5etools-homebrew` 的 adventure/book/collection 内嵌职业/子职暂不整库纳入清单；这些文件噪声很高，除非项目后续打开具体资源批次，否则只作为按资源检索时的候选来源。",
         "> Explicitly excluded: `Rune Scribe | 符文抄录者`, because it is a 3.5e-style prestige class and cannot be reviewed on the normal 5e/5.5e class/subclass progression.",
         "> Redundant same-name or same-lineage entries are cleaned by the project version rules: latest official for same-era official/UA conflicts, separate 2014-official + 2024-UA rows where required, and 2024/5.5e partner or third-party versions over 2014/5e predecessors only when they are from the same author / publisher and use the same or a clearly similar name.",
@@ -833,23 +856,57 @@ def render(rows: list[Row], build_rows: list[BuildRow], dates: dict[str, str]) -
     return "\n".join(lines)
 
 
+def render_external_homebrew(rows: list[Row], dates: dict[str, str]) -> str:
+    rows = sort_rows(rows, dates)
+    lines = [
+        "# External Creator-Homebrew Review Checklist",
+        "",
+        "> This checklist is generated from raw external `5etools-homebrew` class/subclass files and explicitly verified CN-only raw sources. It is kept under `homebrews/Rankings External/`, which is gitignored, so these reviews do not appear as public root official / UA / partner / third-party rankings.",
+        "> Treat every row here with the `homebrew-dnd-ranking-review` workflow. Do not write its reviews under root `Rankings` unless the user explicitly promotes a specific source into the public published-resource scope.",
+        "> Current generator scope intentionally remains narrow: dedicated external `class/` and `subclass/` directory entries that pass the existing discovery filters, plus explicitly verified CN-only external rows. Adventure/book/collection embedded options are not bulk-imported.",
+        "",
+        f"- Total rows: {len(rows)}",
+        "",
+        "| Checkbox | Class / Subclass name (EN) | CN name counterpart | Resource abbr. name | Resource release date | 备注 |",
+        "|---|---|---|---|---|---|",
+    ]
+    for row in rows:
+        lines.append(
+            f"| {row.checked} | {row.name_en} | {row.name_cn} | {row.source} | {date_for_source(row.source, dates)} | {row.note} |"
+        )
+    lines.append("")
+    return "\n".join(lines)
+
+
 def main() -> None:
     text = CHECKLIST.read_text(encoding="utf-8")
     build_rows = parse_build_rows(text)
-    rows = [row for row in parse_rows(text) if not is_discovered_external_row(row)]
+    parsed_rows = parse_rows(text)
+    private_existing_rows = [row for row in parsed_rows if is_private_external_homebrew_row(row)]
+    rows = [row for row in parsed_rows if not is_private_external_homebrew_row(row)]
+    external_seed_rows = rows + private_existing_rows
     for row in CN_ONLY_EXTERNAL_ROWS:
-        if not any(existing.name_en == row.name_en and existing.source == row.source for existing in rows):
-            rows.append(row)
-    external_rows = discover_external_homebrew_rows(rows)
-    rows.extend(external_rows)
+        if not any(existing.name_en == row.name_en and existing.source == row.source for existing in external_seed_rows):
+            external_seed_rows.append(row)
+            private_existing_rows.append(row)
+    external_rows = discover_external_homebrew_rows(external_seed_rows)
     dates = load_source_dates()
+    private_by_key = {(row.name_en, row.source): row for row in private_existing_rows}
+    for row in external_rows:
+        private_by_key[(row.name_en, row.source)] = row
+    private_rows = list(private_by_key.values())
+    private_sources = {row.source for row in private_rows}
+    rows = [row for row in rows if not is_theurgy_for_private_external_row(row, private_sources)]
     rows, audit = cleanup_rows(rows, dates)
     rows, theurgy_audit = add_missing_theurgy_rows(rows)
     audit.extend(theurgy_audit)
     CHECKLIST.write_text(render(rows, build_rows, dates), encoding="utf-8", newline="\n")
+    EXTERNAL_HOMEBREW_CHECKLIST.parent.mkdir(parents=True, exist_ok=True)
+    EXTERNAL_HOMEBREW_CHECKLIST.write_text(render_external_homebrew(private_rows, dates), encoding="utf-8", newline="\n")
     print(f"wrote {CHECKLIST.relative_to(ROOT)} with {len(rows) + len(build_rows)} rows")
+    print(f"wrote {EXTERNAL_HOMEBREW_CHECKLIST.relative_to(ROOT)} with {len(private_rows)} rows")
     print(f"build rows: {len(build_rows)}")
-    print(f"discovered external homebrew rows: {len(external_rows)}")
+    print(f"private external homebrew rows: {len(private_rows)}")
     print(f"removed/added audit entries: {len(audit)}")
     for entry in audit[:80]:
         print(f"- {entry}")

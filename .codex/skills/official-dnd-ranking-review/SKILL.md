@@ -9,6 +9,8 @@ Use this skill for any work under root `Rankings` involving official / partner /
 
 Do not use this skill for `homebrews` unless the user explicitly asks to compare a homebrew against official standards; homebrew output uses `homebrews\Rankings\changelog.md`.
 
+Do not treat raw creator-homebrew entries discovered from external `5etools-homebrew` class/subclass files as public official / UA / partner / third-party checklist material by default. If the source is not an official / UA / partner / clearly public third-party published resource and is instead Patreon, personal-repo, Discord/forum, or otherwise creator-homebrew material, keep it out of `official-review-checklist.md`. Place any private calibration checklist or review under `homebrews\Rankings External` and use the homebrew workflow unless the user explicitly promotes that exact source into the public published-resource scope.
+
 ## DPR-Next Backup Maintenance
 
 Experimental six-category DPR standards are archived in `SKILL.dpr-next.md` beside this file. The active workflow currently uses legacy damage aspects. DPR-next remains worth maintaining as a calibration candidate and difficult-damage audit tool, but it is not ready to replace the active review standard. When this active skill changes for reasons unrelated to damage-aspect taxonomy or DPR calculation workflow, sync the same non-DPR change into `SKILL.dpr-next.md`. Future changes to six-category DPR aspects or calculator workflow should continue to go to the backup first unless the user explicitly re-enables DPR-next for active reviews.
