@@ -95,12 +95,12 @@ SOURCE_CATEGORY_OVERRIDES = {
 
 
 ARTIFICER_EFA_ROWS = [
-    Row("- [ ]", "Artificer", "奇械师", "EFA"),
-    Row("- [ ]", "Artificer - Alchemist", "奇械师 - 炼金师", "EFA"),
-    Row("- [ ]", "Artificer - Armorer", "奇械师 - 装甲师", "EFA"),
-    Row("- [ ]", "Artificer - Artillerist", "奇械师 - 魔炮师", "EFA"),
-    Row("- [ ]", "Artificer - Battle Smith", "奇械师 - 战地匠师", "EFA"),
-    Row("- [ ]", "Artificer - Cartographer", "奇械师 - 制图师", "EFA"),
+    Row("- [x]", "Artificer", "奇械师", "EFA"),
+    Row("- [x]", "Artificer - Alchemist", "奇械师 - 炼金师", "EFA"),
+    Row("- [x]", "Artificer - Armorer", "奇械师 - 装甲师", "EFA"),
+    Row("- [x]", "Artificer - Artillerist", "奇械师 - 魔炮师", "EFA"),
+    Row("- [x]", "Artificer - Battle Smith", "奇械师 - 战地匠师", "EFA"),
+    Row("- [x]", "Artificer - Cartographer", "奇械师 - 制图师", "EFA"),
 ]
 
 
@@ -109,6 +109,13 @@ WIZARD_PHB2014_ROWS = [
     Row("- [ ]", "Wizard - School of Enchantment", "法师 - 附魔学派", "PHB"),
     Row("- [ ]", "Wizard - School of Necromancy", "法师 - 死灵学派", "PHB"),
     Row("- [ ]", "Wizard - School of Transmutation", "法师 - 变化学派", "PHB"),
+]
+
+
+CN_ONLY_EXTERNAL_ROWS = [
+    Row("- [ ]", "Bard - College of Cavalry", "吟游诗人 - 骁骑学院", "DragonHorse2026", "CN 5etools raw-only source: `homebrew.kiwee.top/class/AluStar; 龙马迎春.json`"),
+    Row("- [ ]", "Monk - Way of Iron Heel", "武僧 - 铁蹄宗", "DragonHorse2026", "CN 5etools raw-only source: `homebrew.kiwee.top/class/AluStar; 龙马迎春.json`"),
+    Row("- [ ]", "Paladin - Oath of Iron Cavalry", "圣武士 - 铁骑之誓", "DragonHorse2026", "CN 5etools raw-only source: `homebrew.kiwee.top/class/AluStar; 龙马迎春.json`"),
 ]
 
 
@@ -130,6 +137,36 @@ SOURCE_PUBLISHER_HINTS = {
     "BloodHunter": "Matthew Mercer",
     "Pugilist2024": "Benjamin Huffman",
     "SterlingVermin": "Benjamin Huffman",
+    "SterlingVermin:Patreon": "Benjamin Huffman",
+}
+
+
+SOURCE_EDITION_HINTS = {
+    "Pugilist2024": 1,
+}
+
+
+SOURCE_DATE_HINTS = {
+    "BH2022": "2022-02-14",
+    "BH2020": "2020-01-27",
+    "Pugilist2024": "2024-01-01",
+}
+
+
+OFFICIAL_PUBLISHED_BASE_CLASSES = {
+    "Artificer",
+    "Barbarian",
+    "Bard",
+    "Cleric",
+    "Druid",
+    "Fighter",
+    "Monk",
+    "Paladin",
+    "Ranger",
+    "Rogue",
+    "Sorcerer",
+    "Warlock",
+    "Wizard",
 }
 
 
@@ -156,6 +193,8 @@ UA_TO_OFFICIAL_ALIASES = {
     "fighter - psychic warrior": "fighter - psi warrior",
     "fighter - knight": "fighter - cavalier",
     "monk - way of mercy": "monk - warrior of mercy",
+    "barbarian - battlerager": "barbarian - path of the battlerager",
+    "barbarian - berserker": "barbarian - path of the berserker",
     "paladin - oath of heroism": "paladin - oath of glory",
     "ranger (ambuscade)": "ranger",
     "ranger (spell-less)": "ranger",
@@ -165,9 +204,22 @@ UA_TO_OFFICIAL_ALIASES = {
     "sorcerer - clockwork soul": "sorcerer - clockwork sorcery",
     "sorcerer - psionic soul": "sorcerer - aberrant sorcery",
     "sorcerer - aberrant mind": "sorcerer - aberrant sorcery",
+    "sorcerer - draconic bloodline": "sorcerer - draconic sorcery",
+    "sorcerer - divine soul sorcery": "sorcerer - divine soul",
     "sorcerer - favored soul": "sorcerer - divine soul",
     "sorcerer - lunar magic": "sorcerer - lunar sorcery",
     "sorcerer - shadow": "sorcerer - shadow sorcery",
+    "sorcerer - shadow magic": "sorcerer - shadow sorcery",
+    "sorcerer - storm": "sorcerer - storm sorcery",
+    "sorcerer - wild magic": "sorcerer - wild magic sorcery",
+    "blood hunter - profane soul": "blood hunter - order of the profane soul",
+    "warlock - great old one": "warlock - great old one patron",
+    "warlock - the great old one": "warlock - great old one patron",
+    "warlock - archfey": "warlock - archfey patron",
+    "warlock - the archfey": "warlock - archfey patron",
+    "warlock - alternate great old one": "warlock - great old one patron",
+    "warlock - revised great old one": "warlock - great old one patron",
+    "warlock - the great old one, tweaked": "warlock - great old one patron",
     "warlock - the genie": "warlock - genie patron",
     "warlock - the noble genie": "warlock - genie patron",
     "warlock - the celestial": "warlock - celestial patron",
@@ -297,6 +349,48 @@ def discovered_external_note(existing_note: str = "") -> str:
     return note
 
 
+def is_discovered_external_row(row: Row) -> bool:
+    return row.note.startswith("5etools-homebrew class/subclass目录新增")
+
+
+def external_overlap_canonical_name(row: Row) -> str:
+    name = row.name_en
+    name = re.sub(r"^Alternate\s+", "", name)
+    name = re.sub(r"^Variant\s+", "", name)
+    name = re.sub(r"^Adaptive\s+", "", name)
+    name = re.sub(r"^Versatile\s+", "", name)
+    name = re.sub(r"^Martial\s+", "", name)
+    name = re.sub(r"\s+Reworks?(?=\s+-|$)", "", name)
+    name = re.sub(r"\s+Reworked(?=\s+-|$)", "", name)
+    name = re.sub(r"\s+\((?:Balanced|Tweaked|Revised|Revised Spell-less|Variant|Variant Magic)\)", "", name)
+    name = re.sub(r" - (?:Alternate|Revised)\s+", " - ", name)
+    name = re.sub(r", Tweaked$", "", name)
+    return canonical_name(Row(row.checked, name, row.name_cn, row.source, row.note))
+
+
+def external_overlap_class_name(row: Row) -> str:
+    class_name = row.name_en.split(" - ", 1)[0]
+    class_name = re.sub(r"^Alternate\s+", "", class_name)
+    class_name = re.sub(r"^Variant\s+", "", class_name)
+    class_name = re.sub(r"^Adaptive\s+", "", class_name)
+    class_name = re.sub(r"^Versatile\s+", "", class_name)
+    class_name = re.sub(r"^Martial\s+", "", class_name)
+    class_name = re.sub(r"\s+Reworks?$", "", class_name)
+    class_name = re.sub(r"\s+Reworked$", "", class_name)
+    class_name = re.sub(r"\s+\((?:Balanced|Tweaked|Revised|Revised Spell-less|Variant|Variant Magic)\)", "", class_name)
+    return canonical_name(Row(row.checked, class_name, row.name_cn, row.source, row.note))
+
+
+def is_external_rewrite_chassis(row: Row) -> bool:
+    class_name = row.name_en.split(" - ", 1)[0]
+    return bool(
+        class_name.startswith(("Alternate ", "Variant ", "Adaptive ", "Versatile ", "Martial "))
+        or re.search(r"\s+Reworks?$", class_name)
+        or re.search(r"\s+Reworked$", class_name)
+        or re.search(r"\((?:Balanced|Tweaked|Revised|Revised Spell-less|Variant|Variant Magic)\)", class_name)
+    )
+
+
 def external_publisher_from_path(path: Path) -> str:
     stem = path.stem
     if ";" in stem:
@@ -342,7 +436,23 @@ def discover_external_homebrew_rows(existing_rows: list[Row]) -> list[Row]:
     """
 
     existing_by_name_source = {(row.name_en, row.source): row for row in existing_rows}
+    existing_canonical_names = {canonical_name(row) for row in existing_rows}
+    existing_class_names = {canonical_name(Row(row.checked, row.name_en, row.name_cn, row.source, row.note)) for row in existing_rows if " - " not in row.name_en}
     candidates: list[ExternalCandidate] = []
+    for row in existing_rows:
+        publisher = SOURCE_PUBLISHER_HINTS.get(row.source)
+        if not publisher:
+            continue
+        candidates.append(
+            ExternalCandidate(
+                row=row,
+                publisher=publisher,
+                path="official-review-checklist.md",
+                edition=SOURCE_EDITION_HINTS.get(row.source, 0),
+                date=SOURCE_DATE_HINTS.get(row.source, "未知"),
+                existing=True,
+            )
+        )
     meta = external_meta_by_file()
     for root in DISCOVER_EXTERNAL_HOMEBREW_DIRS:
         if not root.exists():
@@ -365,6 +475,10 @@ def discover_external_homebrew_rows(existing_rows: list[Row]) -> list[Row]:
                 existing = row is not None
                 if row is None:
                     row = Row("- [ ]", name, name, source, discovered_external_note())
+                if external_overlap_canonical_name(row) in existing_canonical_names:
+                    return
+                if is_external_rewrite_chassis(row) and external_overlap_class_name(row) in existing_class_names:
+                    return
                 candidates.append(
                     ExternalCandidate(
                         row=row,
@@ -377,9 +491,9 @@ def discover_external_homebrew_rows(existing_rows: list[Row]) -> list[Row]:
                 )
 
             for cls in data.get("class", []) or []:
-                if not isinstance(cls, dict) or not cls.get("name") or not cls.get("source"):
-                    continue
-                add_candidate(str(cls["name"]), str(cls["source"]))
+                # Broad checklist intentionally excludes external base classes.
+                # Review them only through explicit, resource-scoped tasks.
+                continue
             for subclass in data.get("subclass", []) or []:
                 if (
                     not isinstance(subclass, dict)
@@ -387,6 +501,8 @@ def discover_external_homebrew_rows(existing_rows: list[Row]) -> list[Row]:
                     or not subclass.get("className")
                     or not subclass.get("source")
                 ):
+                    continue
+                if str(subclass["className"]) not in OFFICIAL_PUBLISHED_BASE_CLASSES:
                     continue
                 name = f"{subclass['className']} - {subclass['name']}"
                 add_candidate(str(name), str(subclass["source"]))
@@ -460,6 +576,8 @@ def is_official_counterpart(row: Row) -> bool:
 
 def normalize_name(name: str) -> str:
     name = name.lower()
+    name = name.replace("&", "and")
+    name = name.replace(" - the ", " - ")
     name = re.sub(r"\s*\((?:ua|revised|revisited)\)", "", name)
     name = re.sub(r"\s+v\d+\b", "", name)
     name = re.sub(r"\s+", " ", name)
@@ -500,6 +618,44 @@ def normalize_forced_english_name(row: Row) -> Row:
     return Row(row.checked, row.name_en, row.name_en, row.source, note)
 
 
+def is_nonofficial_base_class_row(row: Row) -> bool:
+    if category_for_source(row.source) != "partner":
+        return False
+    if " - " not in row.name_en:
+        return True
+    parent_class = row.name_en.split(" - ", 1)[0]
+    return parent_class not in OFFICIAL_PUBLISHED_BASE_CLASSES
+
+
+def theurgy_row_for_cleric(row: Row) -> Row:
+    domain_en = row.name_en.removeprefix("Cleric - ")
+    domain_cn = row.name_cn
+    if domain_cn.startswith("牧师 - "):
+        domain_cn = domain_cn.removeprefix("牧师 - ")
+    elif domain_cn.startswith("Cleric - "):
+        domain_cn = domain_cn.removeprefix("Cleric - ")
+    source = f"UAWarlockAndWizard + {row.source}"
+    note = "由牧师领域清单自动补入神圣奇术映射；待独立重评"
+    return Row("- [ ]", f"Wizard - Theurgy - {domain_en}", f"法师 - 神圣奇术 - {domain_cn}", source, note)
+
+
+def add_missing_theurgy_rows(rows: list[Row]) -> tuple[list[Row], list[str]]:
+    audit: list[str] = []
+    by_key = {(row.name_en, row.source): row for row in rows}
+    for row in list(rows):
+        if not row.name_en.startswith("Cleric - "):
+            continue
+        if row.name_en.startswith("Cleric - Theurgy - "):
+            continue
+        theurgy_row = theurgy_row_for_cleric(row)
+        key = (theurgy_row.name_en, theurgy_row.source)
+        if key in by_key:
+            continue
+        by_key[key] = theurgy_row
+        audit.append(f"added Theurgy counterpart: {theurgy_row.name_en} [{theurgy_row.source}]")
+    return list(by_key.values()), audit
+
+
 def cleanup_rows(rows: list[Row], dates: dict[str, str]) -> tuple[list[Row], list[str]]:
     audit: list[str] = []
     cleaned: list[Row] = []
@@ -507,6 +663,9 @@ def cleanup_rows(rows: list[Row], dates: dict[str, str]) -> tuple[list[Row], lis
 
     for row in rows:
         row = normalize_forced_english_name(row)
+        if is_nonofficial_base_class_row(row):
+            audit.append(f"removed non-official-base partner/third-party row: {row.name_en} [{row.source}]")
+            continue
         if is_artificer_legacy_duplicate(row):
             audit.append(f"removed Artificer legacy duplicate: {row.name_en} [{row.source}]")
             continue
@@ -532,9 +691,13 @@ def cleanup_rows(rows: list[Row], dates: dict[str, str]) -> tuple[list[Row], lis
 
     by_key = {(row.name_en, row.source): row for row in cleaned}
     for row in ARTIFICER_EFA_ROWS:
-        if (row.name_en, row.source) not in by_key:
+        existing = by_key.get((row.name_en, row.source))
+        if existing is None:
             audit.append(f"added latest EFA Artificer row: {row.name_en}")
-        by_key.setdefault((row.name_en, row.source), row)
+            by_key[(row.name_en, row.source)] = row
+        elif existing.checked != row.checked:
+            audit.append(f"rechecked completed EFA Artificer row: {row.name_en}")
+            by_key[(row.name_en, row.source)] = Row(row.checked, existing.name_en, existing.name_cn, existing.source, existing.note)
     for row in WIZARD_PHB2014_ROWS:
         if (row.name_en, row.source) not in by_key:
             audit.append(f"added unreplaced PHB2014 Wizard row: {row.name_en}")
@@ -640,10 +803,12 @@ def render(rows: list[Row], build_rows: list[BuildRow], dates: dict[str, str]) -
     lines = [
         "# Official / UA / Partner / Third-Party Review Checklist",
         "",
-        "> Generated from local 5etools JSON resources for the next full review pass. 规则：同世代优先最新官方；2014 官方 + 2024 UA 并列；无官方时取最新 UA；第三方/合作方纳入项目资源集，并额外纳入 `5etools-homebrew` 专门 `class/` 与 `subclass/` 目录中的职业/子职条目。",
+        "> Generated from local 5etools JSON resources for the next full review pass. 规则：同世代优先最新官方；2014 官方 + 2024 UA 并列；无官方时取最新 UA；第三方/合作方纳入项目资源集；外部 `5etools-homebrew` 自动发现范围缩减为 13 个官方已出版基础职业下的新子职。",
         "> `5etools-homebrew` 的 adventure/book/collection 内嵌职业/子职暂不整库纳入清单；这些文件噪声很高，除非项目后续打开具体资源批次，否则只作为按资源检索时的候选来源。",
         "> Explicitly excluded: `Rune Scribe | 符文抄录者`, because it is a 3.5e-style prestige class and cannot be reviewed on the normal 5e/5.5e class/subclass progression.",
-        "> Redundant same-name or same-lineage entries are cleaned by the project version rules: latest official for same-era official/UA conflicts, separate 2014-official + 2024-UA rows where required, and 2024/5.5e partner or third-party versions over their 2014/5e predecessors.",
+        "> Redundant same-name or same-lineage entries are cleaned by the project version rules: latest official for same-era official/UA conflicts, separate 2014-official + 2024-UA rows where required, and 2024/5.5e partner or third-party versions over 2014/5e predecessors only when they are from the same author / publisher and use the same or a clearly similar name.",
+        "> External homebrew base classes and subclasses under external base classes are omitted from this broad checklist, even if present in 5etools. Review them only through explicit, resource-scoped tasks.",
+        "> CN-only 5etools raw class/subclass resources are added only when explicitly verified, because the local CN mirror does not currently store those raw files under `homebrew/` or `prerelease/`.",
         "> Release dates are resolved from 5etools `_meta.sources[].dateReleased` first; UA dates additionally fall back to `5etools-unearthed-arcana\\_generated\\index-sources.json` + `index-timestamps.json`, then narrow manual metadata when local files are incomplete. Partner / third-party `未知` dates are intentionally not resolved by generated timestamps in this pass.",
         "",
         f"- Total rows: {len(rows) + len(build_rows)}",
@@ -671,11 +836,16 @@ def render(rows: list[Row], build_rows: list[BuildRow], dates: dict[str, str]) -
 def main() -> None:
     text = CHECKLIST.read_text(encoding="utf-8")
     build_rows = parse_build_rows(text)
-    rows = parse_rows(text)
+    rows = [row for row in parse_rows(text) if not is_discovered_external_row(row)]
+    for row in CN_ONLY_EXTERNAL_ROWS:
+        if not any(existing.name_en == row.name_en and existing.source == row.source for existing in rows):
+            rows.append(row)
     external_rows = discover_external_homebrew_rows(rows)
     rows.extend(external_rows)
     dates = load_source_dates()
     rows, audit = cleanup_rows(rows, dates)
+    rows, theurgy_audit = add_missing_theurgy_rows(rows)
+    audit.extend(theurgy_audit)
     CHECKLIST.write_text(render(rows, build_rows, dates), encoding="utf-8", newline="\n")
     print(f"wrote {CHECKLIST.relative_to(ROOT)} with {len(rows) + len(build_rows)} rows")
     print(f"build rows: {len(build_rows)}")
