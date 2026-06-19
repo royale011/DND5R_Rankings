@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Homebrewery Subclass"
+  short_description: "Convert subclass drafts into Homebrewery V3 markdown."
+  default_prompt: "Convert this D&D subclass draft into Homebrewery V3 markdown while preserving the rules text."
