@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import json
 import re
+import urllib.error
+import urllib.parse
+import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -152,6 +155,28 @@ SOURCE_DATE_HINTS = {
     "BH2020": "2020-01-27",
     "Pugilist2024": "2024-01-01",
 }
+
+
+CN_HOMEBREW_RAW_ROOT = "https://homebrew.kiwee.top"
+CN_HOMEBREW_INDEX_SOURCES_URL = f"{CN_HOMEBREW_RAW_ROOT}/_generated/index-sources.json"
+
+CN_CLASS_TO_EN = {
+    "奇械师": "Artificer",
+    "野蛮人": "Barbarian",
+    "吟游诗人": "Bard",
+    "牧师": "Cleric",
+    "德鲁伊": "Druid",
+    "战士": "Fighter",
+    "武僧": "Monk",
+    "圣武士": "Paladin",
+    "游侠": "Ranger",
+    "游荡者": "Rogue",
+    "术士": "Sorcerer",
+    "魔契师": "Warlock",
+    "法师": "Wizard",
+}
+
+CN_RAW_WARNINGS: list[str] = []
 
 
 OFFICIAL_PUBLISHED_BASE_CLASSES = {
@@ -437,6 +462,101 @@ def external_date_for_data(data: dict, source: str) -> str:
         if source in {source_entry.get("json"), source_entry.get("abbreviation")}:
             return str(source_entry.get("dateReleased") or "未知")
     return "未知"
+
+
+
+def fetch_json_url(url: str, timeout: int = 20) -> object | None:
+    try:
+        with urllib.request.urlopen(url, timeout=timeout) as response:
+            return json.loads(response.read().decode("utf-8-sig"))
+    except (OSError, urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError) as exc:
+        CN_RAW_WARNINGS.append(f"CN raw fetch failed: {url} ({exc})")
+        return None
+
+
+def iter_cn_index_source_paths(data: object) -> list[tuple[str, str]]:
+    paths: list[tuple[str, str]] = []
+
+    def collect(source_hint: str, value: object) -> None:
+        if isinstance(value, str):
+            if value.endswith(".json") and (value.startswith("class/") or value.startswith("subclass/")):
+                paths.append((source_hint, value))
+        elif isinstance(value, list):
+            for item in value:
+                collect(source_hint, item)
+        elif isinstance(value, dict):
+            for key, item in value.items():
+                collect(source_hint or str(key), item)
+
+    if isinstance(data, dict):
+        for key, value in data.items():
+            collect(str(key), value)
+    return sorted(set(paths), key=lambda item: item[1])
+
+
+def cn_raw_url(path: str) -> str:
+    return f"{CN_HOMEBREW_RAW_ROOT}/{urllib.parse.quote(path, safe='/;:%') }"
+
+
+def cn_raw_external_note(path: str) -> str:
+    return f"CN 5etools raw homebrew source: `homebrew.kiwee.top/{path}`"
+
+
+def cn_entity_source(entity: dict, source_hint: str, data: dict) -> str:
+    source = entity.get("source") or source_hint
+    if source:
+        return str(source)
+    meta = data.get("_meta") if isinstance(data.get("_meta"), dict) else {}
+    sources = meta.get("sources", []) if isinstance(meta, dict) else []
+    if sources and isinstance(sources[0], dict):
+        return str(sources[0].get("json") or sources[0].get("abbreviation") or "CNRawHomebrew")
+    return "CNRawHomebrew"
+
+
+def cn_subclass_names(subclass: dict) -> tuple[str, str] | None:
+    class_raw = str(subclass.get("className") or subclass.get("className_cn") or "")
+    class_en = str(subclass.get("className_eng") or subclass.get("ENG_className") or CN_CLASS_TO_EN.get(class_raw, class_raw))
+    if class_en not in OFFICIAL_PUBLISHED_BASE_CLASSES:
+        return None
+    sub_en = str(subclass.get("ENG_name") or subclass.get("name_eng") or subclass.get("name") or "").strip()
+    sub_cn = str(subclass.get("name") or sub_en).strip()
+    if not sub_en:
+        return None
+    class_cn = class_raw if class_raw and class_raw != class_en else class_en
+    return f"{class_en} - {sub_en}", f"{class_cn} - {sub_cn}"
+
+
+def discover_cn_raw_homebrew_rows(existing_rows: list[Row]) -> list[Row]:
+    index = fetch_json_url(CN_HOMEBREW_INDEX_SOURCES_URL)
+    if index is None:
+        return []
+    existing_by_name_source = {(row.name_en, row.source): row for row in existing_rows}
+    existing_canonical_names = {canonical_name(row) for row in existing_rows}
+    rows: list[Row] = []
+    emitted: set[tuple[str, str]] = set()
+    for source_hint, path in iter_cn_index_source_paths(index):
+        data = fetch_json_url(cn_raw_url(path))
+        if not isinstance(data, dict):
+            continue
+        for subclass in data.get("subclass", []) or []:
+            if not isinstance(subclass, dict):
+                continue
+            names = cn_subclass_names(subclass)
+            if names is None:
+                continue
+            name_en, name_cn = names
+            source = cn_entity_source(subclass, source_hint, data)
+            row = existing_by_name_source.get((name_en, source))
+            if row is None:
+                row = Row("- [ ]", name_en, name_cn, source, cn_raw_external_note(path))
+            if external_overlap_canonical_name(row) in existing_canonical_names:
+                continue
+            key = (row.name_en, row.source)
+            if key in emitted:
+                continue
+            emitted.add(key)
+            rows.append(row)
+    return rows
 
 
 def candidate_sort_key(candidate: ExternalCandidate) -> tuple[int, str, str]:
@@ -890,6 +1010,8 @@ def main() -> None:
             external_seed_rows.append(row)
             private_existing_rows.append(row)
     external_rows = discover_external_homebrew_rows(external_seed_rows)
+    cn_external_rows = discover_cn_raw_homebrew_rows(external_seed_rows + external_rows)
+    external_rows.extend(cn_external_rows)
     dates = load_source_dates()
     private_by_key = {(row.name_en, row.source): row for row in private_existing_rows}
     for row in external_rows:
@@ -907,6 +1029,12 @@ def main() -> None:
     print(f"wrote {EXTERNAL_HOMEBREW_CHECKLIST.relative_to(ROOT)} with {len(private_rows)} rows")
     print(f"build rows: {len(build_rows)}")
     print(f"private external homebrew rows: {len(private_rows)}")
+    if CN_RAW_WARNINGS:
+        print("CN raw warnings:")
+        for warning in CN_RAW_WARNINGS[:20]:
+            print(f"- {warning}")
+        if len(CN_RAW_WARNINGS) > 20:
+            print(f"- ... {len(CN_RAW_WARNINGS) - 20} more")
     print(f"removed/added audit entries: {len(audit)}")
     for entry in audit[:80]:
         print(f"- {entry}")

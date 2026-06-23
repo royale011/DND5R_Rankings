@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update DND Resources"
+  short_description: "Update DND submodules and rebuild review checklists."
+  default_prompt: "Update all DND resource submodules except DND2014_legacy, rebuild official and external homebrew review checklists, and report new content."
